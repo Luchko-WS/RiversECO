@@ -1,16 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { AppComponent } from './app.component';
-import { MapComponent } from './map/map.component';
+import { appRoutes } from './routes';
+
+import { AppComponent } from './components/root/app.component';
+import { NavComponent } from './components/nav/nav.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { MapComponent } from './components/map/map.component';
+import { CriteriasComponent } from './components/management/criterias/criterias.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    NavComponent,
+    FooterComponent,
+    MapComponent,
+    CriteriasComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

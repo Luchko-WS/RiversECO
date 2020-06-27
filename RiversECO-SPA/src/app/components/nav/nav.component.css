@@ -1,0 +1,13 @@
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    background: black;
+}
+
+img {
+    max-height: 40px;
+    border: 2px solid white;
+    display: inline;
+}

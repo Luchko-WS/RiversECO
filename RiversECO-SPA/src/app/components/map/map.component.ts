@@ -16,7 +16,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./map.component.css']
 })
 
-export class MapComponent implements OnInit{
+export class MapComponent implements OnInit {
   private map: any;
 
   ngOnInit() {
