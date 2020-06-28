@@ -1,7 +1,6 @@
 export interface WaterObject {
     id: string;
     name: string;
-    long: number;
-    lat: number;
+    geometry: Array<Array<number>>;
     state: number;
 }

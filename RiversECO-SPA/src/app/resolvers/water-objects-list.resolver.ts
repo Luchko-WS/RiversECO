@@ -14,15 +14,19 @@ export class WaterObjectsListResolver implements Resolve<WaterObject[]> {
                 {
                     id: 'id1',
                     name: 'name 1',
-                    long: 49,
-                    lat: 50,
+                    geometry: [
+                        [-12550727, 2281352], [-11168471, 3244427],
+                        [-10867077, 1986886], [-12550727, 2281352]
+                    ],
                     state: 1
                 },
                 {
                     id: 'id2',
                     name: 'name 2',
-                    long: 50,
-                    lat: 51,
+                    geometry: [
+                        [-125727, 2281352], [-11168471, 3200427],
+                        [-10867077, 1986886], [-125727, 2281352]
+                    ],
                     state: 2
                 }
             ]

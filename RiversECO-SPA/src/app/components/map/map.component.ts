@@ -7,7 +7,8 @@ import VectorLayer from 'ol/layer/Vector';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
-import {Point} from 'ol/geom';
+import {Point, Polygon} from 'ol/geom';
+import {defaults as defaultInteraction, Select} from 'ol/interaction';
 import {defaults as defaultSource, Vector} from 'ol/source';
 import Feature from 'ol/feature';
 import * as olProj from 'ol/proj';
@@ -32,7 +33,7 @@ export class MapComponent implements OnInit {
     this.initMap();
     this.route.data.subscribe(data => {
       this.waterObjects = data['waterObjects'];
-      this.addMarkers(this.waterObjects);
+      this.drawObjects(this.waterObjects);
     });
   }
 
@@ -48,42 +49,41 @@ export class MapComponent implements OnInit {
           source: new OSM()
         })
       ],
+      interactions: defaultInteraction().extend([
+        this.adjustSelectInteraction()
+      ]),
       view: new View({
+        projection: 'EPSG:3857',
         center: olProj.fromLonLat([28.5785, 49.2]),
         zoom: 12
       })
     });
   }
 
-  addMarkers(objects: WaterObject[]) {
-    let iconFeatures = [];
+  adjustSelectInteraction(): Select {
+    const selectInteraction = new Select({multi: false});
+    selectInteraction.on('select', (e) => {
+      console.log(e.selected);
+    });
+    return selectInteraction;
+  }
+
+  drawObjects(objects: WaterObject[]) {
+    const features = [];
     objects.forEach(obj => {
-      iconFeatures.push(new Feature({
-        geometry: new Point(olProj.transform([obj.lat, obj.long], 'EPSG:4326',
-        'EPSG:3857')),
+      //console.error(olProj.transform([28.5785, 49.2], 'EPSG:4326', 'EPSG:3857'));
+      features.push(new Feature({
+        geometry: new Polygon([obj.geometry])/*.transform('EPSG:4326', 'EPSG:3857')*/,
         name: obj.name,
         population: 4000,
         rainfall: 500
       }));
     });
 
-    const vectorSource = new Vector({
-      features: iconFeatures
-    });
-
-    const iconStyle = new Style({
-      image: new Icon({
-        anchor: [0.5, 46],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'pixels',
-        opacity: 1,
-        src: '../../../assets/red-marker-32.png'
-      })
-    });
-
     const vectorLayer = new VectorLayer({
-      source: vectorSource,
-      style: iconStyle
+      source: new Vector({
+        features
+      })
     });
 
     this.map.addLayer(vectorLayer);
