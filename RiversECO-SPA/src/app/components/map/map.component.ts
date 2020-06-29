@@ -12,7 +12,7 @@ import {defaults as defaultInteraction, Select} from 'ol/interaction';
 import {defaults as defaultSource, Vector} from 'ol/source';
 import Feature from 'ol/feature';
 import * as olProj from 'ol/proj';
-import {defaults as defaultControls, Rotate, ScaleLine} from 'ol/control';
+import {defaults as defaultControls, Rotate, ScaleLine, MousePosition} from 'ol/control';
 import TileLayer from 'ol/layer/Tile';
 
 import { WaterObject } from 'src/app/models/water-object';
@@ -40,38 +40,48 @@ export class MapComponent implements OnInit {
   initMap() {
     this.map = new Map({
       target: 'map-layer',
-      controls: defaultControls({attribution: false, zoom: true}).extend([
-        new Rotate(),
-        new ScaleLine()
-      ]),
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        })
-      ],
-      interactions: defaultInteraction().extend([
-        this.adjustSelectInteraction()
-      ]),
-      view: new View({
-        projection: 'EPSG:3857',
-        center: olProj.fromLonLat([28.5785, 49.2]),
-        zoom: 12
-      })
+      controls: this.adjustControls(),
+      layers: this.adjustLayers(),
+      interactions: this.adjustInteractions(),
+      view: this.adjystView(),
     });
   }
 
-  adjustSelectInteraction(): Select {
+  adjustControls(): any {
+    return defaultControls({attribution: false, zoom: true}).extend([
+      new Rotate(),
+      new ScaleLine(),
+       new MousePosition()
+    ]);
+  }
+
+  adjustLayers(): any[] {
+    return [
+      new TileLayer({
+        source: new OSM()
+      })
+    ];
+  }
+
+  adjustInteractions(): any {
     const selectInteraction = new Select({multi: false});
-    selectInteraction.on('select', (e) => {
+    selectInteraction.on('select', e => {
       console.log(e.selected);
     });
-    return selectInteraction;
+    return defaultInteraction().extend([selectInteraction]);
+  }
+
+  adjystView(): View {
+    return new View({
+      projection: 'EPSG:3857',
+      center: olProj.fromLonLat([28.5785, 49.2]),
+      zoom: 10
+    });
   }
 
   drawObjects(objects: WaterObject[]) {
     const features = [];
     objects.forEach(obj => {
-      //console.error(olProj.transform([28.5785, 49.2], 'EPSG:4326', 'EPSG:3857'));
       features.push(new Feature({
         geometry: new Polygon([obj.geometry])/*.transform('EPSG:4326', 'EPSG:3857')*/,
         name: obj.name,
