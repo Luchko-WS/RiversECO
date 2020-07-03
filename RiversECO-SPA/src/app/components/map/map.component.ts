@@ -7,6 +7,7 @@ import VectorLayer from 'ol/layer/Vector';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
+import {defaults as defaultFormat, GeoJSON} from 'ol/format';
 import {Point, Polygon} from 'ol/geom';
 import {defaults as defaultInteraction, Select} from 'ol/interaction';
 import {defaults as defaultSource, Vector} from 'ol/source';
@@ -80,22 +81,21 @@ export class MapComponent implements OnInit {
   }
 
   drawObjects(objects: WaterObject[]) {
-    const features = [];
-    objects.forEach(obj => {
-      features.push(new Feature({
-        geometry: new Polygon([obj.geometry])/*.transform('EPSG:4326', 'EPSG:3857')*/,
-        name: obj.name,
-        population: 4000,
-        rainfall: 500
-      }));
-    });
-
-    const vectorLayer = new VectorLayer({
+    const lakesLayer = new VectorLayer({
       source: new Vector({
-        features
+        url: '../../../assets/lakes.geojson',
+        format: new GeoJSON()
       })
     });
 
-    this.map.addLayer(vectorLayer);
+    const riversLayer = new VectorLayer({
+      source: new Vector({
+        url: '../../../assets/rivers.geojson',
+        format: new GeoJSON()
+      })
+    });
+
+    this.map.addLayer(lakesLayer);
+    this.map.addLayer(riversLayer);
   }
 }
