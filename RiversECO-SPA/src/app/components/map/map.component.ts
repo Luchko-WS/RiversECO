@@ -14,6 +14,7 @@ import {defaults as defaultSource, Vector} from 'ol/source';
 import Feature from 'ol/feature';
 import * as olProj from 'ol/proj';
 import {defaults as defaultControls, Rotate, ScaleLine, MousePosition} from 'ol/control';
+import {default as defaultOverlay} from 'ol/overlay';
 import TileLayer from 'ol/layer/Tile';
 
 import { WaterObject } from 'src/app/models/water-object';
@@ -27,14 +28,16 @@ import { WaterObject } from 'src/app/models/water-object';
 export class MapComponent implements OnInit {
   private waterObjects: WaterObject[];
   private map: any;
+  private overlay: any;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initMap();
+    this.initOverlay();
     this.route.data.subscribe(data => {
       this.waterObjects = data['waterObjects'];
-      this.drawObjects(this.waterObjects);
+      this.drawFeatures(this.waterObjects);
     });
   }
 
@@ -44,7 +47,7 @@ export class MapComponent implements OnInit {
       controls: this.adjustControls(),
       layers: this.adjustLayers(),
       interactions: this.adjustInteractions(),
-      view: this.adjystView(),
+      view: this.adjustView()
     });
   }
 
@@ -52,7 +55,7 @@ export class MapComponent implements OnInit {
     return defaultControls({attribution: false, zoom: true}).extend([
       new Rotate(),
       new ScaleLine(),
-       new MousePosition()
+      new MousePosition()
     ]);
   }
 
@@ -68,11 +71,22 @@ export class MapComponent implements OnInit {
     const selectInteraction = new Select({multi: false});
     selectInteraction.on('select', e => {
       console.log(e.selected);
+
+      if (e.selected.length === 0) {
+        this.overlay.setPosition(undefined);
+        return;
+      }
+
+      const mouseCoordinates = document
+        .getElementsByClassName('ol-mouse-position')[0]
+        .innerHTML.split(',');
+      this.overlay.setPosition(mouseCoordinates);
     });
+
     return defaultInteraction().extend([selectInteraction]);
   }
 
-  adjystView(): View {
+  adjustView(): View {
     return new View({
       projection: 'EPSG:3857',
       center: olProj.fromLonLat([28.5785, 49.2]),
@@ -80,7 +94,30 @@ export class MapComponent implements OnInit {
     });
   }
 
-  drawObjects(objects: WaterObject[]) {
+  initOverlay() {
+    const container = document.getElementById('popup');
+    const content = document.getElementById('popup-content');
+    const closer = document.getElementById('popup-closer');
+
+    const overlay = new defaultOverlay({
+      element: container,
+      autoPan: true,
+      autoPanAnimation: {
+        duration: 250
+      }
+    });
+
+    closer.onclick = () => {
+      overlay.setPosition(undefined);
+      closer.blur();
+      return false;
+    };
+
+    this.overlay = overlay;
+    this.map.addOverlay(overlay);
+  }
+
+  drawFeatures(objects: WaterObject[]) {
     const lakesLayer = new VectorLayer({
       source: new Vector({
         url: '../../../assets/lakes.geojson',
