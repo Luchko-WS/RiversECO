@@ -97,7 +97,7 @@ export class MapComponent implements OnInit {
   initOverlay() {
     const container = document.getElementById('popup');
     const content = document.getElementById('popup-content');
-    const closer = document.getElementById('popup-closer');
+    const closer = document.getElementById('popup-close');
 
     const overlay = new defaultOverlay({
       element: container,

@@ -1,0 +1,18 @@
+.header {
+
+}
+
+.content {
+    position: fixed;
+    bottom: 48px;
+    height: calc(100% - 48px);
+    width: 100%;
+}
+
+.footer {
+    background-color: #2C3E50 !important;
+    position: fixed;
+    bottom: 0px;
+    height: 48px;
+    width: 100%;
+}

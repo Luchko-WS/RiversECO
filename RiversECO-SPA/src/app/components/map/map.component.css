@@ -1,18 +1,17 @@
 #map-layer {
-    height: 600px;
+    height: 100%;
     width: 100%;
+    position: fixed;
 }
 
 .ol-popup {
   position: absolute;
-  background-color: white;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  padding: 15px;
   border-radius: 10px;
-  border: 1px solid #cccccc;
   bottom: 12px;
   left: -50px;
-  min-width: 280px;
+  min-width: 320px;
+  background-color: white;
 }
 .ol-popup:after, .ol-popup:before {
   top: 100%;
@@ -35,12 +34,34 @@
   left: 48px;
   margin-left: -11px;
 }
-.ol-popup-closer {
+
+.popup-header {
+  border-radius: 10px 10px 0 0;
+  padding: 10px 15px 5px 15px;
+  background-color: #2C3E50 !important;
+  color: white;
+}
+.popup-close {
   text-decoration: none;
   position: absolute;
   top: 2px;
   right: 8px;
+  color: red;
 }
-.ol-popup-closer:after {
-  content: "x";
+.popup-close:hover {
+  color: white;
+}
+
+.popup-content {
+  padding: 5px 15px 5px 15px;
+}
+
+.popup-footer {
+  border-radius: 0 0 10px 10px;
+  padding: 5px 15px 5px 15px;
+}
+.popup-footer button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
