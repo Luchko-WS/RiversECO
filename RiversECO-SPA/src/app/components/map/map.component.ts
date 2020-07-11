@@ -26,15 +26,19 @@ import { WaterObject } from 'src/app/models/water-object';
 })
 
 export class MapComponent implements OnInit {
-  private waterObjects: WaterObject[];
+  // members related to the UI map element
   private map: any;
   private overlay: any;
+
+  selectedObject: WaterObject;
+  waterObjects: WaterObject[];
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initMap();
-    this.initOverlay();
+    this.initOverlayWindow();
+
     this.route.data.subscribe(data => {
       this.waterObjects = data['waterObjects'];
       this.drawFeatures(this.waterObjects);
@@ -70,20 +74,30 @@ export class MapComponent implements OnInit {
   adjustInteractions(): any {
     const selectInteraction = new Select({multi: false});
     selectInteraction.on('select', e => {
-      console.log(e.selected);
-
-      if (e.selected.length === 0) {
+      if (e.selected.length !== 1) {
         this.overlay.setPosition(undefined);
         return;
       }
 
-      const mouseCoordinates = document
-        .getElementsByClassName('ol-mouse-position')[0]
-        .innerHTML.split(',');
+      const selectedFeatureValues = e.selected[0].values_;
+      this.selectedObject = {
+        id: selectedFeatureValues.id,
+        name: selectedFeatureValues.name_ukr,
+        state: 15
+      };
+
+      const mouseCoordinates = this.getCurrentMouseCoordinates();
       this.overlay.setPosition(mouseCoordinates);
     });
 
     return defaultInteraction().extend([selectInteraction]);
+  }
+
+  getCurrentMouseCoordinates() {
+    const mouseCoordinates = document
+      .getElementsByClassName('ol-mouse-position')[0]
+      .innerHTML.split(',');
+    return mouseCoordinates;
   }
 
   adjustView(): View {
@@ -94,9 +108,8 @@ export class MapComponent implements OnInit {
     });
   }
 
-  initOverlay() {
+  initOverlayWindow() {
     const container = document.getElementById('popup');
-    const content = document.getElementById('popup-content');
     const closer = document.getElementById('popup-close');
 
     const overlay = new defaultOverlay({

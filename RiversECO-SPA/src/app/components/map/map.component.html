@@ -1,11 +1,12 @@
 <div id="map-layer"></div>
 <div id="popup" class="ol-popup">    
-    <div class="popup-header">
-        Object name
+    <div id="popup-header" class="popup-header">
+        <span *ngIf="selectedObject">{{selectedObject.name}}</span>
         <a href="#" id="popup-close" class="popup-close">x</a>
     </div>
-    <div id="popup-content" class="popup-content">
-        Object description
+    <div id="popup-content" class="popup-content" *ngIf="selectedObject">
+        <p>Id: {{selectedObject.id}}</p>
+        <p>State: {{selectedObject.state}}</p>
     </div>
     <div class="popup-footer">
         <button class="btn btn-info btn-sm">Add review</button>
