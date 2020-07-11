@@ -35,33 +35,14 @@
   margin-left: -11px;
 }
 
-.popup-header {
-  border-radius: 10px 10px 0 0;
-  padding: 10px 15px 5px 15px;
-  background-color: #2C3E50 !important;
-  color: white;
-}
-.popup-close {
-  text-decoration: none;
-  position: absolute;
-  top: 2px;
-  right: 8px;
-  color: red;
-}
-.popup-close:hover {
-  color: white;
-}
-
-.popup-content {
+.modal-body {
   padding: 5px 15px 5px 15px;
 }
-
-.popup-footer {
-  border-radius: 0 0 10px 10px;
-  padding: 5px 15px 5px 15px;
+.modal-body-loading {
+  text-align: center;
+  height: 50px;
 }
-.popup-footer button {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+
+.modal-footer {
+  padding: 5px 15px 5px 15px;
 }

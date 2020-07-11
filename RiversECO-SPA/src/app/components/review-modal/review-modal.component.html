@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Створити огляд для {{object.name}}</h4>
+    <a class="close" (click)="bsModalRef.hide()"></a>
+</div>
+<div class="modal-body">
+    SOME CONTENT
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
+<button type="button" class="btn btn-success" (click)="submitReview()" form="rolesForm">Відправити</button>
+</div>

@@ -17,6 +17,9 @@ import {defaults as defaultControls, Rotate, ScaleLine, MousePosition} from 'ol/
 import {default as defaultOverlay} from 'ol/overlay';
 import TileLayer from 'ol/layer/Tile';
 
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { ReviewModalComponent } from '../review-modal/review-modal.component';
 import { WaterObject } from 'src/app/models/water-object';
 
 @Component({
@@ -29,11 +32,13 @@ export class MapComponent implements OnInit {
   // members related to the UI map element
   private map: any;
   private overlay: any;
+  private selectInteraction: Select;
 
   selectedObject: WaterObject;
   waterObjects: WaterObject[];
+  bsModalRef: BsModalRef;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.initMap();
@@ -75,9 +80,11 @@ export class MapComponent implements OnInit {
     const selectInteraction = new Select({multi: false});
     selectInteraction.on('select', e => {
       if (e.selected.length !== 1) {
-        this.overlay.setPosition(undefined);
+        this.closeOverlay();
         return;
       }
+
+      const mouseCoordinates = this.getCurrentMouseCoordinates();
 
       const selectedFeatureValues = e.selected[0].values_;
       this.selectedObject = {
@@ -86,11 +93,11 @@ export class MapComponent implements OnInit {
         state: 15
       };
 
-      const mouseCoordinates = this.getCurrentMouseCoordinates();
       this.overlay.setPosition(mouseCoordinates);
     });
 
-    return defaultInteraction().extend([selectInteraction]);
+    this.selectInteraction = selectInteraction;
+    return defaultInteraction().extend([this.selectInteraction]);
   }
 
   getCurrentMouseCoordinates() {
@@ -109,25 +116,21 @@ export class MapComponent implements OnInit {
   }
 
   initOverlayWindow() {
-    const container = document.getElementById('popup');
-    const closer = document.getElementById('popup-close');
-
     const overlay = new defaultOverlay({
-      element: container,
+      element: document.getElementById('popup'),
       autoPan: true,
       autoPanAnimation: {
         duration: 250
       }
     });
 
-    closer.onclick = () => {
-      overlay.setPosition(undefined);
-      closer.blur();
-      return false;
-    };
-
     this.overlay = overlay;
     this.map.addOverlay(overlay);
+  }
+
+  closeOverlay() {
+    this.selectInteraction.getFeatures().clear();
+    this.overlay.setPosition(undefined);
   }
 
   drawFeatures(objects: WaterObject[]) {
@@ -147,5 +150,15 @@ export class MapComponent implements OnInit {
 
     this.map.addLayer(lakesLayer);
     this.map.addLayer(riversLayer);
+  }
+
+  createReivew() {
+    this.closeOverlay();
+
+    const initialState = {
+      object: this.selectedObject,
+      criterias: null
+    };
+    this.bsModalRef = this.modalService.show(ReviewModalComponent, {initialState});
   }
 }
