@@ -7,3 +7,30 @@
 .ol-mouse-position {
     display: none;
 }
+
+.modal-header {
+    background-color: #2C3E50 !important;
+    color: white;
+}
+
+.close {  
+    text-decoration: none;
+    cursor:pointer;
+    font-size: 24px;
+}
+.close::after {
+    content: '×'
+}
+.modal-header .close {
+    padding: 0;
+    margin: 0 0 0 10px;
+}
+.modal .close {
+    color: white;
+}
+.modal .close:not(:disabled):not(.disabled):hover {
+    color: red;
+}
+.close:not(:disabled):not(.disabled):hover {
+    color: red;
+}
