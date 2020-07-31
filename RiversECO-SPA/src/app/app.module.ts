@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +15,8 @@ import { MapComponent } from './components/map/map.component';
 import { CriteriasComponent } from './components/management/criterias/criterias.component';
 import { ReviewModalComponent } from './components/review-modal/review-modal.component';
 
+import { WaterObjectService } from './services/water-object.service';
+import { CriteriaService } from './services/criteria.service';
 import { WaterObjectsListResolver } from './resolvers/water-objects-list.resolver';
 
 
@@ -27,12 +30,15 @@ import { WaterObjectsListResolver } from './resolvers/water-objects-list.resolve
     ReviewModalComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     ModalModule.forRoot()
   ],
   providers: [
+    WaterObjectService,
+    CriteriaService,
     WaterObjectsListResolver
   ],
   entryComponents: [

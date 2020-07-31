@@ -3,7 +3,10 @@
     <a class="close" (click)="bsModalRef.hide()"></a>
 </div>
 <div class="modal-body">
-    SOME CONTENT
+    <div *ngFor="let criteria of criterias">
+        <h3>{{criteria.name}}</h3>
+        <h5>{{criteria.description}}</h5>
+    </div>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>

@@ -1,31 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { WaterObject } from '../models/water-object';
+import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { WaterObjectService } from '../services/water-object.service';
+import { WaterObject } from '../models/water-object';
 
 @Injectable()
 export class WaterObjectsListResolver implements Resolve<WaterObject[]> {
-    constructor() { }
+    constructor(private waterObjectService: WaterObjectService, private router: Router) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<WaterObject[]> {
-        const observer = of<WaterObject[]>(
-            [
-                {
-                    id: 'id1',
-                    name: 'name 1',
-                    state: 1
-                },
-                {
-                    id: 'id2',
-                    name: 'name 2',
-                    state: 2
-                }
-            ]
-        );
-
-        return observer.pipe(
+        return this.waterObjectService.getWaterObjects().pipe(
             catchError(error => {
+                console.error(error);
+                this.router.navigate(['/home']);
                 return of(null);
             })
         );

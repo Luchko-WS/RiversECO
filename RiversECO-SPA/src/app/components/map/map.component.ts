@@ -21,6 +21,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { ReviewModalComponent } from '../review-modal/review-modal.component';
 import { WaterObject } from 'src/app/models/water-object';
+import { CriteriaService } from 'src/app/services/criteria.service';
+import { Criteria } from 'src/app/models/criteria';
 
 @Component({
   selector: 'app-map',
@@ -156,8 +158,7 @@ export class MapComponent implements OnInit {
     this.closeOverlay();
 
     const initialState = {
-      object: this.selectedObject,
-      criterias: null
+      object: this.selectedObject
     };
     this.bsModalRef = this.modalService.show(ReviewModalComponent, {initialState});
   }

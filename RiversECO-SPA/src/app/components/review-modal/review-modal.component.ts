@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { WaterObject } from 'src/app/models/water-object';
+import { Criteria } from 'src/app/models/criteria';
+import { CriteriaService } from 'src/app/services/criteria.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -12,11 +14,17 @@ import { WaterObject } from 'src/app/models/water-object';
 
 export class ReviewModalComponent implements OnInit {
   object: WaterObject;
-  criterias: any;
+  criterias: Criteria[];
 
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor(private criteriaService: CriteriaService, public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
+    this.criteriaService.getCriterias()
+      .subscribe((res: Criteria[]) => {
+        this.criterias = res;
+      }, error => {
+        console.error(error);
+      });
   }
 
   submitReview() {
