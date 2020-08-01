@@ -12,8 +12,8 @@ import { AppComponent } from './components/root/app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MapComponent } from './components/map/map.component';
+import { ReviewModalComponent } from './components/map/review-modal/review-modal.component';
 import { CriteriasComponent } from './components/management/criterias/criterias.component';
-import { ReviewModalComponent } from './components/review-modal/review-modal.component';
 
 import { WaterObjectService } from './services/water-object.service';
 import { CriteriaService } from './services/criteria.service';

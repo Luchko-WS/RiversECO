@@ -19,7 +19,7 @@ import TileLayer from 'ol/layer/Tile';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-import { ReviewModalComponent } from '../review-modal/review-modal.component';
+import { ReviewModalComponent } from './review-modal/review-modal.component';
 import { WaterObject } from 'src/app/models/water-object';
 
 @Component({
