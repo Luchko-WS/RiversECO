@@ -17,6 +17,10 @@
     color: white;
 }
 
+.modal-header .modal-title {
+    font-size: large;
+}
+
 .close {  
     text-decoration: none;
     cursor:pointer;

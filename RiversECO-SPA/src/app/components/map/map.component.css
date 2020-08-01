@@ -35,6 +35,10 @@
   margin-left: -11px;
 }
 
+.modal-dialog.modal-window{
+  max-width: 700px;
+}
+
 .modal-body {
   padding: 5px 15px 5px 15px;
 }

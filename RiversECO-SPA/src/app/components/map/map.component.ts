@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import Map from 'ol/Map';
@@ -21,13 +21,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { ReviewModalComponent } from '../review-modal/review-modal.component';
 import { WaterObject } from 'src/app/models/water-object';
-import { CriteriaService } from 'src/app/services/criteria.service';
-import { Criteria } from 'src/app/models/criteria';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class MapComponent implements OnInit {
@@ -157,9 +156,14 @@ export class MapComponent implements OnInit {
   createReivew() {
     this.closeOverlay();
 
-    const initialState = {
+    const options = {
+      initialState: {
       object: this.selectedObject
+      },
+      animated: true,
+      class: 'modal-window'
     };
-    this.bsModalRef = this.modalService.show(ReviewModalComponent, {initialState});
+
+    this.bsModalRef = this.modalService.show(ReviewModalComponent, options);
   }
 }

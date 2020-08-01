@@ -1,14 +1,22 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">Створити огляд для {{object.name}}</h4>
+    <div class="modal-title pull-left">Створити огляд для <b>{{object.name}}</b></div>
     <a class="close" (click)="bsModalRef.hide()"></a>
 </div>
-<div class="modal-body">
-    <div *ngFor="let criteria of criterias">
-        <h3>{{criteria.name}}</h3>
-        <h5>{{criteria.description}}</h5>
+<div class="modal-body form-group">
+    <div class="label">Критерії:</div>
+    <div class="criterias-list">
+        <div *ngFor="let criteria of criterias" class="criteria-object">
+            <div class="criteria-body" (dblclick)="checkCriteria(criteria)">
+                <div class="name-field">{{criteria.name}}</div>
+                <div class="description-field">{{criteria.description}}</div>
+            </div>
+            <input [(ngModel)]="criteria.checked" class="criteria-checkbox" type="checkbox" />
+        </div>
     </div>
+    <div class="label">Коментар:</div>
+    <textarea [(ngModel)]="comment" class="form-control" rows="4" style="resize: none;"></textarea>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
-<button type="button" class="btn btn-success" (click)="submitReview()" form="rolesForm">Відправити</button>
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
+    <button [disabled]="!validateReview()" type="button" class="btn btn-success" (click)="submitReview()" form="rolesForm">Відправити</button>
 </div>

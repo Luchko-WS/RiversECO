@@ -1,0 +1,42 @@
+.criterias-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.label {
+    font-size: large;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.criteria-object {
+    border: 1px lightblue solid;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 5px;
+    position: relative;
+}
+.criteria-object:hover {
+    background-color: rgb(224, 246, 253);
+}
+
+.criteria-body {
+    max-width: calc(100% - 40px);
+}
+
+.name-field {
+    font-size: large;
+}
+
+.description-field {
+    font-size: small;
+}
+
+.criteria-checkbox {
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
