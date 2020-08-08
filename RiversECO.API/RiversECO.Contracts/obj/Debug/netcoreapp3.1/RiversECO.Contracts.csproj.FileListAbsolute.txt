@@ -1,0 +1,9 @@
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\bin\Debug\netcoreapp3.1\RiversECO.Contracts.deps.json
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\bin\Debug\netcoreapp3.1\RiversECO.Contracts.dll
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\bin\Debug\netcoreapp3.1\RiversECO.Contracts.pdb
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.csprojAssemblyReference.cache
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.AssemblyInfoInputs.cache
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.AssemblyInfo.cs
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.csproj.CoreCompileInputs.cache
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.dll
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.pdb
