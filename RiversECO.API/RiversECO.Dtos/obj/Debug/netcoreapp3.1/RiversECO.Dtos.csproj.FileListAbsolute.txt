@@ -1,9 +1,0 @@
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\bin\Debug\netcoreapp3.1\RiversECO.Dtos.deps.json
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\bin\Debug\netcoreapp3.1\RiversECO.Dtos.dll
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\bin\Debug\netcoreapp3.1\RiversECO.Dtos.pdb
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\obj\Debug\netcoreapp3.1\RiversECO.Dtos.AssemblyInfoInputs.cache
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\obj\Debug\netcoreapp3.1\RiversECO.Dtos.AssemblyInfo.cs
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\obj\Debug\netcoreapp3.1\RiversECO.Dtos.csproj.CoreCompileInputs.cache
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\obj\Debug\netcoreapp3.1\RiversECO.Dtos.dll
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\obj\Debug\netcoreapp3.1\RiversECO.Dtos.pdb
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Dtos\obj\Debug\netcoreapp3.1\RiversECO.Dtos.csprojAssemblyReference.cache
