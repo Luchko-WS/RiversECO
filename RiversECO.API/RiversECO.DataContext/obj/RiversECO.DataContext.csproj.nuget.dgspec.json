@@ -1,84 +1,9 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.API\\RiversECO.API.csproj": {}
+    "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.DataContext\\RiversECO.DataContext.csproj": {}
   },
   "projects": {
-    "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.API\\RiversECO.API.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.API\\RiversECO.API.csproj",
-        "projectName": "RiversECO.API",
-        "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.API\\RiversECO.API.csproj",
-        "packagesPath": "C:\\Users\\Andrii\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.API\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\Andrii\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "projectReferences": {
-              "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.DataContext\\RiversECO.DataContext.csproj": {
-                "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.DataContext\\RiversECO.DataContext.csproj"
-              },
-              "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Repositories\\RiversECO.Repositories.csproj": {
-                "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Repositories\\RiversECO.Repositories.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
-          "dependencies": {
-            "AutoMapper": {
-              "target": "Package",
-              "version": "[10.0.0, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[12.0.3, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
     "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Contracts\\RiversECO.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -250,81 +175,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Repositories\\RiversECO.Repositories.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Repositories\\RiversECO.Repositories.csproj",
-        "projectName": "RiversECO.Repositories",
-        "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Repositories\\RiversECO.Repositories.csproj",
-        "packagesPath": "C:\\Users\\Andrii\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Repositories\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\Andrii\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "projectReferences": {
-              "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Contracts\\RiversECO.Contracts.csproj": {
-                "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Contracts\\RiversECO.Contracts.csproj"
-              },
-              "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.DataContext\\RiversECO.DataContext.csproj": {
-                "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.DataContext\\RiversECO.DataContext.csproj"
-              },
-              "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Models\\RiversECO.Models.csproj": {
-                "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Models\\RiversECO.Models.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.6, )"
-            },
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[3.1.6, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

@@ -6,12 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RiversECO.Contracts\RiversECO.Contracts.csproj" />
-    <ProjectReference Include="..\RiversECO.DataContext\RiversECO.DataContext.csproj" />
     <ProjectReference Include="..\RiversECO.Models\RiversECO.Models.csproj" />
   </ItemGroup>
 

@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RiversECO.API.Extensions;
+using RiversECO.DataContext.Configuration;
+using RiversECO.Repositories.Configuration;
 
 namespace RiversECO.API
 {
@@ -22,7 +24,10 @@ namespace RiversECO.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services
+                .ConfigureDataContextForSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                .RegisterRepositories()
+                .AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

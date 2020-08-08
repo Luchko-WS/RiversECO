@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "RiversECO.Contracts/1.0.0": {
+        "dependencies": {
+          "RiversECO.Models": "1.0.0"
+        },
         "runtime": {
           "RiversECO.Contracts.dll": {}
+        }
+      },
+      "RiversECO.Models/1.0.0": {
+        "runtime": {
+          "RiversECO.Models.dll": {}
         }
       }
     }
   },
   "libraries": {
     "RiversECO.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RiversECO.Models/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

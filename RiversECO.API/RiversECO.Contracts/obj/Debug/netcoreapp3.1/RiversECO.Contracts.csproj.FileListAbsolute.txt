@@ -7,3 +7,6 @@ C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.csproj.CoreCompileInputs.cache
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.dll
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.pdb
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\bin\Debug\netcoreapp3.1\RiversECO.Models.dll
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\bin\Debug\netcoreapp3.1\RiversECO.Models.pdb
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Contracts\obj\Debug\netcoreapp3.1\RiversECO.Contracts.csproj.CopyComplete

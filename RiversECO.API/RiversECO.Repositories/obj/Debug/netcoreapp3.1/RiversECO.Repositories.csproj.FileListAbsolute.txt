@@ -4,9 +4,13 @@ C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\bin\Debug\netcoreapp3
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.csprojAssemblyReference.cache
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.AssemblyInfoInputs.cache
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.AssemblyInfo.cs
-C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.csproj.CoreCompileInputs.cache
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.dll
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.pdb
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\bin\Debug\netcoreapp3.1\RiversECO.Models.dll
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\bin\Debug\netcoreapp3.1\RiversECO.Models.pdb
 C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.csproj.CopyComplete
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\bin\Debug\netcoreapp3.1\RiversECO.Contracts.dll
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\bin\Debug\netcoreapp3.1\RiversECO.Contracts.pdb
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\obj\Debug\netcoreapp3.1\RiversECO.Repositories.csproj.CoreCompileInputs.cache
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\bin\Debug\netcoreapp3.1\RiversECO.DataContext.dll
+C:\Dev_VNTU\RiversECO\RiversECO.API\RiversECO.Repositories\bin\Debug\netcoreapp3.1\RiversECO.DataContext.pdb
