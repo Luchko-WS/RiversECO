@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
 using RiversECO.API.Extensions;
 using RiversECO.DataContext.Configuration;
 using RiversECO.Repositories.Configuration;
+using RiversECO.API.Infrastructure.Middlewares;
 
 namespace RiversECO.API
 {
@@ -27,6 +29,8 @@ namespace RiversECO.API
             services
                 .ConfigureDataContextForSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 .RegisterRepositories()
+                .AddAutoMapper(typeof(Startup).Assembly)
+                .RegisterValidators()
                 .AddControllers();
         }
 
@@ -53,10 +57,10 @@ namespace RiversECO.API
                 });
             }
 
-            app.UseRouting();
-
-            //no security =)
-            app.UseCors(n => n.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app
+                .UseCors(n => n.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()) //no security =)
+                .UseMiddleware<ErrorHandlerMiddleware>()
+                .UseRouting();
 
             //app.UseAuthorization();
 

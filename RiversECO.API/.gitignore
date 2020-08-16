@@ -7,3 +7,7 @@ RiversECO.Contracts/obj/
 RiversECO.Dtos/obj/
 RiversECO.Models/obj/
 RiversECO.Services/obj/
+RiversECO.API/bin/
+RiversECO.Repositories/bin/
+.vs/
+

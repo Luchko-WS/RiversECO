@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RiversECO.Contracts.Repositories;
@@ -12,10 +11,19 @@ namespace RiversECO.Repositories
         public CriteriasRepository(DataContext.DataContext context)
             : base(context) { }
 
-        public override async Task<IList<Criteria>> GetAllAsync()
+        public override async Task<PagedList<Criteria>> GetAllAsync()
         {
             var criterias = await _context.Criterias.ToListAsync();
-            return criterias;
+
+            var pagedList = new PagedList<Criteria>
+            {
+                PageNumber = 1,
+                PageSize = criterias.Count,
+                Total = criterias.Count
+            };
+            pagedList.AddRange(criterias);
+
+            return pagedList;
         }
 
         public override async Task<Criteria> GetByIdAsync(Guid id)

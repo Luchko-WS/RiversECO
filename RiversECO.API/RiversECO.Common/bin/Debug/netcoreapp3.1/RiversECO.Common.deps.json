@@ -7,14 +7,56 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "RiversECO.Common/1.0.0": {
+        "dependencies": {
+          "FluentValidation": "9.1.2",
+          "RiversECO.Dtos": "1.0.0"
+        },
         "runtime": {
           "RiversECO.Common.dll": {}
+        }
+      },
+      "FluentValidation/9.1.2": {
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.1.2.0"
+          }
+        }
+      },
+      "RiversECO.Dtos/1.0.0": {
+        "dependencies": {
+          "RiversECO.Models": "1.0.0"
+        },
+        "runtime": {
+          "RiversECO.Dtos.dll": {}
+        }
+      },
+      "RiversECO.Models/1.0.0": {
+        "runtime": {
+          "RiversECO.Models.dll": {}
         }
       }
     }
   },
   "libraries": {
     "RiversECO.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FluentValidation/9.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+l80lxon18PPJhLEGQGiono5vYhJHuIZUCfGPzO01EFFHOy5ZudF4WmWk+3JNCtKOMnyCwKits/BLhUlTiFsyw==",
+      "path": "fluentvalidation/9.1.2",
+      "hashPath": "fluentvalidation.9.1.2.nupkg.sha512"
+    },
+    "RiversECO.Dtos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RiversECO.Models/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

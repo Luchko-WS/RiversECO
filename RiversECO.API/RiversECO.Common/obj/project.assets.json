@@ -1,11 +1,73 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "FluentValidation/9.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/FluentValidation.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.dll": {}
+        }
+      },
+      "RiversECO.Dtos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "RiversECO.Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RiversECO.Dtos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RiversECO.Dtos.dll": {}
+        }
+      },
+      "RiversECO.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/RiversECO.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RiversECO.Models.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "FluentValidation/9.1.2": {
+      "sha512": "+l80lxon18PPJhLEGQGiono5vYhJHuIZUCfGPzO01EFFHOy5ZudF4WmWk+3JNCtKOMnyCwKits/BLhUlTiFsyw==",
+      "type": "package",
+      "path": "fluentvalidation/9.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fluentvalidation.9.1.2.nupkg.sha512",
+        "fluentvalidation.nuspec",
+        "lib/net461/FluentValidation.dll",
+        "lib/net461/FluentValidation.xml",
+        "lib/netstandard2.0/FluentValidation.dll",
+        "lib/netstandard2.0/FluentValidation.xml"
+      ]
+    },
+    "RiversECO.Dtos/1.0.0": {
+      "type": "project",
+      "path": "../RiversECO.Dtos/RiversECO.Dtos.csproj",
+      "msbuildProject": "../RiversECO.Dtos/RiversECO.Dtos.csproj"
+    },
+    "RiversECO.Models/1.0.0": {
+      "type": "project",
+      "path": "../RiversECO.Models/RiversECO.Models.csproj",
+      "msbuildProject": "../RiversECO.Models/RiversECO.Models.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "FluentValidation >= 9.1.2",
+      "RiversECO.Dtos >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Andrii\\.nuget\\packages\\": {},
@@ -36,7 +98,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Dtos\\RiversECO.Dtos.csproj": {
+              "projectPath": "C:\\Dev_VNTU\\RiversECO\\RiversECO.API\\RiversECO.Dtos\\RiversECO.Dtos.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -47,6 +113,12 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "dependencies": {
+          "FluentValidation": {
+            "target": "Package",
+            "version": "[9.1.2, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

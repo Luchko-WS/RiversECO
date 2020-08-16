@@ -1,17 +1,13 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace RiversECO.Models
+namespace RiversECO.Dtos.Responses
 {
-    public abstract class ModelBase
+    public class CriteriaDto
     {
         public Guid Id { get; set; }
-
-        [Required]
         public string Name { get; set; }
-
         public DateTime CreatedOn { get; set; }
-
         public DateTime? ModifiedOn { get; set; }
+        public string Description { get; set; }
     }
 }
