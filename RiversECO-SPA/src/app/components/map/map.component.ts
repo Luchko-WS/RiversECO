@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import Map from 'ol/Map';
@@ -39,7 +39,10 @@ export class MapComponent implements OnInit {
   waterObjects: WaterObject[];
   bsModalRef: BsModalRef;
 
-  constructor(private route: ActivatedRoute, private modalService: BsModalService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private modalService: BsModalService,
+    private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.initMap();
@@ -93,6 +96,7 @@ export class MapComponent implements OnInit {
         name: selectedFeatureValues.name_ukr,
         state: 15
       };
+      this.changeDetectorRef.detectChanges();
 
       this.overlay.setPosition(mouseCoordinates);
     });

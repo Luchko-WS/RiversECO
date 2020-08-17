@@ -2,13 +2,10 @@
 <div id="popup" class="ol-popup">    
     <div class="modal-header">
         <span *ngIf="selectedObject">{{selectedObject.name}}</span>
+        <span *ngIf="!selectedObject">Завантаження...</span>
         <a class="close" (click)="closeOverlay()"></a>
     </div>
-    <div class="modal-body" >
-        <div *ngIf="selectedObject">
-            <p>Id: {{selectedObject.id}}</p>
-            <p>State: {{selectedObject.state}}</p>
-        </div>
+    <div class="modal-body">
         <div class="modal-body-loading" *ngIf="!selectedObject">
             <img src="../../../assets/spinner/48x48.gif"/>
         </div>
