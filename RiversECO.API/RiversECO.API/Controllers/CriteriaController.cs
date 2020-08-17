@@ -6,6 +6,7 @@ using RiversECO.Contracts.Repositories;
 using RiversECO.Dtos.Requests;
 using RiversECO.Dtos.Responses;
 using RiversECO.Models;
+using System.Collections.Generic;
 
 namespace RiversECO.API.Controllers
 {
@@ -40,7 +41,7 @@ namespace RiversECO.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var criterias = await _repository.GetAllAsync();
-            var criteriasToReturn = _mapper.Map<PagedListDto<CriteriaDto>>(criterias);
+            var criteriasToReturn = _mapper.Map<List<CriteriaDto>>(criterias);
             return Ok(criteriasToReturn);
         }
 

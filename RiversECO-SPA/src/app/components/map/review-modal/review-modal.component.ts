@@ -28,6 +28,7 @@ export class ReviewModalComponent implements OnInit {
       .subscribe((res: Criteria[]) => {
         this.criterias = res.map(criteria => {
           return {
+            id: criteria.id,
             name: criteria.name,
             description: criteria.description,
             checked: false

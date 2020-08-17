@@ -7,7 +7,6 @@ namespace RiversECO.Common.Validators.Criteria
     {
         public CreateCriteriaRequestValidator()
         {
-
             RuleFor(x => x.Name)
                 .NotEmpty();
         }

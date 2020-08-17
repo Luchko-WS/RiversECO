@@ -23,7 +23,7 @@
 
 .close {  
     text-decoration: none;
-    cursor:pointer;
+    cursor: pointer;
     font-size: 24px;
 }
 .close::after {

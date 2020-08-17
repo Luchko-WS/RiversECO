@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RiversECO.Contracts.Repositories;
 using RiversECO.Models;
 
@@ -15,9 +18,35 @@ namespace RiversECO.Repositories
             _context = context;
         }
 
-        public abstract Task<PagedList<TModel>> GetAllAsync();
+        public abstract IQueryable<TModel> Items { get; }
 
-        public abstract Task<TModel> GetByIdAsync(Guid id);
+        public async Task<IList<TModel>> GetAllAsync()
+        {
+            var items = await Items.ToListAsync();
+            return items;
+        }
+
+        public async Task<PagedList<TModel>> GetPagedAsync()
+        {
+            var itemsToReturn = await Items.ToListAsync();
+
+            var pagedList = new PagedList<TModel>
+            {
+                PageNumber = 1,
+                PageSize = itemsToReturn.Count,
+                Total = itemsToReturn.Count
+            };
+            pagedList.AddRange(itemsToReturn);
+
+            return pagedList;
+        }
+
+        public async Task<TModel> GetByIdAsync(Guid id)
+        {
+            var item = await Items
+                .FirstOrDefaultAsync(x => x.Id.Equals(id));
+            return item;
+        }
 
         public void Create(TModel model)
         {
