@@ -22,11 +22,17 @@ namespace RiversECO.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = nameof(Get))]
         public async Task<IActionResult> Get(Guid id)
         {
             var criteria = await _repository.GetByIdAsync(id);
             var criteriaToReturn = _mapper.Map<CriteriaDto>(criteria);
+
+            if (criteriaToReturn == null)
+            {
+                return NotFound();
+            }
+
             return Ok(criteriaToReturn);
         }
 
@@ -35,7 +41,7 @@ namespace RiversECO.API.Controllers
         {
             var criterias = await _repository.GetAllAsync();
             var criteriasToReturn = _mapper.Map<PagedListDto<CriteriaDto>>(criterias);
-            return Ok(criterias);
+            return Ok(criteriasToReturn);
         }
 
         [HttpPost]
@@ -58,8 +64,12 @@ namespace RiversECO.API.Controllers
         {
             var criteriaFromRepo = await _repository.GetByIdAsync(dto.Id);
             _mapper.Map(dto, criteriaFromRepo);
-            await _repository.SaveAllChangesAsync();
-            return Ok();
+            if (await _repository.SaveAllChangesAsync())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Could not update a criteria.");
         }
 
         [HttpDelete]

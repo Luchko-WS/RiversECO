@@ -1,13 +1,18 @@
-RiversECO.DataContext/bin/
-RiversECO.API/obj/
-RiversECO.DataContext/obj/
-RiversECO.Repositories/obj/
-RiversECO.Common/obj/
-RiversECO.Contracts/obj/
-RiversECO.Dtos/obj/
-RiversECO.Models/obj/
-RiversECO.Services/obj/
 RiversECO.API/bin/
+RiversECO.API/obj/
+RiversECO.DataContext/bin/
+RiversECO.DataContext/obj/
 RiversECO.Repositories/bin/
+RiversECO.Repositories/obj/
+RiversECO.Common/bin/
+RiversECO.Common/obj/
+RiversECO.Contracts/bin/
+RiversECO.Contracts/obj/
+RiversECO.Dtos/bin/
+RiversECO.Dtos/obj/
+RiversECO.Models/bin/
+RiversECO.Models/obj/
+RiversECO.Services/bin/
+RiversECO.Services/obj/
 .vs/
 

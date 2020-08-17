@@ -10,8 +10,8 @@ using RiversECO.DataContext;
 namespace RiversECO.DataContext.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200808132814_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200817090045_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,10 +33,11 @@ namespace RiversECO.DataContext.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
