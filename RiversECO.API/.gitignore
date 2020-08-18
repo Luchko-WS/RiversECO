@@ -14,5 +14,7 @@ RiversECO.Models/bin/
 RiversECO.Models/obj/
 RiversECO.Services/bin/
 RiversECO.Services/obj/
+GeoJSONMigrationTool/bin/
+GeoJSONMigrationTool/obj/
 .vs/
 

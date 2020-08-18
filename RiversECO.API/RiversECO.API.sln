@@ -13,17 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bussines Layer", "Bussines 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiversECO.Services", "RiversECO.Services\RiversECO.Services.csproj", "{C9E9ACC6-027A-407E-A8F0-C86934DD8B1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiversECO.Common", "RiversECO.Common\RiversECO.Common.csproj", "{6E67A81C-A410-4FDF-8C0B-B138D03C387A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiversECO.Common", "RiversECO.Common\RiversECO.Common.csproj", "{6E67A81C-A410-4FDF-8C0B-B138D03C387A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiversECO.Contracts", "RiversECO.Contracts\RiversECO.Contracts.csproj", "{31F12451-4EB9-4727-A7DF-BF52FFD7561F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiversECO.Contracts", "RiversECO.Contracts\RiversECO.Contracts.csproj", "{31F12451-4EB9-4727-A7DF-BF52FFD7561F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiversECO.Repositories", "RiversECO.Repositories\RiversECO.Repositories.csproj", "{79B70E49-0D23-462D-991C-CD9655CF52BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiversECO.Repositories", "RiversECO.Repositories\RiversECO.Repositories.csproj", "{79B70E49-0D23-462D-991C-CD9655CF52BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiversECO.Dtos", "RiversECO.Dtos\RiversECO.Dtos.csproj", "{7320EA69-642D-4B00-B9D6-0BFDBA322E10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiversECO.Dtos", "RiversECO.Dtos\RiversECO.Dtos.csproj", "{7320EA69-642D-4B00-B9D6-0BFDBA322E10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiversECO.Models", "RiversECO.Models\RiversECO.Models.csproj", "{D2434783-FA8B-410F-9AAA-150188590D35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiversECO.Models", "RiversECO.Models\RiversECO.Models.csproj", "{D2434783-FA8B-410F-9AAA-150188590D35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiversECO.DataContext", "RiversECO.DataContext\RiversECO.DataContext.csproj", "{6A89E7F2-8E45-4C16-97B8-D0A9C4C61996}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiversECO.DataContext", "RiversECO.DataContext\RiversECO.DataContext.csproj", "{6A89E7F2-8E45-4C16-97B8-D0A9C4C61996}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{86D17F00-79F9-4CCF-88D7-905A811DA619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoJSONMigrationTool", "GeoJSONMigrationTool\GeoJSONMigrationTool.csproj", "{DA0CE223-FD48-4234-A3F5-2A4FD97FFB02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,10 @@ Global
 		{6A89E7F2-8E45-4C16-97B8-D0A9C4C61996}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A89E7F2-8E45-4C16-97B8-D0A9C4C61996}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A89E7F2-8E45-4C16-97B8-D0A9C4C61996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0CE223-FD48-4234-A3F5-2A4FD97FFB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0CE223-FD48-4234-A3F5-2A4FD97FFB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0CE223-FD48-4234-A3F5-2A4FD97FFB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0CE223-FD48-4234-A3F5-2A4FD97FFB02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{7320EA69-642D-4B00-B9D6-0BFDBA322E10} = {4456BF15-3750-4C97-B554-9DD1934A24F6}
 		{D2434783-FA8B-410F-9AAA-150188590D35} = {710B5665-9735-4D56-A7C5-250A051B20F3}
 		{6A89E7F2-8E45-4C16-97B8-D0A9C4C61996} = {710B5665-9735-4D56-A7C5-250A051B20F3}
+		{DA0CE223-FD48-4234-A3F5-2A4FD97FFB02} = {86D17F00-79F9-4CCF-88D7-905A811DA619}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E219BF0C-B3B8-4650-A94F-048778D1E2BF}
