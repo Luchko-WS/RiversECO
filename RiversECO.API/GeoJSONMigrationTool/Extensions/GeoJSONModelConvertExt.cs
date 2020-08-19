@@ -17,17 +17,17 @@ namespace GeoJSONMigrationTool.Extensions
             {
                 try
                 {
-                    var waterObject = new River()
+                    var river = new River()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = feature.Properties.WaterObjectId ?? Guid.NewGuid(),
                         Name = feature.Properties.Name_ukr,
                         CreatedOn = DateTime.UtcNow,
                         Code = feature.Properties.Code,
-                        LengthKm = feature.Properties.L_km,
-                        Geometry = JsonConvert.SerializeObject(feature.Geometry.Coordinates)
+                        LengthKm = feature.Properties.L_km
                     };
 
-                    resultList.Add(waterObject);
+                    feature.Properties.WaterObjectId = river.Id;
+                    resultList.Add(river);
                 }
                 catch (Exception ex)
                 {
@@ -45,17 +45,17 @@ namespace GeoJSONMigrationTool.Extensions
             {
                 try
                 {
-                    var waterObject = new Lake()
+                    var lake = new Lake()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = feature.Properties.WaterObjectId ?? Guid.NewGuid(),
                         Name = feature.Properties.Name_ukr,
                         CreatedOn = DateTime.UtcNow,
                         Code = feature.Properties.Code,
-                        Area = feature.Properties.Area,
-                        Geometry = JsonConvert.SerializeObject(feature.Geometry.Coordinates)
+                        Area = feature.Properties.Area
                     };
 
-                    resultList.Add(waterObject);
+                    feature.Properties.WaterObjectId = lake.Id;
+                    resultList.Add(lake);
                 }
                 catch (Exception ex)
                 {
