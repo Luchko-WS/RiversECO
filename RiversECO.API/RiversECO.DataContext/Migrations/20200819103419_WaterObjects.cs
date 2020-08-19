@@ -15,9 +15,8 @@ namespace RiversECO.DataContext.Migrations
                     Name = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Geometry = table.Column<string>(nullable: true),
                     Code = table.Column<string>(nullable: true),
-                    Area = table.Column<double>(nullable: false)
+                    Area = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,9 +31,8 @@ namespace RiversECO.DataContext.Migrations
                     Name = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Geometry = table.Column<string>(nullable: true),
                     Code = table.Column<string>(nullable: true),
-                    LengthKm = table.Column<double>(nullable: false)
+                    LengthKm = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {

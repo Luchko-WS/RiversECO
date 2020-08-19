@@ -49,7 +49,7 @@ namespace RiversECO.DataContext.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Area")
+                    b.Property<double?>("Area")
                         .HasColumnType("float");
 
                     b.Property<string>("Code")
@@ -57,9 +57,6 @@ namespace RiversECO.DataContext.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Geometry")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -85,10 +82,7 @@ namespace RiversECO.DataContext.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Geometry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("LengthKm")
+                    b.Property<double?>("LengthKm")
                         .HasColumnType("float");
 
                     b.Property<DateTime?>("ModifiedOn")

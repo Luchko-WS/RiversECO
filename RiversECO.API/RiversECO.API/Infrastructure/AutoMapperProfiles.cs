@@ -16,12 +16,8 @@ namespace RiversECO.API.Infrastructure
             CreateMap<WaterObject, WaterObjectDto>()
                 .Include<River, RiverDto>()
                 .Include<Lake, LakeDto>();
-            CreateMap<River, RiverDto>().ForMember(
-                dest => dest.Geometry, 
-                opt => opt.MapFrom(src => JsonConvert.DeserializeObject<double[][][]>(src.Geometry)));
-            CreateMap<Lake, LakeDto>().ForMember(
-                dest => dest.Geometry,
-                opt => opt.MapFrom(src => JsonConvert.DeserializeObject<double[][][][]>(src.Geometry)));
+            CreateMap<River, RiverDto>();
+            CreateMap<Lake, LakeDto>();
             CreateMap(typeof(PagedList<>), typeof(PagedListDto<>))
                     .ConvertUsing(typeof(PagedListConverter<,>));
         }

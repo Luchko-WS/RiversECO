@@ -4,6 +4,5 @@
     {
         public string Type { get; }
         public string Code { get; set; }
-        public object Geometry { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace RiversECO.Models
 {
     public class River : WaterObject
     {
-        public double LengthKm { get; set; }
+        public double? LengthKm { get; set; }
 
         [NotMapped]
         public override string Type => "River";
