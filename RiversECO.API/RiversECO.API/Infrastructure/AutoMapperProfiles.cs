@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Newtonsoft.Json;
 using RiversECO.Dtos.Requests;
 using RiversECO.Dtos.Responses;
 using RiversECO.Models;
@@ -12,6 +13,15 @@ namespace RiversECO.API.Infrastructure
             CreateMap<Criteria, CriteriaDto>();
             CreateMap<CreateCriteriaRequestDto, Criteria>();
             CreateMap<UpdateCriteriaRequestDto, Criteria>();
+            CreateMap<WaterObject, WaterObjectDto>()
+                .Include<River, RiverDto>()
+                .Include<Lake, LakeDto>();
+            CreateMap<River, RiverDto>().ForMember(
+                dest => dest.Geometry, 
+                opt => opt.MapFrom(src => JsonConvert.DeserializeObject<double[][][]>(src.Geometry)));
+            CreateMap<Lake, LakeDto>().ForMember(
+                dest => dest.Geometry,
+                opt => opt.MapFrom(src => JsonConvert.DeserializeObject<double[][][][]>(src.Geometry)));
             CreateMap(typeof(PagedList<>), typeof(PagedListDto<>))
                     .ConvertUsing(typeof(PagedListConverter<,>));
         }

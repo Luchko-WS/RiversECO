@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
@@ -6,7 +7,6 @@ using RiversECO.Contracts.Repositories;
 using RiversECO.Dtos.Requests;
 using RiversECO.Dtos.Responses;
 using RiversECO.Models;
-using System.Collections.Generic;
 
 namespace RiversECO.API.Controllers
 {

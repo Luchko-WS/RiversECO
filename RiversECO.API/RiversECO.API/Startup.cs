@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using RiversECO.API.Extensions;
+using RiversECO.Cache.Configuration;
 using RiversECO.DataContext.Configuration;
 using RiversECO.Repositories.Configuration;
 using RiversECO.API.Infrastructure.Middlewares;
@@ -28,6 +29,7 @@ namespace RiversECO.API
         {
             services
                 .ConfigureDataContextForSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                .RegisterCache()
                 .RegisterRepositories()
                 .AddAutoMapper(typeof(Startup).Assembly)
                 .RegisterValidators()

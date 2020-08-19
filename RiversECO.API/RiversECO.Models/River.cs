@@ -4,7 +4,6 @@ namespace RiversECO.Models
 {
     public class River : WaterObject
     {
-        public string Code { get; set; }
         public double LengthKm { get; set; }
 
         [NotMapped]
