@@ -92,9 +92,8 @@ export class MapComponent implements OnInit {
 
       const selectedFeatureValues = e.selected[0].values_;
       this.selectedObject = {
-        id: selectedFeatureValues.id,
+        id: selectedFeatureValues.waterObjectId,
         name: selectedFeatureValues.name_ukr,
-        state: 15
       };
       this.changeDetectorRef.detectChanges();
 

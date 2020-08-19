@@ -17,7 +17,7 @@ export class CriteriaService {
     return this.http.get<Criteria[]>(this.baseUrl + 'criteria');
   }
 
-  getUser(id: string): Observable<Criteria> {
+  getCriteria(id: string): Observable<Criteria> {
     return this.http.get<Criteria>(this.baseUrl + 'criteria/' + id);
   }
 }

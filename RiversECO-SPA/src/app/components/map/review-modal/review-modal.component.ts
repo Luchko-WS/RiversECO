@@ -5,7 +5,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { WaterObject } from 'src/app/models/water-object';
 import { Criteria, CheckedCriteria } from 'src/app/models/criteria';
 import { CriteriaService } from 'src/app/services/criteria.service';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-review-modal',
