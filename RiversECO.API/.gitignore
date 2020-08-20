@@ -8,6 +8,8 @@ RiversECO.Common/bin/
 RiversECO.Common/obj/
 RiversECO.Contracts/bin/
 RiversECO.Contracts/obj/
+RiversECO.Cache/bin/
+RiversECO.Cache/obj/
 RiversECO.Dtos/bin/
 RiversECO.Dtos/obj/
 RiversECO.Models/bin/
