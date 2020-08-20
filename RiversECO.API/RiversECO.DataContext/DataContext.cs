@@ -10,5 +10,6 @@ namespace RiversECO.DataContext
 
         public DbSet<Criteria> Criterias { get; set; }
         public DbSet<WaterObject> WaterObjects { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

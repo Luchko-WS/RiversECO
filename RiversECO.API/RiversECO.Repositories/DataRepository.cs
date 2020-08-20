@@ -20,13 +20,13 @@ namespace RiversECO.Repositories
 
         public abstract IQueryable<TModel> Items { get; }
 
-        public async Task<IList<TModel>> GetAllAsync()
+        public virtual async Task<IList<TModel>> GetAllAsync()
         {
             var items = await Items.ToListAsync();
             return items;
         }
 
-        public async Task<PagedList<TModel>> GetPagedAsync()
+        public virtual async Task<PagedList<TModel>> GetPagedAsync()
         {
             var itemsToReturn = await Items.ToListAsync();
 
@@ -41,14 +41,14 @@ namespace RiversECO.Repositories
             return pagedList;
         }
 
-        public async Task<TModel> GetByIdAsync(Guid id)
+        public virtual async Task<TModel> GetByIdAsync(Guid id)
         {
             var item = await Items
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
             return item;
         }
 
-        public void Create(TModel model)
+        public virtual void Create(TModel model)
         {
             model.Id = Guid.NewGuid();
             model.CreatedOn = DateTime.UtcNow;
@@ -56,14 +56,14 @@ namespace RiversECO.Repositories
             _context.Add(model);
         }
 
-        public void Update(TModel model)
+        public virtual void Update(TModel model)
         {
             model.ModifiedOn = DateTime.UtcNow;
 
             _context.Update(model);
         }
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             var entityToRemove = GetByIdAsync(id).Result;
             if (entityToRemove != null)

@@ -14,6 +14,15 @@ namespace RiversECO.API.Infrastructure
             CreateMap<CreateCriteriaRequestDto, Criteria>();
             CreateMap<UpdateCriteriaRequestDto, Criteria>();
             CreateMap<WaterObject, WaterObjectDto>();
+            CreateMap<Review, ReviewDto>().ForMember(
+                dest => dest.Criterias,
+                opt => opt.MapFrom(src => JsonConvert.DeserializeObject<CriteriaDto[]>(src.Criterias)));
+            CreateMap<CreateReviewRequestDto, Review>().ForMember(
+                dest => dest.Criterias,
+                opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Criterias)));
+            CreateMap<UpdateReviewRequestDto, Review>().ForMember(
+                dest => dest.Criterias,
+                opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Criterias)));
             CreateMap(typeof(PagedList<>), typeof(PagedListDto<>))
                     .ConvertUsing(typeof(PagedListConverter<,>));
         }
