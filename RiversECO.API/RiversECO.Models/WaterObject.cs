@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RiversECO.Models
 {
@@ -6,6 +7,9 @@ namespace RiversECO.Models
     {
         [Required]
         public WaterObjectType Type { get; set; }
+
         public string Code { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

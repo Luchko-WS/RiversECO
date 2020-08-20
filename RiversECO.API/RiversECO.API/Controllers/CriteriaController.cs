@@ -28,12 +28,6 @@ namespace RiversECO.API.Controllers
         {
             var criteria = await _repository.GetByIdAsync(id);
             var criteriaToReturn = _mapper.Map<CriteriaDto>(criteria);
-
-            if (criteriaToReturn == null)
-            {
-                return NotFound();
-            }
-
             return Ok(criteriaToReturn);
         }
 
@@ -65,6 +59,7 @@ namespace RiversECO.API.Controllers
         {
             var criteriaFromRepo = await _repository.GetByIdAsync(dto.Id);
             _mapper.Map(dto, criteriaFromRepo);
+
             if (await _repository.SaveAllChangesAsync())
             {
                 return Ok();

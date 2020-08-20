@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using RiversECO.Dtos.Common;
 
 namespace RiversECO.Dtos.Responses
 {
@@ -11,6 +13,8 @@ namespace RiversECO.Dtos.Responses
         public string Comment { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
-        public CriteriaDto[] Criterias { get; set; }
+        public List<ReviewCriteriaDto> Criterias { get; set; }
+        public Guid WaterObjectId { get; set; }
+        public WaterObjectDto WaterObject { get; set; }
     }
 }

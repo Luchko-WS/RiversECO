@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using RiversECO.Common.Exceptions;
 using RiversECO.Contracts.Repositories;
 using RiversECO.Models;
 
@@ -45,6 +46,12 @@ namespace RiversECO.Repositories
         {
             var item = await Items
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
+
+            if (item == null)
+            {
+                throw new DataNotFoundException($"{nameof(TModel)} with id {id} not found.");
+            }
+
             return item;
         }
 
@@ -65,11 +72,13 @@ namespace RiversECO.Repositories
 
         public virtual void Delete(Guid id)
         {
-            var entityToRemove = GetByIdAsync(id).Result;
-            if (entityToRemove != null)
+            var item = GetByIdAsync(id).Result;
+            if (item == null)
             {
-                _context.Remove(entityToRemove);
+                throw new DataNotFoundException($"{nameof(TModel)} with id {id} not found.");
             }
+
+            _context.Remove(item);
         }
 
         public async Task<bool> SaveAllChangesAsync()

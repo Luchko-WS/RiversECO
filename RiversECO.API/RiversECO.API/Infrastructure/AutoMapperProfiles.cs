@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Newtonsoft.Json;
 using RiversECO.Dtos.Requests;
 using RiversECO.Dtos.Responses;
@@ -16,7 +17,7 @@ namespace RiversECO.API.Infrastructure
             CreateMap<WaterObject, WaterObjectDto>();
             CreateMap<Review, ReviewDto>().ForMember(
                 dest => dest.Criterias,
-                opt => opt.MapFrom(src => JsonConvert.DeserializeObject<CriteriaDto[]>(src.Criterias)));
+                opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<CriteriaDto>>(src.Criterias)));
             CreateMap<CreateReviewRequestDto, Review>().ForMember(
                 dest => dest.Criterias,
                 opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Criterias)));

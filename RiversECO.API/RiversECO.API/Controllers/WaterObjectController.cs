@@ -25,12 +25,6 @@ namespace RiversECO.API.Controllers
         {
             var waterObject = _repository.GetById(id);
             var waterObjectToReturn = _mapper.Map<WaterObjectDto>(waterObject);
-
-            if (waterObjectToReturn == null)
-            {
-                return NotFound();
-            }
-
             return Ok(waterObjectToReturn);
         }
 

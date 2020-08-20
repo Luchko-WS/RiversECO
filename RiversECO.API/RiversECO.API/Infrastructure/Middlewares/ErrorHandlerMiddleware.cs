@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using RiversECO.API.Extensions;
+using RiversECO.Common.Exceptions;
 using RiversECO.Dtos.Responses;
 
 namespace RiversECO.API.Infrastructure.Middlewares
@@ -27,17 +28,14 @@ namespace RiversECO.API.Infrastructure.Middlewares
             {
                 await _next.Invoke(context);
             }
-            catch (Exception exeption)
+            catch (DataNotFoundException exception)
             {
-                await HandleUnknownErrorAsync(context, exeption);
+                await WriteResponseErrorsAsync(context, exception.ToErrorDetails());
             }
-        }
-
-        private async Task HandleUnknownErrorAsync(HttpContext context, Exception exeption)
-        {
-            if (exeption == null) return;
-
-            await WriteResponseErrorsAsync(context, exeption.ToErrorDetails());
+            catch (Exception exception)
+            {
+                await WriteResponseErrorsAsync(context, exception.ToErrorDetails());
+            }
         }
         
         private static async Task WriteResponseErrorsAsync(

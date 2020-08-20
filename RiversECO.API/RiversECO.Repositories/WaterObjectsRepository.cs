@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RiversECO.Cache.Contracts;
+using RiversECO.Common.Exceptions;
 using RiversECO.Contracts.Repositories;
 using RiversECO.Models;
 
@@ -41,7 +42,7 @@ namespace RiversECO.Repositories
                 return river;
             }
 
-            return null;
+            throw new DataNotFoundException($"Water object with id {id} not found.");
         }
 
         public IList<WaterObject> GetAll()

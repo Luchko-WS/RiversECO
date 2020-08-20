@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RiversECO.Dtos.Requests
+namespace RiversECO.Dtos.Common
 {
     public class ReviewCriteriaDto
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using RiversECO.Common.Validators.Criteria;
+using RiversECO.Common.Validators.Review;
 using RiversECO.Dtos.Requests;
 
 namespace RiversECO.API.Extensions
@@ -11,7 +12,9 @@ namespace RiversECO.API.Extensions
         {
             return services
                 .AddTransient<IValidator<CreateCriteriaRequestDto>, CreateCriteriaRequestValidator>()
-                .AddTransient<IValidator<UpdateCriteriaRequestDto>, UpdateCriteriaRequestValidator>();
+                .AddTransient<IValidator<UpdateCriteriaRequestDto>, UpdateCriteriaRequestValidator>()
+                .AddTransient<IValidator<CreateReviewRequestDto>, CreateReviewRequestValidator>()
+                .AddTransient<IValidator<UpdateReviewRequestDto>, UpdateReviewRequestValidator>();
         }
     }
 }

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RiversECO.Cache\RiversECO.Cache.csproj" />
+    <ProjectReference Include="..\RiversECO.Common\RiversECO.Common.csproj" />
     <ProjectReference Include="..\RiversECO.Contracts\RiversECO.Contracts.csproj" />
     <ProjectReference Include="..\RiversECO.DataContext\RiversECO.DataContext.csproj" />
     <ProjectReference Include="..\RiversECO.Models\RiversECO.Models.csproj" />

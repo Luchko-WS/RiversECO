@@ -1,4 +1,5 @@
 ﻿using System;
+using RiversECO.Dtos.Common;
 
 namespace RiversECO.Dtos.Requests
 {
