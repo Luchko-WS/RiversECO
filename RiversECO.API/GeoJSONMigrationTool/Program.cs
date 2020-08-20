@@ -47,7 +47,7 @@ namespace GeoJSONMigrationTool
                     {
                         var geoJsonObject = JsonConvert
                             .DeserializeObject<GeoJSONFileModel<RiverFeatureModel>>(fileContent);
-                        var rivers = geoJsonObject.MapToRivers();
+                        var rivers = geoJsonObject.MapToWaterObjects();
                         SeedDatabase(rivers);
                         WriteJsonFile(geoJsonObject);
                     }
@@ -55,7 +55,7 @@ namespace GeoJSONMigrationTool
                     {
                         var geoJsonObject = JsonConvert
                             .DeserializeObject<GeoJSONFileModel<LakeFeatureModel>>(fileContent);
-                        var lakes = geoJsonObject.MapToLakes();
+                        var lakes = geoJsonObject.MapToWaterObjects();
                         SeedDatabase(lakes);
                         WriteJsonFile(geoJsonObject);
                     }
@@ -65,7 +65,7 @@ namespace GeoJSONMigrationTool
             Console.WriteLine("Done!");
         }
 
-        private static void SeedDatabase<T>(List<T> waterObjects) where T: WaterObject
+        private static void SeedDatabase(List<WaterObject> waterObjects)
         {
             if (PromptYesNo("Would you like to update database?"))
             {

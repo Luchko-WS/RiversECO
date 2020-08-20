@@ -9,7 +9,6 @@ namespace RiversECO.DataContext
             : base(options) { }
 
         public DbSet<Criteria> Criterias { get; set; }
-        public DbSet<River> Rivers { get; set; }
-        public DbSet<Lake> Lakes { get; set; }
+        public DbSet<WaterObject> WaterObjects { get; set; }
     }
 }

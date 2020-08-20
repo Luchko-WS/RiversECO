@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using RiversECO.Models;
 using GeoJSONMigrationTool.Models;
 using GeoJSONMigrationTool.Models.River;
@@ -10,24 +9,24 @@ namespace GeoJSONMigrationTool.Extensions
 {
     public static class GeoJSONModelConvertExt
     {
-        public static List<River> MapToRivers(this GeoJSONFileModel<RiverFeatureModel> geoJsonObject)
+        public static List<WaterObject> MapToWaterObjects(this GeoJSONFileModel<RiverFeatureModel> geoJsonObject)
         {
-            var resultList = new List<River>();
+            var resultList = new List<WaterObject>();
             foreach (var feature in geoJsonObject.Features)
             {
                 try
                 {
-                    var river = new River()
+                    var waterObject = new WaterObject()
                     {
                         Id = feature.Properties.WaterObjectId ?? Guid.NewGuid(),
                         Name = feature.Properties.Name_ukr,
                         CreatedOn = DateTime.UtcNow,
                         Code = feature.Properties.Code,
-                        LengthKm = feature.Properties.L_km
+                        Type = WaterObjectType.River
                     };
 
-                    feature.Properties.WaterObjectId = river.Id;
-                    resultList.Add(river);
+                    feature.Properties.WaterObjectId = waterObject.Id;
+                    resultList.Add(waterObject);
                 }
                 catch (Exception ex)
                 {
@@ -38,24 +37,24 @@ namespace GeoJSONMigrationTool.Extensions
             return resultList;
         }
 
-        public static List<Lake> MapToLakes(this GeoJSONFileModel<LakeFeatureModel> geoJsonObject)
+        public static List<WaterObject> MapToWaterObjects(this GeoJSONFileModel<LakeFeatureModel> geoJsonObject)
         {
-            var resultList = new List<Lake>();
+            var resultList = new List<WaterObject>();
             foreach (var feature in geoJsonObject.Features)
             {
                 try
                 {
-                    var lake = new Lake()
+                    var waterObject = new WaterObject()
                     {
                         Id = feature.Properties.WaterObjectId ?? Guid.NewGuid(),
                         Name = feature.Properties.Name_ukr,
                         CreatedOn = DateTime.UtcNow,
                         Code = feature.Properties.Code,
-                        Area = feature.Properties.Area
+                        Type = WaterObjectType.Lake
                     };
 
-                    feature.Properties.WaterObjectId = lake.Id;
-                    resultList.Add(lake);
+                    feature.Properties.WaterObjectId = waterObject.Id;
+                    resultList.Add(waterObject);
                 }
                 catch (Exception ex)
                 {

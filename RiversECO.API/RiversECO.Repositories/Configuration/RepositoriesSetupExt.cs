@@ -9,8 +9,6 @@ namespace RiversECO.Repositories.Configuration
         {
             return services
                 .AddScoped<ICriteriasRepository, CriteriasRepository>()
-                .AddScoped<IRiversRepository, RiversRepository>()
-                .AddScoped<ILakesRepository, LakesRepository>()
                 .AddScoped<IWaterObjectsRepository, WaterObjectsRepository>();
         }
     }

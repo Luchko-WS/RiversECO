@@ -7,46 +7,38 @@ using RiversECO.Models;
 
 namespace RiversECO.Repositories
 {
-    public class WaterObjectsRepository : IWaterObjectsRepository
+    public class WaterObjectsRepository : DataRepository<WaterObject>, IWaterObjectsRepository
     {
         private readonly IAppMemoryCache _cache;
-        private readonly IRiversRepository _riversRepository;
-        private readonly ILakesRepository _lakesRepository;
 
-        private IDictionary<Guid, River> _rivers;
-        private IDictionary<Guid, Lake> _lakes;
+        private IDictionary<Guid, WaterObject> _waterObjects;
 
-        public WaterObjectsRepository(
-            IAppMemoryCache cache,
-            IRiversRepository riversRepository,
-            ILakesRepository lakesRepository)
+        public WaterObjectsRepository(DataContext.DataContext context, IAppMemoryCache cache)
+            : base(context)
         {
             _cache = cache;
-            _riversRepository = riversRepository;
-            _lakesRepository = lakesRepository;
-            
             InitRepository();
+        }
+
+        public override IQueryable<WaterObject> Items
+        {
+            get
+            {
+                return _context.WaterObjects.AsQueryable();
+            }
         }
 
         private void InitRepository()
         {
-            var rivers = _riversRepository.GetAllAsync().Result;
-            _rivers = _cache.GetOrCreate("rivers", () => rivers.ToDictionary(x => x.Id));
-
-            var lakes = _lakesRepository.GetAllAsync().Result;
-            _lakes = _cache.GetOrCreate("lakes", () => lakes.ToDictionary(x => x.Id));
+            var waterObjects = GetAllAsync().Result;
+            _waterObjects = _cache.GetOrCreate("rivers", () => waterObjects.ToDictionary(x => x.Id));
         }
 
         public WaterObject GetById(Guid id)
         {
-            if (_rivers.TryGetValue(id, out var river))
+            if (_waterObjects.TryGetValue(id, out var river))
             {
                 return river;
-            }
-
-            if (_lakes.TryGetValue(id, out var lake))
-            {
-                return lake;
             }
 
             return null;
@@ -54,9 +46,7 @@ namespace RiversECO.Repositories
 
         public IList<WaterObject> GetAll()
         {
-            var result = new List<WaterObject>();
-            result.AddRange(_rivers.Values);
-            result.AddRange(_lakes.Values);
+            var result = _waterObjects.Values.ToList();
             return result;
         }
     }

@@ -13,11 +13,7 @@ namespace RiversECO.API.Infrastructure
             CreateMap<Criteria, CriteriaDto>();
             CreateMap<CreateCriteriaRequestDto, Criteria>();
             CreateMap<UpdateCriteriaRequestDto, Criteria>();
-            CreateMap<WaterObject, WaterObjectDto>()
-                .Include<River, RiverDto>()
-                .Include<Lake, LakeDto>();
-            CreateMap<River, RiverDto>();
-            CreateMap<Lake, LakeDto>();
+            CreateMap<WaterObject, WaterObjectDto>();
             CreateMap(typeof(PagedList<>), typeof(PagedListDto<>))
                     .ConvertUsing(typeof(PagedListConverter<,>));
         }

@@ -1,8 +1,8 @@
 ﻿namespace RiversECO.Models
 {
-    public abstract class WaterObject : ModelBase
+    public class WaterObject : ModelBase
     {
-        public abstract string Type { get; }
+        public WaterObjectType Type { get; set; }
         public string Code { get; set; }
     }
 }
