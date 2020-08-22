@@ -6,6 +6,7 @@ import { WaterObject } from 'src/app/models/water-object';
 import { Criteria, CheckedCriteria } from 'src/app/models/criteria';
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { ReviewService } from 'src/app/services/review.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -22,6 +23,7 @@ export class ReviewModalComponent implements OnInit {
   constructor(
     private criteriaService: CriteriaService,
     private reviewService: ReviewService,
+    private utilsService: UtilsService,
     public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
@@ -45,16 +47,8 @@ export class ReviewModalComponent implements OnInit {
   }
 
   validateReview() {
-    return !this.isStringEmptyOrWhitespaces(this.author) &&
-      !this.isStringEmptyOrWhitespaces(this.comment);
-  }
-
-  isStringEmptyOrWhitespaces(value: string) {
-    if (!value || value.trim() === '') {
-      return true;
-    }
-
-    return false;
+    return !this.utilsService.isStringEmptyOrWhitespaces(this.author) &&
+      !this.utilsService.isStringEmptyOrWhitespaces(this.comment);
   }
 
   submitReview() {

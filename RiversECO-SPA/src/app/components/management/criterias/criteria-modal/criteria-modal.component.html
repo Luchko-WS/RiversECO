@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <div *ngIf="isCreateMode" class="modal-title pull-left">Створення нового критерію</div>
+    <div *ngIf="!isCreateMode" class="modal-title pull-left">Редагування критерію <b>{{criteria.name}}</b></div>
+    <a class="close" (click)="bsModalRef.hide()"></a>
+</div>
+<div class="modal-body form-group">
+    <div class="label required-field">Назва:</div>
+    <input [(ngModel)]="name" class="form-control" type="text" />
+    <div class="label">Опис:</div>
+    <textarea [(ngModel)]="description" class="form-control" rows="4" style="resize: none;"></textarea>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
+    <button [disabled]="!validateCriteria()" type="button" class="btn btn-success" (click)="saveCriteria()" form="rolesForm">Зберегти</button>
+</div>

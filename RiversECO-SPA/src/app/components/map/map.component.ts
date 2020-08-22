@@ -167,7 +167,7 @@ export class MapComponent implements OnInit {
 
     const options = {
       initialState: {
-      object: this.selectedObject
+        object: this.selectedObject
       },
       animated: true,
       class: 'modal-window'
