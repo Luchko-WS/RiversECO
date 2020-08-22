@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { Criteria } from 'src/app/models/criteria';
 
@@ -11,14 +13,13 @@ import { Criteria } from 'src/app/models/criteria';
 export class CriteriasComponent implements OnInit {
   criterias: Criteria[];
 
-  constructor(private criteriaService: CriteriaService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private criteriaService: CriteriaService) {}
 
   ngOnInit() {
-    this.criteriaService.getCriterias()
-      .subscribe((res: Criteria[]) => {
-        this.criterias = res;
-      }, error => {
-        console.error(error);
-      });
+    this.route.data.subscribe(data => {
+      this.criterias = data['criterias'];
+    });
   }
 }

@@ -1,1 +1,31 @@
-Критерії
+<div class="table-tool-panel">
+    <div class="title">Критерії</div>
+    <div class="tools">
+        <button class="btn btn-info">Створити</button>
+        <button class="btn btn-danger">Видалити</button>
+    </div>
+</div>
+<div class="full-screen-table-wrapper">
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="d-flex">
+            <th class="col-1">#</th>
+            <th class="col-4">Назва</th>
+            <th class="col-6">Опис</th>
+            <th class="col-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <div class="scroll-container">
+            <tr class="d-flex" *ngFor="let criteria of criterias; let i = index" [attr.data-index]="i">
+                <th class="col-sm-1">{{i+1}}</th>
+                <td class="col-sm-4">{{criteria.name}}</td>
+                <td class="col-sm-6">{{criteria.description}}</td>
+                <th class="col-sm-1"><input type="checkbox"></th>
+            </tr>
+        </div>
+      <tr>
+    </tbody>
+</table>
+</div>
+

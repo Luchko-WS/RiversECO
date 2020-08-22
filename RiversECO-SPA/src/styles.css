@@ -54,3 +54,44 @@
 .close:not(:disabled):not(.disabled):hover {
     color: red;
 }
+
+.full-screen-table-wrapper {
+    height: 100%;
+}
+
+.full-screen-table-wrapper table tbody {
+    position: relative;
+}
+
+.full-screen-table-wrapper table tbody .scroll-container {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    overflow-y: auto;
+}
+.full-screen-table-wrapper table.table-hover tbody tr {
+    cursor: pointer;
+}
+
+.table-tool-panel {
+    margin: 5px 10px 5px 0;
+    height: 36px;
+    width: 100%;
+}
+.table-tool-panel .title {
+    margin: 5px 0 0 10px;
+    font-size: larger;
+    font-weight: bold;
+    float: left;
+}
+.table-tool-panel .tools {
+    margin-right: 10px;
+    font-size: larger;
+    font-weight: bold;
+    float: right;
+}
+.table-tool-panel button {
+    min-width: 150px;
+    margin-left: 5px;
+}
