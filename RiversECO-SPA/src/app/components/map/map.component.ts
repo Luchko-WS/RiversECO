@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -19,6 +18,7 @@ import TileLayer from 'ol/layer/Tile';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
+import { WaterObjectService } from 'src/app/services/water-object.service';
 import { ReviewModalComponent } from './review-modal/review-modal.component';
 import { WaterObject } from 'src/app/models/water-object';
 
@@ -37,21 +37,27 @@ export class MapComponent implements OnInit {
 
   selectedObject: WaterObject;
   waterObjects: WaterObject[];
+  isLoaded: boolean;
   bsModalRef: BsModalRef;
 
   constructor(
-    private route: ActivatedRoute,
+    private waterObjectService: WaterObjectService,
     private modalService: BsModalService,
     private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.isLoaded = false;
     this.initMap();
     this.initOverlayWindow();
 
-    this.route.data.subscribe(data => {
-      this.waterObjects = data['waterObjects'];
-      this.drawFeatures(this.waterObjects);
-    });
+    return this.waterObjectService.getWaterObjects()
+      .subscribe(data => {
+        this.waterObjects = data;
+        this.drawFeatures(this.waterObjects);
+        this.isLoaded = true;
+      }, error => {
+        console.error(error);
+      });
   }
 
   initMap() {

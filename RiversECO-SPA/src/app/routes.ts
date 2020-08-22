@@ -3,16 +3,14 @@ import { Routes } from '@angular/router';
 import { MapComponent } from './components/map/map.component';
 import { CriteriasComponent } from './components/management/criterias/criterias.component';
 
-import { WaterObjectsListResolver } from './resolvers/water-objects-list.resolver';
-
 export const appRoutes: Routes = [
-    { path: '', component: MapComponent,
-        resolve: { waterObjects: WaterObjectsListResolver } },
+    { path: '', component: MapComponent },
     {
         path: '',
         runGuardsAndResolvers: 'always',
         children: [
             { path: 'management/criterias', component: CriteriasComponent },
+            // { path: 'management/reviews', component: ReviewsComponent },
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }

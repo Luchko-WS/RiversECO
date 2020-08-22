@@ -18,8 +18,6 @@ import { CriteriasComponent } from './components/management/criterias/criterias.
 import { WaterObjectService } from './services/water-object.service';
 import { CriteriaService } from './services/criteria.service';
 import { ReviewService } from './services/review.service';
-import { WaterObjectsListResolver } from './resolvers/water-objects-list.resolver';
-
 
 @NgModule({
   declarations: [
@@ -40,8 +38,7 @@ import { WaterObjectsListResolver } from './resolvers/water-objects-list.resolve
   providers: [
     WaterObjectService,
     CriteriaService,
-    ReviewService,
-    WaterObjectsListResolver
+    ReviewService
   ],
   entryComponents: [
     ReviewModalComponent
