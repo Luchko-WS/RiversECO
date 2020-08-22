@@ -4,6 +4,18 @@
 @import '../node_modules/bootswatch/dist/flatly/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 
+.form-control {
+    color: black;
+}
+.form-control:focus {
+    color: black;
+}
+.label.required-field::after {
+    content: "*";
+    color: red;
+    margin-left: 5px;
+}
+
 .ol-mouse-position {
     display: none;
 }

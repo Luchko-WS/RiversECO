@@ -5,6 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { WaterObject } from 'src/app/models/water-object';
 import { Criteria, CheckedCriteria } from 'src/app/models/criteria';
 import { CriteriaService } from 'src/app/services/criteria.service';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -18,11 +19,12 @@ export class ReviewModalComponent implements OnInit {
   author: string;
   comment: string;
 
-  constructor(private criteriaService: CriteriaService, public bsModalRef: BsModalRef) {}
+  constructor(
+    private criteriaService: CriteriaService,
+    private reviewService: ReviewService,
+    public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
-    this.author = 'Andrii Luchko';
-
     this.criteriaService.getCriterias()
       .subscribe((res: Criteria[]) => {
         this.criterias = res.map(criteria => {
@@ -61,11 +63,17 @@ export class ReviewModalComponent implements OnInit {
     });
 
     const review = {
-      author: this.author,
+      createdBy: this.author,
+      comment: this.comment,
       criterias: filteredCriterias,
-      comment: this.comment
+      waterObjectId: this.object.id
     };
 
-    console.log(review);
+    this.reviewService.createReview(review)
+      .subscribe(review => {
+          console.log('Review created.', review);
+      }, error => {
+          console.error(error);
+      });
   }
 }

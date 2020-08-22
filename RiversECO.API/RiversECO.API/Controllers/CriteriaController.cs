@@ -23,8 +23,8 @@ namespace RiversECO.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{id}", Name = nameof(Get))]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet("{id}", Name = nameof(GetCriteria))]
+        public async Task<IActionResult> GetCriteria(Guid id)
         {
             var criteria = await _repository.GetByIdAsync(id);
             var criteriaToReturn = _mapper.Map<CriteriaDto>(criteria);
@@ -48,7 +48,7 @@ namespace RiversECO.API.Controllers
             if (await _repository.SaveAllChangesAsync())
             {
                 var criteriaToReturn = _mapper.Map<CriteriaDto>(criteriaToCreate);
-                return CreatedAtRoute(nameof(Get), new { id = criteriaToCreate.Id }, criteriaToReturn);
+                return CreatedAtRoute(nameof(GetCriteria), new { id = criteriaToCreate.Id }, criteriaToReturn);
             }
 
             return BadRequest("Could not create a criteria.");

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using RiversECO.Contracts.Repositories;
 using RiversECO.Models;
 
@@ -16,6 +17,12 @@ namespace RiversECO.Repositories
             {
                 return _context.Reviews.AsQueryable();
             }
+        }
+
+        public override void Create(Review model)
+        {
+            model.Name = $"Review-{model.CreatedBy.Replace(" ", string.Empty)}-{DateTime.UtcNow.Ticks}";
+            base.Create(model);
         }
     }
 }

@@ -19,7 +19,7 @@
     "RiversECO.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
+      "applicationUrl": "http://localhost:64943",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

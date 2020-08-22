@@ -30,8 +30,8 @@ namespace RiversECO.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{id}", Name = nameof(Get))]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet("{id}", Name = nameof(GetReview))]
+        public async Task<IActionResult> GetReview(Guid id)
         {
             var review = await _reviewsRepository.GetByIdAsync(id);
             var reviewToReturn = _mapper.Map<ReviewDto>(review);
@@ -56,8 +56,8 @@ namespace RiversECO.API.Controllers
 
             if (await _reviewsRepository.SaveAllChangesAsync())
             {
-                var reviewToReturn = _mapper.Map<CriteriaDto>(reviewToCreate);
-                return CreatedAtRoute(nameof(Get), new { id = reviewToCreate.Id }, reviewToReturn);
+                var reviewToReturn = _mapper.Map<ReviewDto>(reviewToCreate);
+                return CreatedAtRoute(nameof(GetReview), new { id = reviewToCreate.Id }, reviewToReturn);
             }
 
             return BadRequest("Could not create a review.");
