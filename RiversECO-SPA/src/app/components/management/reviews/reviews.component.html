@@ -1,0 +1,30 @@
+<div class="overlay" *ngIf="!isLoaded">
+    <div class="spinner">
+        <img src="../../../assets/spinner/128x128.gif"/>
+    </div>
+</div>
+<div class="table-tool-panel">
+    <div class="title">Огляди</div>
+</div>
+<div class="full-screen-table-wrapper">
+<table class="table table-hover">
+    <thead>
+        <tr class="d-flex">
+            <th class="col-1">#</th>
+            <th class="col-4">Автор</th>
+            <th class="col-7">Коментар</th>
+        </tr>
+    </thead>
+    <tbody>
+        <div class="scroll-container">
+            <tr class="d-flex" *ngFor="let review of reviews; let i = index" [attr.data-index]="i">
+                <th class="col-sm-1">{{i+1}}</th>
+                <td class="col-sm-4">{{review.createdBy}}</td>
+                <td class="col-sm-7">{{review.comment}}</td>
+            </tr>
+        </div>
+      <tr>
+    </tbody>
+</table>
+</div>
+
