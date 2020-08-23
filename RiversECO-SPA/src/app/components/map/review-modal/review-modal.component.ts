@@ -52,9 +52,7 @@ export class ReviewModalComponent implements OnInit {
   }
 
   submitReview() {
-    const filteredCriterias = this.criterias.filter(criteria => {
-      return criteria.checked;
-    });
+    const filteredCriterias = this.utilsService.getSelectedCriterias(this.criterias);
 
     const review = {
       createdBy: this.author,

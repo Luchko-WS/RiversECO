@@ -19,7 +19,6 @@ import { CriteriaModalComponent } from './components/management/criterias/criter
 import { WaterObjectService } from './services/water-object.service';
 import { CriteriaService } from './services/criteria.service';
 import { ReviewService } from './services/review.service';
-import { CriteriasListResolver } from './resolvers/criterias.resolver';
 import { UtilsService } from './services/utils.service';
 
 @NgModule({
@@ -43,8 +42,7 @@ import { UtilsService } from './services/utils.service';
     WaterObjectService,
     CriteriaService,
     ReviewService,
-    UtilsService,
-    CriteriasListResolver
+    UtilsService
   ],
   entryComponents: [
     ReviewModalComponent

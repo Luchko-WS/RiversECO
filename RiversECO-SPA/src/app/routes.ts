@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 
 import { MapComponent } from './components/map/map.component';
 import { CriteriasComponent } from './components/management/criterias/criterias.component';
-import { CriteriasListResolver } from './resolvers/criterias.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: MapComponent },
@@ -10,8 +9,7 @@ export const appRoutes: Routes = [
         path: '',
         runGuardsAndResolvers: 'always',
         children: [
-            { path: 'management/criterias', component: CriteriasComponent,
-                resolve: { criterias: CriteriasListResolver } },
+            { path: 'management/criterias', component: CriteriasComponent },
             // { path: 'management/reviews', component: ReviewsComponent },
         ]
     },

@@ -106,3 +106,20 @@
     min-width: 150px;
     margin-left: 5px;
 }
+
+/* Common styles for all pages */
+.overlay {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+.overlay .spinner {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -50px;
+  }

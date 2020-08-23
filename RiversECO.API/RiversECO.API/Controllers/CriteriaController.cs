@@ -62,16 +62,21 @@ namespace RiversECO.API.Controllers
 
             if (await _repository.SaveAllChangesAsync())
             {
-                return Ok();
+                var criteriaToReturn = _mapper.Map<CriteriaDto>(criteriaFromRepo);
+                return Ok(criteriaToReturn);
             }
 
             return BadRequest("Could not update a criteria.");
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromBody]Guid[] ids)
         {
-            _repository.Delete(id);
+            foreach (var id in ids)
+            {
+                _repository.Delete(id);
+            }
+
             await _repository.SaveAllChangesAsync();
             return Ok();
         }

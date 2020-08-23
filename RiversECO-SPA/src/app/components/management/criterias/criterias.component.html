@@ -1,8 +1,13 @@
+<div class="overlay" *ngIf="!isLoaded">
+    <div class="spinner">
+        <img src="../../../assets/spinner/128x128.gif"/>
+    </div>
+</div>
 <div class="table-tool-panel">
     <div class="title">Критерії</div>
     <div class="tools">
         <button class="btn btn-info" (click)="createCriteria()">Створити</button>
-        <button class="btn btn-danger">Видалити</button>
+        <button class="btn btn-danger" (click)="deleteCriterias()">Видалити</button>
     </div>
 </div>
 <div class="full-screen-table-wrapper">
@@ -22,7 +27,7 @@
                 <th class="col-sm-1">{{i+1}}</th>
                 <td class="col-sm-4">{{criteria.name}}</td>
                 <td class="col-sm-6">{{criteria.description}}</td>
-                <th class="col-sm-1"><input type="checkbox"></th>
+                <th class="col-sm-1"><input type="checkbox" [(ngModel)]="criteria.checked"></th>
             </tr>
         </div>
       <tr>

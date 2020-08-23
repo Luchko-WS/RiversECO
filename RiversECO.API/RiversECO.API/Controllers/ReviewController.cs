@@ -78,9 +78,13 @@ namespace RiversECO.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromBody]Guid[] ids)
         {
-            _reviewsRepository.Delete(id);
+            foreach (var id in ids)
+            {
+                _reviewsRepository.Delete(id);
+            }
+
             await _reviewsRepository.SaveAllChangesAsync();
             return Ok();
         }

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Criteria } from 'src/app/models/criteria';
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-criteria-modal',
@@ -13,6 +14,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 
 export class CriteriaModalComponent implements OnInit {
+  @Output() resultCriteria = new EventEmitter();
+
   criteria: Criteria;
   name: string;
   description: string;
@@ -42,6 +45,18 @@ export class CriteriaModalComponent implements OnInit {
       description: this.description
     };
 
-    console.log('save criteria', criteriaToSave);
+    let observableOperation: Observable<Criteria>;
+    if (this.isCreateMode) {
+      observableOperation = this.criteriaService.createCriteria(criteriaToSave);
+    } else {
+      observableOperation = this.criteriaService.updateCriteria(criteriaToSave);
+    }
+
+    observableOperation.subscribe(data => {
+      this.resultCriteria.emit(data);
+      this.bsModalRef.hide();
+    }, error => {
+      console.error(error);
+    });
   }
 }
