@@ -1,0 +1,27 @@
+# API
+
+RiversECO.API/.vs/
+RiversECO.API/RiversECO.API/bin/
+RiversECO.API/RiversECO.API/obj/
+RiversECO.API/RiversECO.Cache/bin/
+RiversECO.API/RiversECO.Cache/obj/
+RiversECO.API/RiversECO.Common/bin/
+RiversECO.API/RiversECO.Common/obj/
+RiversECO.API/RiversECO.Contracts/bin/
+RiversECO.API/RiversECO.Contracts/obj/
+RiversECO.API/RiversECO.DataContext/bin/
+RiversECO.API/RiversECO.DataContext/obj/
+RiversECO.API/RiversECO.Dtos/bin/
+RiversECO.API/RiversECO.Dtos/obj/
+RiversECO.API/RiversECO.Models/bin/
+RiversECO.API/RiversECO.Models/obj/
+RiversECO.API/RiversECO.Repositories/bin/
+RiversECO.API/RiversECO.Repositories/obj/
+RiversECO.API/RiversECO.Services/bin/
+RiversECO.API/RiversECO.Services/obj/
+RiversECO.API/GeoJSONMigrationTool/bin/
+RiversECO.API/GeoJSONMigrationTool/obj/
+
+# SPA
+
+RiversECO-SPA/node_modules/
