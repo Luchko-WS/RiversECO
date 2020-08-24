@@ -3,6 +3,10 @@
     <a class="close" (click)="bsModalRef.hide()"></a>
 </div>
 <div class="modal-body form-group">
+    <div class="label required-field">Автор:</div>
+    <input [(ngModel)]="author" class="form-control" type="text" />
+    <div class="label required-field">Коментар:</div>
+    <textarea [(ngModel)]="comment" class="form-control" rows="4" style="resize: none;"></textarea>
     <div *ngIf="criterias != undefined && criterias.length !== 0">
         <div class="label">Критерії:</div>
         <div class="criterias-list">
@@ -15,10 +19,6 @@
             </div>
         </div>
     </div>
-    <div class="label required-field">Автор:</div>
-    <input [(ngModel)]="author" class="form-control" type="text" />
-    <div class="label required-field">Коментар:</div>
-    <textarea [(ngModel)]="comment" class="form-control" rows="4" style="resize: none;"></textarea>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
