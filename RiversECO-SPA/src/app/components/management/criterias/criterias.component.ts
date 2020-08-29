@@ -42,9 +42,13 @@ export class CriteriasComponent implements OnInit {
           checked: false
         };
       });
+
+      // init table
       this.dataSource = new MatTableDataSource(this.criterias);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.dataSource.sortingDataAccessor = (data, sortHeaderId) => data[sortHeaderId].toLocaleLowerCase();
+
       this.isLoaded = true;
     }, error => {
       console.error(error);

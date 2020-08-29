@@ -10,30 +10,28 @@
         <button class="btn btn-danger" (click)="deleteCriterias()">Видалити</button>
     </div>
 </div>
-<div class="table-wrapper">
-  <div class="table-container mat-elevation-z8">
-    <mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Назва </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-      </ng-container>
-      
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef> Опис </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
-      </ng-container>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Назва </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
     
-      <ng-container matColumnDef="check">
-        <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
-        <mat-cell *matCellDef="let row" >
-             <input type="checkbox" [(ngModel)]="row.checked"/>
-        </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Опис </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="check">
+      <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
+      <mat-cell *matCellDef="let row" >
+            <input type="checkbox" [(ngModel)]="row.checked"/>
+      </mat-cell>
+    </ng-container>
 
-      <mat-header-row *matHeaderRowDef="['name', 'description', 'check']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['name', 'description', 'check'];" (dblclick)="updateCriteria(row)"></mat-row>
-    </mat-table>
+    <mat-header-row *matHeaderRowDef="['name', 'description', 'check']; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'description', 'check'];" (dblclick)="updateCriteria(row)"></mat-row>
+  </mat-table>
 
-    <mat-paginator [pageSizeOptions]="[25]"></mat-paginator>
-  </div>
+  <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
 </div>

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 import { ReviewService } from 'src/app/services/review.service';
 import { Review } from 'src/app/models/review';
@@ -13,6 +17,11 @@ export class ReviewsComponent implements OnInit {
   reviews: Review[];
   isLoaded: boolean;
 
+  dataSource: MatTableDataSource<Review>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(
     private reviewService: ReviewService) {}
 
@@ -20,6 +29,13 @@ export class ReviewsComponent implements OnInit {
     this.isLoaded = false;
     this.reviewService.getReviews().subscribe(data => {
       this.reviews = data;
+
+      // init table
+      this.dataSource = new MatTableDataSource(this.reviews);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.dataSource.sortingDataAccessor = (data, sortHeaderId) => data[sortHeaderId].toLocaleLowerCase();
+
       this.isLoaded = true;
     }, error => {
       console.error(error);

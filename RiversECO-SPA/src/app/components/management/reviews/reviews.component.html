@@ -6,25 +6,21 @@
 <div class="table-tool-panel">
     <div class="title">Огляди</div>
 </div>
-<div class="full-screen-table-wrapper">
-<table class="table table-hover">
-    <thead>
-        <tr class="d-flex">
-            <th class="col-1">#</th>
-            <th class="col-4">Автор</th>
-            <th class="col-7">Коментар</th>
-        </tr>
-    </thead>
-    <tbody>
-        <div class="scroll-container">
-            <tr class="d-flex" *ngFor="let review of reviews; let i = index" [attr.data-index]="i">
-                <th class="col-sm-1">{{i+1}}</th>
-                <td class="col-sm-4">{{review.createdBy}}</td>
-                <td class="col-sm-7">{{review.comment}}</td>
-            </tr>
-        </div>
-      <tr>
-    </tbody>
-</table>
-</div>
-
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="createdBy">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.createdBy}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="comment">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Коментар </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.comment}} </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="['createdBy', 'comment']; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['createdBy', 'comment'];"></mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
+  </div>

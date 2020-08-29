@@ -66,8 +66,31 @@
 }
 
 /* Table page styles*/
+.mat-table {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 116px);
+    overflow-y: auto;
+}
+
 .mat-header-cell {
     font-size: larger;
+    color: black;
+}
+
+.mat-row {
+    cursor: pointer;
+}
+.mat-row:hover {
+    background-color: rgba(0, 0, 139, 0.075);
+}
+
+.mat-paginator {
+    display: block;
+    position: absolute;
+    z-index: 1010;
+    bottom: 0;
+    width: 100%;
 }
 .mat-paginator-page-size.ng-star-inserted {
     display: none;
@@ -75,30 +98,14 @@
 .mat-paginator-range-label {
     display: none;
 }
-.mat-row {
-    cursor: pointer;
-}
-.mat-row:hover {
-    background-color: rgba(0, 0, 0, 0.123);
-}
-
-.table-wrapper {
-    position: relative;
-}
-.table-container {
-    position: absolute;
-    width: 100%;
-    top: 15px;
-    bottom: 0;
-}
 
 .table-tool-panel {
-    margin: 5px 0px 5px 0;
+    margin: 5px 0px 20px 0;
     height: 36px;
     width: 100%;
 }
 .table-tool-panel .title {
-    margin: 5px 0 0 10px;
+    margin: 15px 0 0 10px;
     font-size: xx-large;
     font-weight: bold;
     float: left;
