@@ -24,30 +24,6 @@ namespace RiversECO.API.Infrastructure
             CreateMap<UpdateReviewRequestDto, Review>().ForMember(
                 dest => dest.Criterias,
                 opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Criterias)));
-            CreateMap(typeof(PagedList<>), typeof(PagedListDto<>))
-                    .ConvertUsing(typeof(PagedListConverter<,>));
-        }
-    }
-
-    public class PagedListConverter<TEntity, TDto> : ITypeConverter<PagedList<TEntity>, PagedListDto<TDto>>
-    {
-        public PagedListDto<TDto> Convert(PagedList<TEntity> source, PagedListDto<TDto> destination, ResolutionContext context)
-        {
-            var pagedResultDto = new PagedListDto<TDto>();
-            pagedResultDto.Page = new PageDto
-            {
-                Number = source.PageNumber,
-                Size = source.PageSize,
-                Total = source.Total
-            };
-
-            foreach (var item in source)
-            {
-                var objDto = context.Mapper.Map<TEntity, TDto>(item);
-                pagedResultDto.Items.Add(objDto);
-            }
-
-            return pagedResultDto;
         }
     }
 }

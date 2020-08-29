@@ -27,21 +27,6 @@ namespace RiversECO.Repositories
             return items;
         }
 
-        public virtual async Task<PagedList<TModel>> GetPagedAsync()
-        {
-            var itemsToReturn = await Items.ToListAsync();
-
-            var pagedList = new PagedList<TModel>
-            {
-                PageNumber = 1,
-                PageSize = itemsToReturn.Count,
-                Total = itemsToReturn.Count
-            };
-            pagedList.AddRange(itemsToReturn);
-
-            return pagedList;
-        }
-
         public virtual async Task<TModel> GetByIdAsync(Guid id)
         {
             var item = await Items

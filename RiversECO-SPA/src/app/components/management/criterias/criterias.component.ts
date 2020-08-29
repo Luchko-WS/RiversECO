@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -18,6 +21,11 @@ export class CriteriasComponent implements OnInit {
   bsModalRef: BsModalRef;
   isLoaded: boolean;
 
+  dataSource: MatTableDataSource<CheckedCriteria>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(
     private criteriaService: CriteriaService,
     private utilsService: UtilsService,
@@ -34,6 +42,9 @@ export class CriteriasComponent implements OnInit {
           checked: false
         };
       });
+      this.dataSource = new MatTableDataSource(this.criterias);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       this.isLoaded = true;
     }, error => {
       console.error(error);

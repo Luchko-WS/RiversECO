@@ -12,7 +12,6 @@ namespace RiversECO.Contracts.Repositories
 
         Task<TModel> GetByIdAsync(Guid id);
         Task<IList<TModel>> GetAllAsync();
-        Task<PagedList<TModel>> GetPagedAsync();
 
         void Create(TModel model);
         void Update(TModel model);

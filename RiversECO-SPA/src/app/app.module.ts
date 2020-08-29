@@ -1,8 +1,13 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 
@@ -36,7 +41,11 @@ import { UtilsService } from './services/utils.service';
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     RouterModule.forRoot(appRoutes),
     ModalModule.forRoot()
   ],

@@ -10,28 +10,30 @@
         <button class="btn btn-danger" (click)="deleteCriterias()">Видалити</button>
     </div>
 </div>
-<div class="full-screen-table-wrapper">
-<table class="table table-hover">
-    <thead>
-        <tr class="d-flex">
-            <th class="col-1">#</th>
-            <th class="col-4">Назва</th>
-            <th class="col-6">Опис</th>
-            <th class="col-1"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <div class="scroll-container">
-            <tr class="d-flex" *ngFor="let criteria of criterias; let i = index" 
-                (dblclick)="updateCriteria(criteria)" [attr.data-index]="i">
-                <th class="col-sm-1">{{i+1}}</th>
-                <td class="col-sm-4">{{criteria.name}}</td>
-                <td class="col-sm-6">{{criteria.description}}</td>
-                <th class="col-sm-1"><input type="checkbox" [(ngModel)]="criteria.checked"></th>
-            </tr>
-        </div>
-      <tr>
-    </tbody>
-</table>
-</div>
+<div class="table-wrapper">
+  <div class="table-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Назва </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Опис </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="check">
+        <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+             <input type="checkbox" [(ngModel)]="row.checked"/>
+        </mat-cell>
+      </ng-container>
 
+      <mat-header-row *matHeaderRowDef="['name', 'description', 'check']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'description', 'check'];" (dblclick)="updateCriteria(row)"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[25]"></mat-paginator>
+  </div>
+</div>
