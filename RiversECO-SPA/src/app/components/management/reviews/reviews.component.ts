@@ -34,11 +34,21 @@ export class ReviewsComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.reviews);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.dataSource.sortingDataAccessor = (data, sortHeaderId) => data[sortHeaderId].toLocaleLowerCase();
+      this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+        switch (sortHeaderId) {
+          case 'waterObject': return data.waterObject.name;
+          default: return data[sortHeaderId];
+        }
+      };
 
       this.isLoaded = true;
     }, error => {
       console.error(error);
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

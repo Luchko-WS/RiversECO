@@ -23,7 +23,11 @@ export class ReviewService {
     return this.http.get<Review[]>(this.baseUrl + 'review');
   }
 
-  getReviewsForWaterObject(waterObjectId: string): Observable<Review> {
-    return this.http.get<Review>(this.baseUrl + 'review/' + waterObjectId);
+  getReview(id: string): Observable<Review> {
+    return this.http.get<Review>(this.baseUrl + 'review/' + id);
+  }
+
+  getReviewsForWaterObject(waterObjectId: string): Observable<Review[]> {
+    return this.http.get<Review[]>(this.baseUrl + 'review/for/' + waterObjectId);
   }
 }

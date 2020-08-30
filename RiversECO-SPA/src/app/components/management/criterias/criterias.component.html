@@ -8,6 +8,9 @@
     <div class="tools">
         <button class="btn btn-info" (click)="createCriteria()">Створити</button>
         <button class="btn btn-danger" (click)="deleteCriterias()">Видалити</button>
+        <div class="filter-container">
+          <input class="form-control" type="text" (keyup)="applyFilter($event)" placeholder="Введіть назву критерію для пошуку">
+        </div>
     </div>
 </div>
 <div class="mat-elevation-z8">
