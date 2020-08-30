@@ -48,6 +48,15 @@ namespace RiversECO.API.Controllers
             return Ok(reviewsToReturn);
         }
 
+        [HttpGet("for/{waterObjectId}")]
+        public async Task<IActionResult> GetAllForWaterObject(Guid waterObjectId)
+        {
+            var reviews = await _reviewsRepository.GetAllForWaterObjectAsync(waterObjectId);
+            var reviewsToReturn = _mapper.Map<List<ReviewDto>>(reviews);
+            await ValidateCriterias(reviewsToReturn.ToArray());
+            return Ok(reviewsToReturn);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]CreateReviewRequestDto dto)
         {
