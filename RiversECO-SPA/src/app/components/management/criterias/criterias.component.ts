@@ -48,6 +48,13 @@ export class CriteriasComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.dataSource.sortingDataAccessor = (data, sortHeaderId) => data[sortHeaderId].toLocaleLowerCase();
+      this.dataSource.filterPredicate = (data: Criteria, filter: string) => {
+        if (data.name.toLowerCase().includes(filter.toLowerCase())) {
+          return true;
+        } else {
+          return false;
+        }
+      };
 
       this.isLoaded = true;
     }, error => {

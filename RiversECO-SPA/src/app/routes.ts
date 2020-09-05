@@ -11,7 +11,8 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         children: [
             { path: 'management/criterias', component: CriteriasComponent },
-            { path: 'management/reviews', component: ReviewsComponent }
+            { path: 'management/reviews', component: ReviewsComponent },
+            { path: 'management/reviews/:id', component: ReviewsComponent }
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }

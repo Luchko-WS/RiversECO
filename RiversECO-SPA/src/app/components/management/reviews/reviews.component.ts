@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+
+import { Observable } from 'rxjs';
 
 import { ReviewService } from 'src/app/services/review.service';
 import { Review } from 'src/app/models/review';
@@ -23,11 +26,22 @@ export class ReviewsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private reviewService: ReviewService) {}
+    private reviewService: ReviewService,
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.isLoaded = false;
-    this.reviewService.getReviews().subscribe(data => {
+
+    let method: Observable<Review[]>;
+    const waterObjectId = this.route.snapshot.params['id'];
+
+    if (waterObjectId) {
+      method = this.reviewService.getReviewsForWaterObject(waterObjectId);
+    } else {
+      method = this.reviewService.getReviews();
+    }
+
+    method.subscribe(data => {
       this.reviews = data;
 
       // init table
@@ -38,6 +52,15 @@ export class ReviewsComponent implements OnInit {
         switch (sortHeaderId) {
           case 'waterObject': return data.waterObject.name;
           default: return data[sortHeaderId];
+        }
+      };
+      this.dataSource.filterPredicate = (data: Review, filter: string) => {
+        if (data.createdBy.toLowerCase().includes(filter.toLowerCase())) {
+          return true;
+        } else if (data.waterObject.name.toLowerCase().includes(filter.toLowerCase())) {
+          return true;
+        } else {
+          return false;
         }
       };
 
