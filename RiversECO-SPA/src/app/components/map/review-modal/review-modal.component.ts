@@ -64,6 +64,7 @@ export class ReviewModalComponent implements OnInit {
     this.reviewService.createReview(review)
       .subscribe(review => {
           console.log('Review created.', review);
+          this.bsModalRef.hide();
       }, error => {
           console.error(error);
       });

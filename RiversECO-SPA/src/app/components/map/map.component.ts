@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, NgZone } from '@angular/core';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -43,7 +43,7 @@ export class MapComponent implements OnInit {
   constructor(
     private waterObjectService: WaterObjectService,
     private modalService: BsModalService,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private zone: NgZone) { }
 
   ngOnInit() {
     this.isLoaded = false;
@@ -95,13 +95,13 @@ export class MapComponent implements OnInit {
       }
 
       const mouseCoordinates = this.getCurrentMouseCoordinates();
-
       const selectedFeatureValues = e.selected[0].values_;
-      this.selectedObject = {
-        id: selectedFeatureValues.waterObjectId,
-        name: selectedFeatureValues.name_ukr,
-      };
-      this.changeDetectorRef.detectChanges();
+      this.zone.run(() => {
+        this.selectedObject = {
+          id: selectedFeatureValues.waterObjectId,
+          name: selectedFeatureValues.name_ukr,
+        };
+      });
 
       this.overlay.setPosition(mouseCoordinates);
     });
