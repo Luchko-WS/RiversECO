@@ -42,8 +42,8 @@ namespace RiversECO.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var review = await _reviewsRepository.GetAllAsync();
-            var reviewsToReturn = _mapper.Map<List<ReviewDto>>(review);
+            var reviews = await _reviewsRepository.GetAllAsync();
+            var reviewsToReturn = _mapper.Map<List<ReviewDto>>(reviews);
             await ValidateCriterias(reviewsToReturn.ToArray());
             return Ok(reviewsToReturn);
         }
