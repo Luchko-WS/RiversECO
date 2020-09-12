@@ -64,13 +64,23 @@
 .navbar {
     height: 70px;
 }
+.navbar-nav {
+    flex-direction: row;
+}
+.nav-link {
+    margin: 0 5px 0 5px;
+}
 
 /* Table page styles*/
 .mat-table {
-    position: absolute;
     width: 100%;
-    height: calc(100% - 116px);
+    max-height: 500px; /* TODO: FIX THIS! */
     overflow-y: auto;
+}
+
+.mat-header-row {
+    margin-top: 15px;
+    box-shadow: 0px -1px 7px 0px rgba(50, 50, 50, 0.33);
 }
 
 .mat-header-cell {
@@ -100,10 +110,9 @@
 }
 
 .table-tool-panel {
-    margin: 5px 0px 20px 0;
-    height: 36px;
-    width: 100%;
-}
+    padding: 5px;
+ }
+
 .table-tool-panel .title {
     margin: 15px 0 0 10px;
     font-size: xx-large;
@@ -124,8 +133,8 @@
     width: 100%;
 }
 .table-tool-panel .tools button {
-    min-width: 150px;
-    margin-left: 5px;
+    min-width: 120px;
+    margin: 0 0 5px 5px;
     float: right;
 }
 
