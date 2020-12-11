@@ -41,7 +41,6 @@ export class MapComponent implements OnInit {
   bsModalRef: BsModalRef;
 
   constructor(
-    private waterObjectService: WaterObjectService,
     private modalService: BsModalService,
     private zone: NgZone) { }
 
@@ -49,15 +48,8 @@ export class MapComponent implements OnInit {
     this.isLoaded = false;
     this.initMap();
     this.initOverlayWindow();
-
-    return this.waterObjectService.getWaterObjects()
-      .subscribe(data => {
-        this.waterObjects = data;
-        this.drawFeatures(this.waterObjects);
-        this.isLoaded = true;
-      }, error => {
-        console.error(error);
-      });
+    this.drawFeatures();
+    this.isLoaded = true;
   }
 
   initMap() {
@@ -143,17 +135,17 @@ export class MapComponent implements OnInit {
     this.overlay.setPosition(undefined);
   }
 
-  drawFeatures(objects: WaterObject[]) {
+  drawFeatures() {
     const lakesLayer = new VectorLayer({
       source: new Vector({
-        url: '../../../assets/lakes.geojson',
+        url: '../../../assets/lakes.json',
         format: new GeoJSON()
       })
     });
 
     const riversLayer = new VectorLayer({
       source: new Vector({
-        url: '../../../assets/rivers.geojson',
+        url: '../../../assets/rivers.json',
         format: new GeoJSON()
       })
     });

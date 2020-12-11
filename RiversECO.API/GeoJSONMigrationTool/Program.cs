@@ -23,9 +23,9 @@ namespace GeoJSONMigrationTool
         [STAThread]
         static void Main()
         {
-            Console.WriteLine("What data would you like to import (rivers, lakes)?");
+            Console.WriteLine("What data would you like to import (rivers [r], lakes [l])?");
             var dataType = Console.ReadLine().ToLower().Trim();
-            if (dataType != "rivers" && dataType != "lakes")
+            if (dataType != "r" && dataType != "l")
             {
                 Console.WriteLine("Unknown data type. Exiting from application...");
                 return;
@@ -111,10 +111,10 @@ namespace GeoJSONMigrationTool
                     Formatting = Formatting.None
                 };
 
-                Console.WriteLine("Writing data into GeoJSON file...");
+                Console.WriteLine("Writing geo data into JSON file...");
                 var fileContent = JsonConvert.SerializeObject(data, settings);
-                File.WriteAllText($"{filename}.geojson", fileContent, Encoding.UTF8);
-                Console.WriteLine("GeoJSON file generated.");
+                File.WriteAllText($"{filename}.json", fileContent, Encoding.UTF8);
+                Console.WriteLine("JSON file generated.");
             }
         }
 

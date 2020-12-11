@@ -8,10 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using RiversECO.API.Extensions;
+using RiversECO.API.Infrastructure.Middlewares;
 using RiversECO.Cache.Configuration;
 using RiversECO.DataContext.Configuration;
 using RiversECO.Repositories.Configuration;
-using RiversECO.API.Infrastructure.Middlewares;
+using System.IO;
 
 namespace RiversECO.API
 {
@@ -27,6 +28,12 @@ namespace RiversECO.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddSpaStaticFiles(config =>
+                {
+                    config.RootPath = "wwwroot";
+                });
+
             services
                 .ConfigureDataContextForSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 .RegisterCache()
@@ -59,17 +66,25 @@ namespace RiversECO.API
                 });
             }
 
-            app
-                .UseCors(n => n.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()) //no security =)
-                .UseMiddleware<ErrorHandlerMiddleware>()
-                .UseRouting();
+            app.UseDefaultFiles();
+            app.UseSpaStaticFiles();
+
+            app.UseCors(n => n.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //no security =)
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            app.UseRouting();
 
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapFallbackToController("Index", "Fallback");
+            });
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
             });
         }
     }

@@ -3,6 +3,7 @@
 RiversECO.API/.vs/
 RiversECO.API/RiversECO.API/bin/
 RiversECO.API/RiversECO.API/obj/
+RiversECO.API/RiversECO.API/wwwroot/
 RiversECO.API/RiversECO.Cache/bin/
 RiversECO.API/RiversECO.Cache/obj/
 RiversECO.API/RiversECO.Common/bin/
@@ -25,3 +26,4 @@ RiversECO.API/GeoJSONMigrationTool/obj/
 # SPA
 
 RiversECO-SPA/node_modules/
+RiversECO-SPA/dist

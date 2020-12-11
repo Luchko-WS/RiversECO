@@ -8,6 +8,8 @@
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="FluentValidation" Version="9.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.10" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
@@ -17,6 +19,10 @@
     <ProjectReference Include="..\RiversECO.DataContext\RiversECO.DataContext.csproj" />
     <ProjectReference Include="..\RiversECO.Dtos\RiversECO.Dtos.csproj" />
     <ProjectReference Include="..\RiversECO.Repositories\RiversECO.Repositories.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 
