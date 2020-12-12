@@ -13,6 +13,7 @@ using RiversECO.Cache.Configuration;
 using RiversECO.DataContext.Configuration;
 using RiversECO.Repositories.Configuration;
 using System.IO;
+using System;
 
 namespace RiversECO.API
 {
@@ -67,7 +68,20 @@ namespace RiversECO.API
             }
 
             app.UseDefaultFiles();
-            app.UseSpaStaticFiles();
+            app.UseSpaStaticFiles(new StaticFileOptions()
+            {
+                HttpsCompression = Microsoft.AspNetCore.Http.Features.HttpsCompressionMode.Compress,
+                OnPrepareResponse = (context) =>
+                {
+                    var headers = context.Context.Response.GetTypedHeaders();
+                    headers.CacheControl = new Microsoft.Net.Http.Headers.CacheControlHeaderValue
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromDays(365)
+                    };
+                }
+            });
+
 
             app.UseCors(n => n.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //no security =)
             app.UseMiddleware<ErrorHandlerMiddleware>();

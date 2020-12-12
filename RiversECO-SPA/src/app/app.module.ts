@@ -29,8 +29,6 @@ import { CriteriaService } from './services/criteria.service';
 import { ReviewService } from './services/review.service';
 import { UtilsService } from './services/utils.service';
 
-import { environment } from '../environments/environment';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,8 +50,7 @@ import { environment } from '../environments/environment';
     MatSortModule,
     MatFormFieldModule,
     RouterModule.forRoot(appRoutes),
-    ModalModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ModalModule.forRoot()
   ],
   providers: [
     WaterObjectService,
