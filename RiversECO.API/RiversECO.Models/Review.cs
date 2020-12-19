@@ -13,7 +13,10 @@ namespace RiversECO.Models
         
         public string ModifiedBy { get; set; }
 
-        public string Criterias { get; set; }
+        [Required]
+        public Guid CriteriaId { get; set; }
+        
+        public virtual Criteria Criteria { get; set; }
 
         [Required]
         public Guid WaterObjectId { get; set; }

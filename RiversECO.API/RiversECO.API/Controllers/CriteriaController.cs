@@ -42,6 +42,12 @@ namespace RiversECO.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]CreateCriteriaRequestDto dto)
         {
+            var existCriteria = await _repository.GetCriteriaByName(dto.Name);
+            if (existCriteria != null)
+            {
+                return BadRequest($"Criteria with name {dto.Name} already exists.");
+            }
+
             var criteriaToCreate = _mapper.Map<Criteria>(dto);
             _repository.Create(criteriaToCreate);
 
@@ -57,6 +63,12 @@ namespace RiversECO.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody]UpdateCriteriaRequestDto dto)
         {
+            var existCriteria = await _repository.GetCriteriaByName(dto.Name);
+            if (existCriteria != null && dto.Id != existCriteria.Id)
+            {
+                return BadRequest($"Criteria with name {dto.Name} already exists.");
+            }
+
             var criteriaFromRepo = await _repository.GetByIdAsync(dto.Id);
             _mapper.Map(dto, criteriaFromRepo);
 

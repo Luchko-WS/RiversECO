@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import { WaterObject } from 'src/app/models/water-object';
-import { Criteria, CheckedCriteria } from 'src/app/models/criteria';
+import { WaterObjectFromFile, WaterObject } from 'src/app/models/water-object';
+import { Criteria } from 'src/app/models/criteria';
+import { WaterObjectService } from 'src/app/services/water-object.service';
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-review-modal',
@@ -15,53 +21,56 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 
 export class ReviewModalComponent implements OnInit {
-  object: WaterObject;
-  criterias: CheckedCriteria[];
+  object: WaterObjectFromFile;
+  criterias: Criteria[];
+
+  areCriteriasLoaded: boolean = false;
+  isWaterObjectLoaded = false;
+  criteriaAutocompleteControl = new FormControl();
+  filterCriterias: Observable<Criteria[]>;
+
+  waterObject: WaterObject;
   author: string;
   comment: string;
-
-  isLoaded: boolean = false;
-  filteredCriterias: CheckedCriteria[] = [];
-  criteriaFilterText: string;
+  selectedCriteriaName: string;
 
   constructor(
+    private waterObjectService: WaterObjectService,
     private criteriaService: CriteriaService,
     private reviewService: ReviewService,
     private utilsService: UtilsService,
     public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
+    this.filterCriterias = this.criteriaAutocompleteControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterCriterias(value)));
+
+    this.waterObjectService.getWaterObject(this.object.id)
+      .subscribe((res: WaterObject) => {
+        this.waterObject = res;
+        this.isWaterObjectLoaded = true;
+      }, error => {
+        console.error(error);
+      })
+
     this.criteriaService.getCriterias()
       .subscribe((res: Criteria[]) => {
-        this.criterias = res.map(criteria => {
-          return {
-            id: criteria.id,
-            name: criteria.name,
-            description: criteria.description,
-            checked: false
-          };
-        });
-        this.filterCriterias();
+        this.criterias = res;
+        this.areCriteriasLoaded = true;
       }, error => {
-        this.isLoaded = true;
         console.error(error);
-      });
+      });    
   }
 
-  filterCriterias() {
-    this.isLoaded = false;
-    this.filteredCriterias = this.criterias.filter(
-      criteria => {
-        if (!this.criteriaFilterText) {
-          return true;
-        }     
-        return criteria.name.toLowerCase().includes(this.criteriaFilterText.toLowerCase())
-      });
-    this.isLoaded = true;
-  }
-
-  checkCriteria(criteria: CheckedCriteria) {
-    criteria.checked = !criteria.checked;
+  private _filterCriterias(value: string): Criteria[] {
+    if (!value) {
+      value = '';
+    }
+    if (this.criterias) {
+      const filterValue = value.toLowerCase();
+      return this.criterias.filter(criteria => criteria.name.toLowerCase().includes(filterValue));
+    }
   }
 
   validateReview() {
@@ -70,12 +79,10 @@ export class ReviewModalComponent implements OnInit {
   }
 
   submitReview() {
-    const filteredCriterias = this.utilsService.getSelectedCriterias(this.criterias);
-
     const review = {
       createdBy: this.author,
       comment: this.comment,
-      criterias: filteredCriterias,
+      criteriaName: this.selectedCriteriaName,
       waterObjectId: this.object.id
     };
 

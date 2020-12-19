@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RiversECO.Contracts.Repositories;
 using RiversECO.Models;
 
@@ -25,6 +26,13 @@ namespace RiversECO.Repositories
         {
             var result = await base.GetAllAsync();
             return result.OrderBy(x => x.Name, StringComparer.InvariantCultureIgnoreCase).ToList();
+        }
+
+        public async Task<Criteria> GetCriteriaByName(string name)
+        {
+            var criteria = await Items
+                .FirstOrDefaultAsync(x => x.Name.ToLower() == name.Trim().ToLower());
+            return criteria;
         }
     }
 }

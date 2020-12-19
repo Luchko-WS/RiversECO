@@ -2,37 +2,31 @@
     <div class="modal-title pull-left">Створити оцінку для <b>{{object.name}}</b></div>
     <a class="close" (click)="bsModalRef.hide()"></a>
 </div>
-<div *ngIf="!isLoaded" class="spinner">
-    <img src="../../../assets/spinner/128x128.gif"/>
+<div *ngIf="!areCriteriasLoaded || !isWaterObjectLoaded">
+    <img class="center" src="../../../assets/spinner/128x128.gif"/>
 </div>
-<div *ngIf="isLoaded" class="modal-body form-group">
+<div *ngIf="areCriteriasLoaded && isWaterObjectLoaded" class="modal-body form-group">
+    <div class="label">Код об'єкту:</div>
+    <input [(ngModel)]="waterObject.code" class="form-control" type="text" readonly />
+    
+    <div class="label">Опис:</div>
+    <input [(ngModel)]="waterObject.description" class="form-control" type="text" readonly />
+
     <div class="label required-field">Автор:</div>
     <input [(ngModel)]="author" class="form-control" type="text" />
+    
     <div class="label required-field">Коментар:</div>
     <textarea [(ngModel)]="comment" class="form-control" rows="4" style="resize: none;"></textarea>
-    <div *ngIf="criterias != undefined && criterias.length !== 0">
-        <div class="label">Критерії:</div>
-
-
-        <div class="input-group input-group-lg" style="margin-bottom: 15px;">
-            <input [(ngModel)]="criteriaFilterText" (ngModelChange)="filterCriterias()" placeholder="Пошук критеріїв" class="form-control" type="text">
-            <div class="input-group-append">
-                <span class="input-group-text"><i class="fa fa-search"></i></span>
-            </div>
-        </div>
-        
-        <div class="criterias-list">
-            <div *ngFor="let criteria of filteredCriterias" class="criteria-object">
-                <div class="criteria-body" (dblclick)="checkCriteria(criteria)">
-                    <div class="name-field">{{criteria.name}}</div>
-                    <div class="description-field">{{criteria.description}}</div>
-                </div>
-                <input [(ngModel)]="criteria.checked" class="criteria-checkbox" type="checkbox" />
-            </div>
-        </div>
-    </div>
+    
+    <div class="label required-field">Проблема:</div>
+    <input class="form-control" type="text" matInput [formControl]="criteriaAutocompleteControl" [matAutocomplete]="auto" [(ngModel)]="selectedCriteriaName" />
+    <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let criteria of filterCriterias | async" [value]="criteria.name">
+            {{criteria.name}}
+        </mat-option>
+    </mat-autocomplete>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
-    <button *ngIf="isLoaded" [disabled]="!validateReview()" type="button" class="btn btn-success" (click)="submitReview()" form="rolesForm">Відправити</button>
+    <button *ngIf="areCriteriasLoaded && isWaterObjectLoaded" [disabled]="!validateReview()" type="button" class="btn btn-success" (click)="submitReview()" form="rolesForm">Відправити</button>
 </div>

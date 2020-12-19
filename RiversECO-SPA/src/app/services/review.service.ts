@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Review } from '../models/review';
+import { Review, ReviewCreateModel } from '../models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ReviewService {
 
   constructor(private http: HttpClient) { }
 
-  createReview(review: Review) {
+  createReview(review: ReviewCreateModel) {
     return this.http.post(this.baseUrl + 'review', review);
   }
 

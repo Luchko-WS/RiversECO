@@ -9,6 +9,7 @@ using RiversECO.Contracts.Repositories;
 using RiversECO.Dtos.Requests;
 using RiversECO.Dtos.Responses;
 using RiversECO.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace RiversECO.API.Controllers
 {
@@ -35,7 +36,6 @@ namespace RiversECO.API.Controllers
         {
             var review = await _reviewsRepository.GetByIdAsync(id);
             var reviewToReturn = _mapper.Map<ReviewDto>(review);
-            await ValidateCriterias(reviewToReturn);
             return Ok(reviewToReturn);
         }
 
@@ -44,7 +44,6 @@ namespace RiversECO.API.Controllers
         {
             var reviews = await _reviewsRepository.GetAllAsync();
             var reviewsToReturn = _mapper.Map<List<ReviewDto>>(reviews);
-            await ValidateCriterias(reviewsToReturn.ToArray());
             return Ok(reviewsToReturn);
         }
 
@@ -53,7 +52,6 @@ namespace RiversECO.API.Controllers
         {
             var reviews = await _reviewsRepository.GetAllForWaterObjectAsync(waterObjectId);
             var reviewsToReturn = _mapper.Map<List<ReviewDto>>(reviews);
-            await ValidateCriterias(reviewsToReturn.ToArray());
             return Ok(reviewsToReturn);
         }
 
@@ -61,6 +59,17 @@ namespace RiversECO.API.Controllers
         public async Task<IActionResult> Create([FromBody]CreateReviewRequestDto dto)
         {
             var reviewToCreate = _mapper.Map<Review>(dto);
+
+            var criteria = await _criteriasRepository.GetCriteriaByName(dto.CriteriaName);
+            if (criteria == null)
+            {
+                criteria = new Criteria
+                {
+                    Name = dto.CriteriaName
+                };
+            }
+            reviewToCreate.Criteria = criteria;
+
             _reviewsRepository.Create(reviewToCreate);
 
             if (await _reviewsRepository.SaveAllChangesAsync())
@@ -77,6 +86,20 @@ namespace RiversECO.API.Controllers
         {
             var reviewFromRepo = await _reviewsRepository.GetByIdAsync(dto.Id);
             _mapper.Map(dto, reviewFromRepo);
+
+            var criteria = await _criteriasRepository.GetCriteriaByName(dto.CriteriaName);
+            if (criteria?.Id != reviewFromRepo.CriteriaId)
+            {
+                if (criteria == null)
+                {
+                    criteria = new Criteria
+                    {
+                        Name = dto.CriteriaName
+                    };
+                }
+
+                reviewFromRepo.Criteria = criteria;
+            }
 
             if (await _reviewsRepository.SaveAllChangesAsync())
             {
@@ -96,53 +119,6 @@ namespace RiversECO.API.Controllers
 
             await _reviewsRepository.SaveAllChangesAsync();
             return Ok();
-        }
-
-        private async Task ValidateCriterias(params ReviewDto[] reviews)
-        {
-            var criteriasFromRepo = (await _criteriasRepository.GetAllAsync())
-                .ToDictionary(x => x.Id);
-
-            var reviewsModified = false;
-            foreach (var review in reviews)
-            {
-                var needUpdateReviewInDb = false;
-                for (var i = 0; i < review.Criterias.Count; i++)
-                {
-                    var criteriaDto = review.Criterias[i];
-                    if (criteriasFromRepo.TryGetValue(criteriaDto.Id, out var criteriaFromRepo))
-                    {
-                        if (criteriaFromRepo.Name != criteriaDto.Name)
-                        {
-                            criteriaDto.Name = criteriaFromRepo.Name;
-                            needUpdateReviewInDb = true;
-                        }
-
-                        if (criteriaFromRepo.Description != criteriaDto.Description)
-                        {
-                            criteriaDto.Description = criteriaFromRepo.Description;
-                            needUpdateReviewInDb = true;
-                        }
-                    }
-                    else
-                    {
-                        review.Criterias.RemoveAt(i--);
-                        needUpdateReviewInDb = true;
-                    }
-                }
-
-                if (needUpdateReviewInDb)
-                {
-                    var reviewToUpdate = await _reviewsRepository.GetByIdAsync(review.Id);
-                    reviewToUpdate.Criterias = JsonConvert.SerializeObject(review.Criterias);
-                    reviewsModified = true;
-                }
-            }
-
-            if (reviewsModified)
-            {
-                await _reviewsRepository.SaveAllChangesAsync();
-            }
         }
     }
 }

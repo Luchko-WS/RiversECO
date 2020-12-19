@@ -20,7 +20,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { WaterObjectService } from 'src/app/services/water-object.service';
 import { ReviewModalComponent } from './review-modal/review-modal.component';
-import { WaterObject } from 'src/app/models/water-object';
+import { WaterObjectFromFile } from 'src/app/models/water-object';
 
 @Component({
   selector: 'app-map',
@@ -35,8 +35,7 @@ export class MapComponent implements OnInit {
   private overlay: any;
   private selectInteraction: Select;
 
-  selectedObject: WaterObject;
-  waterObjects: WaterObject[];
+  selectedObject: WaterObjectFromFile;
   isLoaded: boolean = false;
   bsModalRef: BsModalRef;
 

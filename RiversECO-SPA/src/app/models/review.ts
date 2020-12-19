@@ -6,6 +6,14 @@ export interface Review {
     comment: string;
     waterObjectId: string;
     waterObject?: WaterObject;
-    criterias: Criteria[];
+    criteria: Criteria;
+    modifiedBy?: string;
+}
+
+export interface ReviewCreateModel {
+    createdBy: string;
+    comment: string;
+    waterObjectId: string;
+    criteriaName: string;
     modifiedBy?: string;
 }

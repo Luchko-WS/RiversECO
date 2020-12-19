@@ -13,7 +13,7 @@ namespace RiversECO.Dtos.Responses
         public string Comment { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
-        public List<ReviewCriteriaDto> Criterias { get; set; }
+        public ReviewCriteriaDto Criteria { get; set; }
         public Guid WaterObjectId { get; set; }
         public WaterObjectDto WaterObject { get; set; }
     }

@@ -16,4 +16,8 @@ export class WaterObjectService {
   getWaterObjects(): Observable<WaterObject[]> {
     return this.http.get<WaterObject[]>(this.baseUrl + 'waterobject');
   }
+
+  getWaterObject(id: string): Observable<WaterObject> {
+    return this.http.get<WaterObject>(this.baseUrl + 'waterobject/' + id);
+  }
 }

@@ -44,6 +44,7 @@ namespace RiversECO.Repositories
         {
             model.Id = Guid.NewGuid();
             model.CreatedOn = DateTime.UtcNow;
+            model.Name = model.Name.Trim();
 
             _context.Add(model);
         }
@@ -51,6 +52,7 @@ namespace RiversECO.Repositories
         public virtual void Update(TModel model)
         {
             model.ModifiedOn = DateTime.UtcNow;
+            model.Name = model.Name.Trim();
 
             _context.Update(model);
         }
