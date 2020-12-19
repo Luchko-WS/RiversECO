@@ -20,6 +20,10 @@ export class ReviewModalComponent implements OnInit {
   author: string;
   comment: string;
 
+  isLoaded: boolean = false;
+  filteredCriterias: CheckedCriteria[] = [];
+  criteriaFilterText: string;
+
   constructor(
     private criteriaService: CriteriaService,
     private reviewService: ReviewService,
@@ -37,9 +41,23 @@ export class ReviewModalComponent implements OnInit {
             checked: false
           };
         });
+        this.filterCriterias();
       }, error => {
+        this.isLoaded = true;
         console.error(error);
       });
+  }
+
+  filterCriterias() {
+    this.isLoaded = false;
+    this.filteredCriterias = this.criterias.filter(
+      criteria => {
+        if (!this.criteriaFilterText) {
+          return true;
+        }     
+        return criteria.name.toLowerCase().includes(this.criteriaFilterText.toLowerCase())
+      });
+    this.isLoaded = true;
   }
 
   checkCriteria(criteria: CheckedCriteria) {

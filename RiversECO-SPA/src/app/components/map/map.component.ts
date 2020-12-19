@@ -37,7 +37,7 @@ export class MapComponent implements OnInit {
 
   selectedObject: WaterObject;
   waterObjects: WaterObject[];
-  isLoaded: boolean;
+  isLoaded: boolean = false;
   bsModalRef: BsModalRef;
 
   constructor(
@@ -45,7 +45,6 @@ export class MapComponent implements OnInit {
     private zone: NgZone) { }
 
   ngOnInit() {
-    this.isLoaded = false;
     this.initMap();
     this.initOverlayWindow();
     this.drawFeatures();

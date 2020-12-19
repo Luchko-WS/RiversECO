@@ -54,6 +54,7 @@ export class ReviewsComponent implements OnInit {
           default: return data[sortHeaderId];
         }
       };
+      
       this.dataSource.filterPredicate = (data: Review, filter: string) => {
         if (data.createdBy.toLowerCase().includes(filter.toLowerCase())) {
           return true;
