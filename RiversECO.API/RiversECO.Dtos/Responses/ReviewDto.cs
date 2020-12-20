@@ -14,7 +14,9 @@ namespace RiversECO.Dtos.Responses
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public ReviewCriteriaDto Criteria { get; set; }
-        public Guid WaterObjectId { get; set; }
         public WaterObjectDto WaterObject { get; set; }
+        public int? Influence { get; set; }
+        public int? GlobalInfluence { get; set; }
+        public string References { get; set; }
     }
 }

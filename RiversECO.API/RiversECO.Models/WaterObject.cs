@@ -10,6 +10,8 @@ namespace RiversECO.Models
 
         public string Code { get; set; }
 
+        public string Description { get; set; }
+
         public virtual ICollection<Review> Reviews { get; set; }
     }
 }

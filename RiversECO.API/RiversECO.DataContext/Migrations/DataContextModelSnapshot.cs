@@ -50,7 +50,6 @@ namespace RiversECO.DataContext.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
@@ -60,8 +59,14 @@ namespace RiversECO.DataContext.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Criterias")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("CriteriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("GlobalInfluence")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Influence")
+                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -73,10 +78,16 @@ namespace RiversECO.DataContext.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("References")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("WaterObjectId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CriteriaId");
 
                     b.HasIndex("WaterObjectId");
 
@@ -95,6 +106,9 @@ namespace RiversECO.DataContext.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -112,6 +126,12 @@ namespace RiversECO.DataContext.Migrations
 
             modelBuilder.Entity("RiversECO.Models.Review", b =>
                 {
+                    b.HasOne("RiversECO.Models.Criteria", "Criteria")
+                        .WithMany()
+                        .HasForeignKey("CriteriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RiversECO.Models.WaterObject", "WaterObject")
                         .WithMany("Reviews")
                         .HasForeignKey("WaterObjectId")

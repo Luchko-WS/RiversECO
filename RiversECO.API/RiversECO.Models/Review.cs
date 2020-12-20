@@ -5,9 +5,7 @@ namespace RiversECO.Models
 {
     public class Review : ModelBase
     {
-        [Required]
-        public string Comment { get; set; }
-        
+
         [Required]
         public string CreatedBy { get; set; }
         
@@ -22,5 +20,14 @@ namespace RiversECO.Models
         public Guid WaterObjectId { get; set; }
 
         public virtual WaterObject WaterObject { get; set; }
+
+        public int? Influence { get; set; }
+
+        public int? GlobalInfluence { get; set; }
+
+        [Required]
+        public string References { get; set; }
+
+        public string Comment { get; set; }
     }
 }

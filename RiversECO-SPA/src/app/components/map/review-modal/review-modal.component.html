@@ -15,9 +15,6 @@
     <div class="label required-field">Автор:</div>
     <input [(ngModel)]="author" class="form-control" type="text" />
     
-    <div class="label required-field">Коментар:</div>
-    <textarea [(ngModel)]="comment" class="form-control" rows="4" style="resize: none;"></textarea>
-    
     <div class="label required-field">Проблема:</div>
     <input class="form-control" type="text" matInput [formControl]="criteriaAutocompleteControl" [matAutocomplete]="auto" [(ngModel)]="selectedCriteriaName" />
     <mat-autocomplete #auto="matAutocomplete">
@@ -25,6 +22,23 @@
             {{criteria.name}}
         </mat-option>
     </mat-autocomplete>
+
+    <div class="label required-field">Посилання:</div>
+    <textarea [(ngModel)]="references" class="form-control" rows="4" style="resize: none;"></textarea>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="label">Вплив:</div>
+            <input [(ngModel)]="influence" class="form-control" type="number" min="0" max="100" />
+        </div>
+        <div class="col-md-6">
+            <div class="label">Вплив глобальний:</div>
+            <input [(ngModel)]="globalInfluence" class="form-control" type="number" min="0" max="100" />
+        </div>
+    </div>
+
+    <div class="label">Коментар:</div>
+    <textarea [(ngModel)]="comment" class="form-control" rows="4" style="resize: none;"></textarea>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>

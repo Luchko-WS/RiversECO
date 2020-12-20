@@ -12,7 +12,6 @@ import { WaterObjectService } from 'src/app/services/water-object.service';
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-review-modal',
@@ -33,6 +32,9 @@ export class ReviewModalComponent implements OnInit {
   author: string;
   comment: string;
   selectedCriteriaName: string;
+  references: string;
+  influence?: number;
+  globalInfluence?: number;
 
   constructor(
     private waterObjectService: WaterObjectService,
@@ -75,7 +77,8 @@ export class ReviewModalComponent implements OnInit {
 
   validateReview() {
     return !this.utilsService.isStringEmptyOrWhitespaces(this.author) &&
-      !this.utilsService.isStringEmptyOrWhitespaces(this.comment);
+      !this.utilsService.isStringEmptyOrWhitespaces(this.references) &&
+      !this.utilsService.isStringEmptyOrWhitespaces(this.selectedCriteriaName);
   }
 
   submitReview() {
@@ -83,7 +86,10 @@ export class ReviewModalComponent implements OnInit {
       createdBy: this.author,
       comment: this.comment,
       criteriaName: this.selectedCriteriaName,
-      waterObjectId: this.object.id
+      waterObjectId: this.object.id,
+      references: this.references,
+      influence: this.influence,
+      globalInfluence: this.globalInfluence
     };
 
     this.reviewService.createReview(review)

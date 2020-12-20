@@ -16,4 +16,7 @@ export interface ReviewCreateModel {
     waterObjectId: string;
     criteriaName: string;
     modifiedBy?: string;
+    influence?: number;
+    globalInfluence?: number;
+    references: string;
 }

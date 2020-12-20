@@ -63,10 +63,8 @@ namespace RiversECO.API.Controllers
             var criteria = await _criteriasRepository.GetCriteriaByName(dto.CriteriaName);
             if (criteria == null)
             {
-                criteria = new Criteria
-                {
-                    Name = dto.CriteriaName
-                };
+                criteria = new Criteria { Name = dto.CriteriaName };
+                _criteriasRepository.Create(criteria);
             }
             reviewToCreate.Criteria = criteria;
 
@@ -92,12 +90,9 @@ namespace RiversECO.API.Controllers
             {
                 if (criteria == null)
                 {
-                    criteria = new Criteria
-                    {
-                        Name = dto.CriteriaName
-                    };
+                    criteria = new Criteria { Name = dto.CriteriaName };
+                    _criteriasRepository.Create(criteria);
                 }
-
                 reviewFromRepo.Criteria = criteria;
             }
 

@@ -19,13 +19,15 @@ namespace GeoJSONMigrationTool
     {
         // TODO: Move hardcoded onnection string to onfiguration.
         const string CONNECTION_STRING = "Server=(localdb)\\MSSQLLocalDB;Database=RiversECO;Trusted_Connection=True;";
+        const string RIVERS_DATA = "r";
+        const string LAKES_DATA = "l";
 
         [STAThread]
         static void Main()
         {
             Console.WriteLine("What data would you like to import (rivers [r], lakes [l])?");
             var dataType = Console.ReadLine().ToLower().Trim();
-            if (dataType != "r" && dataType != "l")
+            if (dataType != RIVERS_DATA && dataType != LAKES_DATA)
             {
                 Console.WriteLine("Unknown data type. Exiting from application...");
                 return;
@@ -43,7 +45,7 @@ namespace GeoJSONMigrationTool
                     Console.WriteLine("Processing imported data...");
                     var fileContent = File.ReadAllText(fileDialog.FileName);
 
-                    if (dataType == "rivers")
+                    if (dataType == RIVERS_DATA)
                     {
                         var geoJsonObject = JsonConvert
                             .DeserializeObject<GeoJSONFileModel<RiverFeatureModel>>(fileContent);
