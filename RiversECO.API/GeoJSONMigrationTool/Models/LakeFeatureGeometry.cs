@@ -1,4 +1,4 @@
-﻿namespace GeoJSONMigrationTool.Models.Lake
+﻿namespace GeoJSONMigrationTool.Models
 {
     public class LakeFeatureGeometry
     {

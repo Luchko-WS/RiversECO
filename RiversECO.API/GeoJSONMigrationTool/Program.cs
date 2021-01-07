@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RiversECO.DataContext;
 using RiversECO.Models;
-using GeoJSONMigrationTool.Extensions;
-using GeoJSONMigrationTool.Models;
-using GeoJSONMigrationTool.Models.Lake;
-using GeoJSONMigrationTool.Models.River;
-using System.Text;
-using Newtonsoft.Json.Serialization;
+using GeoJSONMigrationTool.Helpers;
+using GeoJSONMigrationTool.DataProcessing;
 
 namespace GeoJSONMigrationTool
 {
     class Program
     {
-        // TODO: Move hardcoded onnection string to onfiguration.
+        // TODO: Move hardcoded connection string to onfiguration.
         const string CONNECTION_STRING = "Server=(localdb)\\MSSQLLocalDB;Database=RiversECO;Trusted_Connection=True;";
         const string RIVERS_DATA = "r";
         const string LAKES_DATA = "l";
@@ -25,105 +21,120 @@ namespace GeoJSONMigrationTool
         [STAThread]
         static void Main()
         {
-            Console.WriteLine("What data would you like to import (rivers [r], lakes [l])?");
-            var dataType = Console.ReadLine().ToLower().Trim();
-            if (dataType != RIVERS_DATA && dataType != LAKES_DATA)
+            var dataType = PromptDataTypeInput();
+            var factory = new DataContextFactory(CONNECTION_STRING);
+            var dataProcessor = DataProcessorFactory.GetDataProcessor(factory, dataType);
+
+            var fileName = SelectGeoJsonFile();
+            if (string.IsNullOrEmpty(fileName))
             {
-                Console.WriteLine("Unknown data type. Exiting from application...");
-                return;
+                ConsoleLogger.WriteWarning("No file is selected.");
             }
 
-            Console.WriteLine("Selection GeoJSON file...");
+            var fileContent = File.ReadAllText(fileName);
+            try
+            {
+                dataProcessor.ParseFileData(fileContent);
+                ConsoleLogger.WriteSuccess("Imported data parsed!");
+
+                if (PromptYesNo("Would you like to sync data with database?"))
+                {
+                    var rewriteWaterObjects = PromptYesNo("Rewrite existing water objects in the database?");
+                    ConsoleLogger.WriteText("Starting data synchronation...");
+                    dataProcessor.SyncWithDataBase(rewriteWaterObjects);
+                    ConsoleLogger.WriteSuccess("The database has been updated!");
+                }
+
+                if (PromptYesNo("Would you like to write result data into JSON file?"))
+                {
+                    var outputFileData = dataProcessor.GetOutputFileData();
+
+                    ConsoleLogger.WriteText("Enter file name:");
+                    var filename = Console.ReadLine().Trim();
+
+                    var settings = new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                        Formatting = Formatting.None
+                    };
+
+                    ConsoleLogger.WriteText("Writing geo data into JSON file...");
+
+                    var outputFileContent = JsonConvert.SerializeObject(outputFileData, settings);
+                    File.WriteAllText($"{filename}.json", outputFileContent, Encoding.UTF8);
+                    ConsoleLogger.WriteSuccess("The JSON file generated.");
+                }
+            }
+            catch (Exception exception)
+            {
+                ConsoleLogger.WriteError("An unexpected exception occured.", exception);
+            }
+
+            ConsoleLogger.WriteSuccess("Done!");
+            Console.ReadKey();
+        }
+
+        private static string SelectGeoJsonFile()
+        {
+            ConsoleLogger.WriteText("Selection GeoJSON file...");
             using (var fileDialog = new OpenFileDialog())
             {
-                fileDialog.Title = $"Select GeoJSON file which contains {dataType} data";
+                fileDialog.Title = $"Select GeoJSON file";
                 fileDialog.Filter = "GeoJSON file|*.geojson";
                 fileDialog.Multiselect = false;
 
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Console.WriteLine("Processing imported data...");
-                    var fileContent = File.ReadAllText(fileDialog.FileName);
-
-                    if (dataType == RIVERS_DATA)
-                    {
-                        var geoJsonObject = JsonConvert
-                            .DeserializeObject<GeoJSONFileModel<RiverFeatureModel>>(fileContent);
-                        var rivers = geoJsonObject.MapToWaterObjects();
-                        SeedDatabase(rivers);
-                        WriteJsonFile(geoJsonObject);
-                    }
-                    else
-                    {
-                        var geoJsonObject = JsonConvert
-                            .DeserializeObject<GeoJSONFileModel<LakeFeatureModel>>(fileContent);
-                        var lakes = geoJsonObject.MapToWaterObjects();
-                        SeedDatabase(lakes);
-                        WriteJsonFile(geoJsonObject);
-                    }
-                }
-            }
-
-            Console.WriteLine("Done!");
-        }
-
-        private static void SeedDatabase(List<WaterObject> waterObjects)
-        {
-            if (PromptYesNo("Would you like to update database?"))
-            {
-                IDesignTimeDbContextFactory<DataContext> factory = new DataContextFactory(CONNECTION_STRING);
-                var context = factory.CreateDbContext(new string[0]);
-
-                Console.WriteLine("Updating database...");
-                foreach (var waterObject in waterObjects)
-                {
-                    try
-                    {
-                        context.Add(waterObject);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Exception occured while processing the feature {waterObject.Name}. Exception: {ex}");
-                    }
+                    var fileName = fileDialog.FileName;
+                    ConsoleLogger.WriteText($"File {fileName} selected.");
+                    return fileName;
                 }
 
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Exception occured while updating DB. Exception: {ex}");
-                }
-
-                Console.WriteLine("Database has been updated");
+                return null;
             }
         }
 
-        private static void WriteJsonFile(object data)
+        private static WaterObjectType PromptDataTypeInput()
         {
-            if (PromptYesNo("Would you like to write result data into JSON file?"))
+            do
             {
-                Console.WriteLine("Enter file name:");
-                var filename = Console.ReadLine().Trim();
+                ConsoleLogger.WriteText("What data would you like to import?");
+                ConsoleLogger.WriteText("rivers — [r], lakes — [l]");
 
-                var settings = new JsonSerializerSettings
+                var input = Console.ReadLine().ToLower().Trim();
+                if (string.Equals(input, RIVERS_DATA, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    Formatting = Formatting.None
-                };
+                    return WaterObjectType.River;
+                }
+                else if (string.Equals(input, LAKES_DATA, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return WaterObjectType.Lake;
+                }
 
-                Console.WriteLine("Writing geo data into JSON file...");
-                var fileContent = JsonConvert.SerializeObject(data, settings);
-                File.WriteAllText($"{filename}.json", fileContent, Encoding.UTF8);
-                Console.WriteLine("JSON file generated.");
+                ConsoleLogger.WriteWarning("Unknown data type.");
             }
+            while (true);
         }
 
         private static bool PromptYesNo(string message)
         {
-            Console.WriteLine($"{message} (y/n)");
-            return Console.ReadLine().ToLower() == "y";
+            do
+            {
+                ConsoleLogger.WriteText(message);
+                ConsoleLogger.WriteText("yes — [y], no — [n]");
+
+                var input = Console.ReadLine();
+                if (string.Equals(input, "y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+
+                if (string.Equals(input, "n", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return false;
+                }
+            }
+            while (true);
         }
     }
 }
