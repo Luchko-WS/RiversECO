@@ -21,6 +21,10 @@ namespace RiversECO.DataContext
                 .WithOne(r => r.WaterObject)
                 .HasForeignKey(r => r.WaterObjectId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<WaterObject>()
+                .HasIndex(o => o.CodeSwb)
+                .IsUnique();
         }
     }
 }
