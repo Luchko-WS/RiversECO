@@ -34,20 +34,3 @@
   left: 48px;
   margin-left: -11px;
 }
-
-.modal-dialog.modal-window{
-  max-width: 700px;
-}
-
-.modal-body {
-  padding: 5px 15px 5px 15px;
-}
-.modal-body-loading {
-  text-align: center;
-  height: 50px;
-}
-
-.modal-footer {
-  padding: 5px 15px 5px 15px;
-}
-

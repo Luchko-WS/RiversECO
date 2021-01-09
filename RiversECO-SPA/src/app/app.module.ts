@@ -21,7 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MapComponent } from './components/map/map.component';
 import { CriteriasComponent } from './components/management/criterias/criterias.component';
 import { ReviewsComponent } from './components/management/reviews/reviews.component';
-import { ReviewModalComponent } from './components/map/review-modal/review-modal.component';
+import { ReviewModalComponent } from './components/management/reviews/review-modal/review-modal.component';
 import { CriteriaModalComponent } from './components/management/criterias/criteria-modal/criteria-modal.component';
 
 import { WaterObjectService } from './services/water-object.service';

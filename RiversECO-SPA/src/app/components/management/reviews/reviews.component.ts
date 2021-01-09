@@ -5,8 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 
+import { ReviewModalComponent } from './review-modal/review-modal.component';
 import { ReviewService } from 'src/app/services/review.service';
 import { Review } from 'src/app/models/review';
 
@@ -18,6 +20,7 @@ import { Review } from 'src/app/models/review';
 
 export class ReviewsComponent implements OnInit {
   reviews: Review[];
+  bsModalRef: BsModalRef;
   isLoaded: boolean;
 
   dataSource: MatTableDataSource<Review>;
@@ -27,7 +30,8 @@ export class ReviewsComponent implements OnInit {
 
   constructor(
     private reviewService: ReviewService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private modalService: BsModalService) {}
 
   ngOnInit() {
     this.isLoaded = false;
@@ -54,7 +58,7 @@ export class ReviewsComponent implements OnInit {
           default: return data[sortHeaderId];
         }
       };
-      
+
       this.dataSource.filterPredicate = (data: Review, filter: string) => {
         if (data.createdBy.toLowerCase().includes(filter.toLowerCase())) {
           return true;
@@ -74,5 +78,19 @@ export class ReviewsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  openReviewModal(review: Review) {
+    const options = {
+      initialState: {
+        waterObjectId: review.waterObject.id,
+        review: review,
+        isEditMode: false
+      },
+      animated: true,
+      class: 'modal-window'
+    };
+
+    this.bsModalRef = this.modalService.show(ReviewModalComponent, options);
   }
 }

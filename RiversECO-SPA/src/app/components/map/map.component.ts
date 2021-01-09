@@ -18,8 +18,7 @@ import TileLayer from 'ol/layer/Tile';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-import { WaterObjectService } from 'src/app/services/water-object.service';
-import { ReviewModalComponent } from './review-modal/review-modal.component';
+import { ReviewModalComponent } from '../management/reviews/review-modal/review-modal.component';
 import { WaterObjectFromFile } from 'src/app/models/water-object';
 
 @Component({
@@ -111,7 +110,7 @@ export class MapComponent implements OnInit {
     return new View({
       projection: 'EPSG:3857',
       center: olProj.fromLonLat([28.5785, 49.2]),
-      zoom: 10
+      zoom: 11
     });
   }
 
@@ -157,7 +156,8 @@ export class MapComponent implements OnInit {
 
     const options = {
       initialState: {
-        object: this.selectedObject
+        waterObjectId: this.selectedObject.id,
+        isEditMode: true
       },
       animated: true,
       class: 'modal-window'

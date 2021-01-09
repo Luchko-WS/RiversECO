@@ -29,7 +29,7 @@
       </ng-container>
       
       <mat-header-row *matHeaderRowDef="['createdBy', 'waterObject', 'comment']; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['createdBy', 'waterObject', 'comment'];"></mat-row>
+      <mat-row *matRowDef="let row; columns: ['createdBy', 'waterObject', 'comment'];" (dblclick)="openReviewModal(row)"></mat-row>
     </mat-table>
   
     <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>

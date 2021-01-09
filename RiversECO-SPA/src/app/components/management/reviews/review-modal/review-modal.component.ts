@@ -6,7 +6,8 @@ import {map, startWith} from 'rxjs/operators';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import { WaterObjectFromFile, WaterObject } from 'src/app/models/water-object';
+import { Review } from 'src/app/models/review';
+import { WaterObject } from 'src/app/models/water-object';
 import { Criteria } from 'src/app/models/criteria';
 import { WaterObjectService } from 'src/app/services/water-object.service';
 import { CriteriaService } from 'src/app/services/criteria.service';
@@ -20,10 +21,12 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 
 export class ReviewModalComponent implements OnInit {
-  object: WaterObjectFromFile;
+  waterObjectId: string;
+  review: Review;
+  isEditMode: boolean;
   criterias: Criteria[];
 
-  areCriteriasLoaded: boolean = false;
+  areCriteriasLoaded = false;
   isWaterObjectLoaded = false;
   criteriaAutocompleteControl = new FormControl();
   filterCriterias: Observable<Criteria[]>;
@@ -48,13 +51,28 @@ export class ReviewModalComponent implements OnInit {
       startWith(''),
       map(value => this._filterCriterias(value)));
 
-    this.waterObjectService.getWaterObject(this.object.id)
+    if (this.review) {
+      this.author = this.review.createdBy;
+      this.comment = this.review.comment;
+      this.selectedCriteriaName = this.review.criteria.name;
+      this.references = this.review.references;
+      this.influence = this.review.influence;
+      this.globalInfluence = this.review.globalInfluence;
+
+      // currently the modal does not support update review functionality.
+      if (this.isEditMode) {
+        console.error('Currently, the modal does not support update review functionality');
+        this.isEditMode = false;
+      }
+    }
+
+    this.waterObjectService.getWaterObject(this.waterObjectId)
       .subscribe((res: WaterObject) => {
         this.waterObject = res;
         this.isWaterObjectLoaded = true;
       }, error => {
         console.error(error);
-      })
+      });
 
     this.criteriaService.getCriterias()
       .subscribe((res: Criteria[]) => {
@@ -62,7 +80,7 @@ export class ReviewModalComponent implements OnInit {
         this.areCriteriasLoaded = true;
       }, error => {
         console.error(error);
-      });    
+      })
   }
 
   private _filterCriterias(value: string): Criteria[] {
@@ -82,17 +100,17 @@ export class ReviewModalComponent implements OnInit {
   }
 
   submitReview() {
-    const review = {
+    const reviewToCreate = {
       createdBy: this.author,
       comment: this.comment,
       criteriaName: this.selectedCriteriaName,
-      waterObjectId: this.object.id,
+      waterObjectId: this.waterObjectId,
       references: this.references,
       influence: this.influence,
       globalInfluence: this.globalInfluence
     };
 
-    this.reviewService.createReview(review)
+    this.reviewService.createReview(reviewToCreate)
       .subscribe(review => {
           console.log('Review created.', review);
           this.bsModalRef.hide();

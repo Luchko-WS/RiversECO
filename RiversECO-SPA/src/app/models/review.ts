@@ -8,6 +8,9 @@ export interface Review {
     waterObject?: WaterObject;
     criteria: Criteria;
     modifiedBy?: string;
+    influence?: number;
+    globalInfluence?: number;
+    references: string;
 }
 
 export interface ReviewCreateModel {

@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <div *ngIf="isEditMode" class="modal-title pull-left">Створити оцінку для <b>{{waterObject?.name}}</b></div>
+    <div *ngIf="!isEditMode" class="modal-title pull-left">Оцінка для <b>{{waterObject?.name}}</b></div>
+    <a class="close" (click)="bsModalRef.hide()"></a>
+</div>
+<div *ngIf="!areCriteriasLoaded || !isWaterObjectLoaded">
+    <img class="center" src="../../../assets/spinner/128x128.gif"/>
+</div>
+<div *ngIf="areCriteriasLoaded && isWaterObjectLoaded" class="modal-body form-group">
+    <div class="label">Код об'єкту:</div>
+    <input [(ngModel)]="waterObject.codeSwb" class="form-control" type="text" readonly />
+    
+    <div class="label">Опис:</div>
+    <input [(ngModel)]="waterObject.description" class="form-control" type="text" readonly />
+
+    <div class="label required-field">Автор:</div>
+    <input [(ngModel)]="author" class="form-control" type="text" [disabled]="!isEditMode" />
+    
+    <div class="label required-field">Проблема:</div>
+    <span *ngIf="!isEditMode">
+        <input class="form-control" type="text" [(ngModel)]="selectedCriteriaName" disabled />
+    </span>
+    <span *ngIf="isEditMode">
+        <input class="form-control" type="text" 
+            matInput [formControl]="criteriaAutocompleteControl"
+            [matAutocomplete]="auto" [(ngModel)]="selectedCriteriaName" />
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let criteria of filterCriterias | async" [value]="criteria.name">
+                {{criteria.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </span>
+
+    <div class="label required-field">Посилання:</div>
+    <textarea [(ngModel)]="references" class="form-control" rows="4" style="resize: none;" [disabled]="!isEditMode"></textarea>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="label">Вплив:</div>
+            <input [(ngModel)]="influence" class="form-control" type="number" min="0" max="100" [disabled]="!isEditMode" />
+        </div>
+        <div class="col-md-6">
+            <div class="label">Вплив глобальний:</div>
+            <input [(ngModel)]="globalInfluence" class="form-control" type="number" min="0" max="100" [disabled]="!isEditMode" />
+        </div>
+    </div>
+
+    <div class="label">Коментар:</div>
+    <textarea [(ngModel)]="comment" class="form-control" rows="4" style="resize: none;" [disabled]="!isEditMode"></textarea>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Закрити</button>
+    <button *ngIf="areCriteriasLoaded && isWaterObjectLoaded && isEditMode" [disabled]="!validateReview()" type="button" class="btn btn-success" (click)="submitReview()" form="rolesForm">Відправити</button>
+</div>
