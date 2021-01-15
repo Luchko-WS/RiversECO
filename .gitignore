@@ -20,8 +20,12 @@ RiversECO.API/RiversECO.Repositories/bin/
 RiversECO.API/RiversECO.Repositories/obj/
 RiversECO.API/RiversECO.Services/bin/
 RiversECO.API/RiversECO.Services/obj/
-RiversECO.API/GeoJSONMigrationTool/bin/
-RiversECO.API/GeoJSONMigrationTool/obj/
+RiversECO.API/Plugins/RiversECO.WebPageParser/bin/
+RiversECO.API/Plugins/RiversECO.WebPageParser/obj/
+RiversECO.API/Tools/RiversECO.GeoJSONMigrationTool/bin/
+RiversECO.API/Tools/RiversECO.GeoJSONMigrationTool/obj/
+RiversECO.API/Tests/WebPageParserTests/bin/
+RiversECO.API/Tests/WebPageParserTests/obj/
 
 # SPA
 

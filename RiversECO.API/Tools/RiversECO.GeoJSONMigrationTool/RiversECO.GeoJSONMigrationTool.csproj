@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RiversECO.DataContext\RiversECO.DataContext.csproj" />
-    <ProjectReference Include="..\RiversECO.Models\RiversECO.Models.csproj" />
+    <ProjectReference Include="..\..\RiversECO.DataContext\RiversECO.DataContext.csproj" />
+    <ProjectReference Include="..\..\RiversECO.Models\RiversECO.Models.csproj" />
   </ItemGroup>
 
 </Project>

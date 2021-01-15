@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RiversECO.DataContext;
 using RiversECO.Models;
-using GeoJSONMigrationTool.Helpers;
-using GeoJSONMigrationTool.DataProcessing;
+using RiversECO.Tools.GeoJSONMigrationTool.DataProcessing;
+using RiversECO.Tools.GeoJSONMigrationTool.Helpers;
 
-namespace GeoJSONMigrationTool
+namespace RiversECO.Tools.GeoJSONMigrationTool
 {
     class Program
     {

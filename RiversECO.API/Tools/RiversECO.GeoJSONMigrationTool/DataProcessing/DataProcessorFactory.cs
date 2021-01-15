@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
-using RiversECO.DataContext;
 using RiversECO.Models;
 
-namespace GeoJSONMigrationTool.DataProcessing
+namespace RiversECO.Tools.GeoJSONMigrationTool.DataProcessing
 {
     internal static class DataProcessorFactory
     {
         public static IDataProcessor GetDataProcessor(
-            IDesignTimeDbContextFactory<DataContext> contextFactory,
+            IDesignTimeDbContextFactory<RiversECO.DataContext.DataContext> contextFactory,
             WaterObjectType objectType)
         {
             switch (objectType)

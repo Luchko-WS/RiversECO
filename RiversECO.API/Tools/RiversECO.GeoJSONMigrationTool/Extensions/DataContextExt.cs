@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
 using RiversECO.Models;
-using RiversECO.DataContext;
 
-namespace GeoJSONMigrationTool.Extensions
+namespace RiversECO.Tools.GeoJSONMigrationTool.Extensions
 {
     public static class DataContextExt
     {
         public static Guid AddOrUpdateWaterObject(
-            this DataContext dataContext,
+            this RiversECO.DataContext.DataContext dataContext,
             WaterObject waterObject,
             bool rewriteWaterObjects)
         {

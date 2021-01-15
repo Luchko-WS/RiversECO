@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
 using RiversECO.Models;
-using GeoJSONMigrationTool.Helpers;
-using GeoJSONMigrationTool.Models;
+using RiversECO.Tools.GeoJSONMigrationTool.Helpers;
+using RiversECO.Tools.GeoJSONMigrationTool.Models;
 
-namespace GeoJSONMigrationTool.Extensions
+namespace RiversECO.Tools.GeoJSONMigrationTool.Extensions
 {
     public static class ConvertsionExt
     {

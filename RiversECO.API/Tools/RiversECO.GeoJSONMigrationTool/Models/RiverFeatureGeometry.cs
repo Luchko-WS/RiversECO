@@ -1,4 +1,4 @@
-﻿namespace GeoJSONMigrationTool.Models
+﻿namespace RiversECO.Tools.GeoJSONMigrationTool.Models
 {
     public class RiverFeatureGeometry
     {

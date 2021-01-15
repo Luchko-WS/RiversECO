@@ -1,4 +1,4 @@
-﻿namespace GeoJSONMigrationTool.DataProcessing
+﻿namespace RiversECO.Tools.GeoJSONMigrationTool.DataProcessing
 {
     internal interface IDataProcessor
     {

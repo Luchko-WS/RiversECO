@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
-using RiversECO.DataContext;
-using GeoJSONMigrationTool.Extensions;
-using GeoJSONMigrationTool.Models;
+using RiversECO.Tools.GeoJSONMigrationTool.Models;
+using RiversECO.Tools.GeoJSONMigrationTool.Extensions;
 
-namespace GeoJSONMigrationTool.DataProcessing
+namespace RiversECO.Tools.GeoJSONMigrationTool.DataProcessing
 {
     internal class LakesDataProcessor : IDataProcessor
     {
-        private DataContext _dataContext;
+        private RiversECO.DataContext.DataContext _dataContext;
         private GeoJsonFileModel<LakeFeatureProperties, LakeFeatureGeometry> _fileModel;
 
-        public LakesDataProcessor(IDesignTimeDbContextFactory<DataContext> contextFactory)
+        public LakesDataProcessor(IDesignTimeDbContextFactory<RiversECO.DataContext.DataContext> contextFactory)
         {
             _dataContext = contextFactory.CreateDbContext(new string[0]);
         }

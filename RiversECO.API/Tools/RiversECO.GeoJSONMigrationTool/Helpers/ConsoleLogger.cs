@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace GeoJSONMigrationTool.Helpers
+namespace RiversECO.Tools.GeoJSONMigrationTool.Helpers
 {
     internal class ConsoleLogger
     {

@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
   private selectInteraction: Select;
 
   selectedObject: WaterObjectFromFile;
-  isLoaded: boolean = false;
+  isLoaded = false;
   bsModalRef: BsModalRef;
 
   constructor(

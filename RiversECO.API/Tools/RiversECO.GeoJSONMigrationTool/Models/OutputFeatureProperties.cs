@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace GeoJSONMigrationTool.Models
+namespace RiversECO.Tools.GeoJSONMigrationTool.Models
 {
     public class OutputFeatureProperties
     {
