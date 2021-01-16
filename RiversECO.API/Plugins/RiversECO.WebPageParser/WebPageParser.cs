@@ -58,12 +58,13 @@ namespace RiversECO.Plugins.WebPageParser
                     return new HtmlPlainTextParser(html);
                 // pdf
                 case "application/pdf":
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    return new PdfPlainTextParser(stream);
+                    var pdfDocStream = await response.Content.ReadAsStreamAsync();
+                    return new PdfPlainTextParser(pdfDocStream);
                 // word
                 case "application/msword":
                 case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                    throw new NotImplementedException();
+                    var wordDocStream = await response.Content.ReadAsStreamAsync();
+                    return new WordPlainTextParser(wordDocStream);
                 // excel
                 case "application/vnd.ms-excel":
                 case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":

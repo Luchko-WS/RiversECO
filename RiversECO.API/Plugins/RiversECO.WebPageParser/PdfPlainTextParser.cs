@@ -40,7 +40,7 @@ namespace RiversECO.Plugins.WebPageParser
                     {
                         var page = document.GetPage(pageNumber);
                         var textContent = PdfTextExtractor.GetTextFromPage(page);
-                        sb.Append(textContent);
+                        sb.AppendLine(textContent);
                     }
                 }
             }

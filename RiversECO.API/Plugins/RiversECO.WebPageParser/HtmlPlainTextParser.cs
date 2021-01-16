@@ -35,7 +35,7 @@ namespace RiversECO.Plugins.WebPageParser
                 .Where(line => !line.Equals(string.Empty))
                 .ToArray();
 
-            var resultText = string.Join('\n', lines);
+            var resultText = string.Join("\n", lines);
             return resultText;
         }
 
