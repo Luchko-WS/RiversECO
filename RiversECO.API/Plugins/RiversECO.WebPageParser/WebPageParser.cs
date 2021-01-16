@@ -7,7 +7,14 @@ namespace RiversECO.Plugins.WebPageParser
     public class WebPageParser : IPlainTextParser
     {
         private Uri _uri;
-        
+
+        public WebPageParser() { }
+
+        public WebPageParser(Uri uri)
+        {
+            SetUri(uri);
+        }
+
         public void SetUri(Uri uri)
         {
             _uri = uri;
@@ -43,20 +50,35 @@ namespace RiversECO.Plugins.WebPageParser
         private async Task<IPlainTextParser> GetPlainTextParser(HttpResponseMessage response)
         {
             var contentType = response.Content.Headers.ContentType;
-            if (contentType.MediaType == "text/html")
+            switch (contentType.MediaType)
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var parser = new HtmlPlainTextParser();
-                parser.LoadHtml(content);
-                return parser;
+                // web page (htm, html)
+                case "text/html":
+                    var html = await response.Content.ReadAsStringAsync();
+                    return new HtmlPlainTextParser(html);
+                // pdf
+                case "application/pdf":
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    return new PdfPlainTextParser(stream);
+                // word
+                case "application/msword":
+                case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                    throw new NotImplementedException();
+                // excel
+                case "application/vnd.ms-excel":
+                case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                    throw new NotImplementedException();
+                //json, xml, csv, txt
+                case "application/json":
+                case "application/xml":
+                case "text/xml":
+                case "text/csv":
+                case "text/plain":
+                    var text = await response.Content.ReadAsStringAsync();
+                    return new PlainTextContainer(text);
+                default:
+                    throw new Exception($"Unsupported content type {contentType.MediaType}.");
             }
-
-            throw new Exception($"Unsupported content type {contentType.MediaType}");
-        }
-
-        private void ValidateState()
-        {
-
         }
     }
 }

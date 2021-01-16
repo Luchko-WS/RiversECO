@@ -9,6 +9,13 @@ namespace RiversECO.Plugins.WebPageParser
     {
         private HtmlDocument _htmlDoc;
 
+        public HtmlPlainTextParser() { }
+
+        public HtmlPlainTextParser(string html)
+        {
+            LoadHtml(html);
+        }
+
         public void LoadHtml(string html)
         {
             _htmlDoc = new HtmlDocument();
@@ -19,7 +26,7 @@ namespace RiversECO.Plugins.WebPageParser
         {
             if (_htmlDoc == null)
             {
-                throw new Exception("Please load HTML first.");
+                throw new Exception("Please load a HTML document first.");
             }
 
             var lines = _htmlDoc.DocumentNode.InnerText
