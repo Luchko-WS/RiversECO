@@ -36,5 +36,14 @@ namespace RiversECO.Repositories
 
             return items;
         }
+
+        public async Task<IList<Review>> GetAllPendingApprovalReviews()
+        {
+            var items = await Items
+                .Where(x => x.Status == ReviewStatus.PendingApproval)
+                .ToListAsync();
+
+            return items;
+        }
     }
 }

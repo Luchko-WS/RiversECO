@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
+using RiversECO.Contracts;
 
-namespace RiversECO.Plugins.WebPageParser
+namespace RiversECO.PlainTextExtractors
 {
-    public class PlainTextContainer : IPlainTextParser
+    public class PlainTextExtractor : IPlainTextExtractor
     {
         private string _content;
 
-        public PlainTextContainer() { }
+        public PlainTextExtractor() { }
 
-        public PlainTextContainer(string content)
+        public PlainTextExtractor(string content)
         {
             LoadText(content);
         }
@@ -18,12 +19,12 @@ namespace RiversECO.Plugins.WebPageParser
             _content = content;
         }
 
-        public string GetPlainText()
+        public string ExtractPlainText()
         {
             return _content;
         }
 
-        public Task<string> GetPlainTextAsync()
+        public Task<string> ExtractPlainTextAsync()
         {
             return Task.FromResult(_content);
         }

@@ -20,12 +20,14 @@ RiversECO.API/RiversECO.Repositories/bin/
 RiversECO.API/RiversECO.Repositories/obj/
 RiversECO.API/RiversECO.Services/bin/
 RiversECO.API/RiversECO.Services/obj/
-RiversECO.API/Plugins/RiversECO.WebPageParser/bin/
-RiversECO.API/Plugins/RiversECO.WebPageParser/obj/
 RiversECO.API/Tools/RiversECO.GeoJSONMigrationTool/bin/
 RiversECO.API/Tools/RiversECO.GeoJSONMigrationTool/obj/
-RiversECO.API/Tests/WebPageParserTests/bin/
-RiversECO.API/Tests/WebPageParserTests/obj/
+RiversECO.API/BackgroudWorkers/RiversECO.VerifyReviewService/obj/
+RiversECO.API/BackgroudWorkers/RiversECO.VerifyReviewService/bin/
+RiversECO.API/RiversECO.PlainTextExtractors/bin/
+RiversECO.API/RiversECO.PlainTextExtractors/obj/
+RiversECO.API/Tests/PlainTextExtractorsTests/obj/
+RiversECO.API/Tests/PlainTextExtractorsTests/bin/
 
 # SPA
 

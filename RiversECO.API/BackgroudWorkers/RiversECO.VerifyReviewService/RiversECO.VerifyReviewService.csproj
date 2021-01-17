@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\RiversECO.Contracts\RiversECO.Contracts.csproj" />
+    <ProjectReference Include="..\..\RiversECO.PlainTextExtractors\RiversECO.PlainTextExtractors.csproj" />
+  </ItemGroup>
+
+</Project>

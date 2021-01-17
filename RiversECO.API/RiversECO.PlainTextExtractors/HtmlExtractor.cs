@@ -2,16 +2,17 @@
 using System.Linq;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using RiversECO.Contracts;
 
-namespace RiversECO.Plugins.WebPageParser
+namespace RiversECO.PlainTextExtractors
 {
-    public class HtmlPlainTextParser : IPlainTextParser
+    public class HtmlExtractor : IPlainTextExtractor
     {
         private HtmlDocument _htmlDoc;
 
-        public HtmlPlainTextParser() { }
+        public HtmlExtractor() { }
 
-        public HtmlPlainTextParser(string html)
+        public HtmlExtractor(string html)
         {
             LoadHtml(html);
         }
@@ -22,7 +23,7 @@ namespace RiversECO.Plugins.WebPageParser
             _htmlDoc.LoadHtml(html);
         }
 
-        public string GetPlainText()
+        public string ExtractPlainText()
         {
             if (_htmlDoc == null)
             {
@@ -39,9 +40,9 @@ namespace RiversECO.Plugins.WebPageParser
             return resultText;
         }
 
-        public Task<string> GetPlainTextAsync()
+        public Task<string> ExtractPlainTextAsync()
         {
-            return Task.Factory.StartNew(GetPlainText);
+            return Task.Factory.StartNew(ExtractPlainText);
         }
 
         private string CleanStringLine(string line)

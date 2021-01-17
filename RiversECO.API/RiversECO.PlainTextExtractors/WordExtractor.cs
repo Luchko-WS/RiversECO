@@ -4,16 +4,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Spire.Doc;
 using Spire.Doc.Documents;
+using RiversECO.Contracts;
 
-namespace RiversECO.Plugins.WebPageParser
+namespace RiversECO.PlainTextExtractors
 {
-    public class WordPlainTextParser : IPlainTextParser
+    public class WordExtractor : IPlainTextExtractor
     {
         private Stream _fileStream;
 
-        public WordPlainTextParser() { }
+        public WordExtractor() { }
 
-        public WordPlainTextParser(Stream fileStream)
+        public WordExtractor(Stream fileStream)
         {
             LoadWordDocument(fileStream);
         }
@@ -23,7 +24,7 @@ namespace RiversECO.Plugins.WebPageParser
             _fileStream = fileStream;
         }
 
-        public string GetPlainText()
+        public string ExtractPlainText()
         {
             if (_fileStream == null)
             {
@@ -45,9 +46,9 @@ namespace RiversECO.Plugins.WebPageParser
             return sb.ToString();
         }
 
-        public Task<string> GetPlainTextAsync()
+        public Task<string> ExtractPlainTextAsync()
         {
-            return Task.Factory.StartNew(GetPlainText);
+            return Task.Factory.StartNew(ExtractPlainText);
         }
     }
 }

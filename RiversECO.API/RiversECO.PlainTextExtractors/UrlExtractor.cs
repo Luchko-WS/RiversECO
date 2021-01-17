@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using RiversECO.Contracts;
 
-namespace RiversECO.Plugins.WebPageParser
+namespace RiversECO.PlainTextExtractors
 {
-    public class WebPageParser : IPlainTextParser
+    public class UrlExtractor : IPlainTextExtractor
     {
         private Uri _uri;
 
-        public WebPageParser() { }
+        public UrlExtractor() { }
 
-        public WebPageParser(Uri uri)
+        public UrlExtractor(Uri uri)
         {
             SetUri(uri);
         }
@@ -20,12 +21,12 @@ namespace RiversECO.Plugins.WebPageParser
             _uri = uri;
         }
 
-        public string GetPlainText()
+        public string ExtractPlainText()
         {
-            return GetPlainTextAsync().Result;
+            return ExtractPlainTextAsync().Result;
         }
 
-        public async Task<string> GetPlainTextAsync()
+        public async Task<string> ExtractPlainTextAsync()
         {
             if (_uri == null)
             {
@@ -43,11 +44,11 @@ namespace RiversECO.Plugins.WebPageParser
                 }
 
                 var parser = await GetPlainTextParser(response);
-                return parser.GetPlainText();
+                return parser.ExtractPlainText();
             }
         }
 
-        private async Task<IPlainTextParser> GetPlainTextParser(HttpResponseMessage response)
+        private async Task<IPlainTextExtractor> GetPlainTextParser(HttpResponseMessage response)
         {
             var contentType = response.Content.Headers.ContentType;
             switch (contentType.MediaType)
@@ -55,16 +56,16 @@ namespace RiversECO.Plugins.WebPageParser
                 // web page (htm, html)
                 case "text/html":
                     var html = await response.Content.ReadAsStringAsync();
-                    return new HtmlPlainTextParser(html);
+                    return new HtmlExtractor(html);
                 // pdf
                 case "application/pdf":
                     var pdfDocStream = await response.Content.ReadAsStreamAsync();
-                    return new PdfPlainTextParser(pdfDocStream);
+                    return new PdfExtractor(pdfDocStream);
                 // word
                 case "application/msword":
                 case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
                     var wordDocStream = await response.Content.ReadAsStreamAsync();
-                    return new WordPlainTextParser(wordDocStream);
+                    return new WordExtractor(wordDocStream);
                 // excel
                 case "application/vnd.ms-excel":
                 case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
@@ -76,7 +77,7 @@ namespace RiversECO.Plugins.WebPageParser
                 case "text/csv":
                 case "text/plain":
                     var text = await response.Content.ReadAsStringAsync();
-                    return new PlainTextContainer(text);
+                    return new PlainTextExtractor(text);
                 default:
                     throw new Exception($"Unsupported content type {contentType.MediaType}.");
             }

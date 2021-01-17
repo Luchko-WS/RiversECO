@@ -29,5 +29,7 @@ namespace RiversECO.Models
         public string References { get; set; }
 
         public string Comment { get; set; }
+
+        public ReviewStatus Status { get; set; }
     }
 }

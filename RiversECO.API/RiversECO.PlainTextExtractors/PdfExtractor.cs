@@ -4,16 +4,17 @@ using System.Text;
 using System.Threading.Tasks;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
+using RiversECO.Contracts;
 
-namespace RiversECO.Plugins.WebPageParser
+namespace RiversECO.PlainTextExtractors
 {
-    public class PdfPlainTextParser : IPlainTextParser
+    public class PdfExtractor : IPlainTextExtractor
     {
         private Stream _fileStream;
 
-        public PdfPlainTextParser() { }
+        public PdfExtractor() { }
 
-        public PdfPlainTextParser(Stream fileStream)
+        public PdfExtractor(Stream fileStream)
         {
             LoadPdf(fileStream);
         }
@@ -23,7 +24,7 @@ namespace RiversECO.Plugins.WebPageParser
             _fileStream = fileStream;
         }
 
-        public string GetPlainText()
+        public string ExtractPlainText()
         {
             if (_fileStream == null)
             {
@@ -48,9 +49,9 @@ namespace RiversECO.Plugins.WebPageParser
             return sb.ToString();
         }
 
-        public Task<string> GetPlainTextAsync()
+        public Task<string> ExtractPlainTextAsync()
         {
-            return Task.Factory.StartNew(GetPlainText);
+            return Task.Factory.StartNew(ExtractPlainText);
         }
     }
 }

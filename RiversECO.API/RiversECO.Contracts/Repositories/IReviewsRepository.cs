@@ -8,5 +8,6 @@ namespace RiversECO.Contracts.Repositories
     public interface IReviewsRepository : IDataRepository<Review>
     {
         Task<IList<Review>> GetAllForWaterObjectAsync(Guid waterObjectId);
+        Task<IList<Review>> GetAllPendingApprovalReviews();
     }
 }
