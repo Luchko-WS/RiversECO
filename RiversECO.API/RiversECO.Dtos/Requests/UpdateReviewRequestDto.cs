@@ -10,6 +10,6 @@ namespace RiversECO.Dtos.Requests
         public string CriteriaName { get; set; }
         public int? Influence { get; set; }
         public int? GlobalInfluence { get; set; }
-        public string References { get; set; }
+        public string Reference { get; set; }
     }
 }

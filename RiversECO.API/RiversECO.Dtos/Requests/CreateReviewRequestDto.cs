@@ -11,6 +11,6 @@ namespace RiversECO.Dtos.Requests
         public Guid WaterObjectId { get; set; }
         public int? Influence { get; set; }
         public int? GlobalInfluence { get; set; }
-        public string References { get; set; }
+        public string Reference { get; set; }
     }
 }

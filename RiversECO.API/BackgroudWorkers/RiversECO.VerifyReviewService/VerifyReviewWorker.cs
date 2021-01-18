@@ -25,7 +25,7 @@ namespace RiversECO.BackgroudWorkers.VerifyReviewService
                 {
                     foreach (var review in pendingApproveReviews)
                     {
-                        var uri = new Uri(review.References);
+                        var uri = new Uri(review.Reference);
                         review.Status = await CheckUri(uri) ?
                             ReviewStatus.Approved :
                             ReviewStatus.NotApproved;
