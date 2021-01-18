@@ -10,7 +10,7 @@ export interface Review {
     modifiedBy?: string;
     influence?: number;
     globalInfluence?: number;
-    references: string;
+    reference: string;
 }
 
 export interface ReviewCreateModel {
@@ -21,5 +21,5 @@ export interface ReviewCreateModel {
     modifiedBy?: string;
     influence?: number;
     globalInfluence?: number;
-    references: string;
+    reference: string;
 }

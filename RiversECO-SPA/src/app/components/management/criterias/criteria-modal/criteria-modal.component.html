@@ -1,15 +1,29 @@
-<div class="modal-header">
-    <div *ngIf="isCreateMode" class="modal-title pull-left">Створення нового критерію</div>
-    <div *ngIf="!isCreateMode" class="modal-title pull-left">Редагування критерію <b>{{criteria.name}}</b></div>
-    <a class="close" (click)="bsModalRef.hide()"></a>
-</div>
-<div class="modal-body form-group">
-    <div class="label required-field">Назва:</div>
-    <input [(ngModel)]="name" class="form-control" type="text" />
-    <div class="label">Опис:</div>
-    <textarea [(ngModel)]="description" class="form-control" rows="4" style="resize: none;"></textarea>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
-    <button [disabled]="!validateCriteria()" type="button" class="btn btn-success" (click)="saveCriteria()" form="rolesForm">Зберегти</button>
-</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-header">
+        <div *ngIf="isCreateMode" class="modal-title pull-left">Створення нового критерію</div>
+        <div *ngIf="!isCreateMode" class="modal-title pull-left">Редагування критерію <b>{{criteria.name}}</b></div>
+        <a class="close" (click)="bsModalRef.hide()"></a>
+    </div>
+    <div class="modal-body form-group">
+        <div class="label required-field">Назва:</div>
+        <input class="form-control" type="text"
+            [(ngModel)]="name" name="nameControl" #nameControl="ngModel"
+            [ngClass]="{ 'is-invalid': nameControl.invalid && nameControl.touched}"
+            required />
+        <div *ngIf="nameControl.invalid && nameControl.touched" class="invalid-feedback">
+            <div *ngIf="nameControl.errors.required">Будь ласка, вкажіть Ваш Email для зворотнього зв'язку</div>
+            <div *ngIf="nameControl.errors.email">Email має невалідний формат</div>
+        </div>
+
+        <div class="label">Опис:</div>
+        <textarea class="form-control" style="resize: none;" rows="4"
+            [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Скасувати</button>
+        <button class="btn btn-success" type="button"
+            (click)="saveCriteria()"
+            [disabled]="!f.form.valid">Зберегти</button>
+    </div>
+</form>

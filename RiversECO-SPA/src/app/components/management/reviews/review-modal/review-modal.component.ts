@@ -12,7 +12,6 @@ import { Criteria } from 'src/app/models/criteria';
 import { WaterObjectService } from 'src/app/services/water-object.service';
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { ReviewService } from 'src/app/services/review.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -35,7 +34,7 @@ export class ReviewModalComponent implements OnInit {
   author: string;
   comment: string;
   selectedCriteriaName: string;
-  references: string;
+  reference: string;
   influence?: number;
   globalInfluence?: number;
 
@@ -43,7 +42,6 @@ export class ReviewModalComponent implements OnInit {
     private waterObjectService: WaterObjectService,
     private criteriaService: CriteriaService,
     private reviewService: ReviewService,
-    private utilsService: UtilsService,
     public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
@@ -55,7 +53,7 @@ export class ReviewModalComponent implements OnInit {
       this.author = this.review.createdBy;
       this.comment = this.review.comment;
       this.selectedCriteriaName = this.review.criteria.name;
-      this.references = this.review.references;
+      this.reference = this.review.reference;
       this.influence = this.review.influence;
       this.globalInfluence = this.review.globalInfluence;
 
@@ -93,19 +91,13 @@ export class ReviewModalComponent implements OnInit {
     }
   }
 
-  validateReview() {
-    return !this.utilsService.isStringEmptyOrWhitespaces(this.author) &&
-      !this.utilsService.isStringEmptyOrWhitespaces(this.references) &&
-      !this.utilsService.isStringEmptyOrWhitespaces(this.selectedCriteriaName);
-  }
-
   submitReview() {
     const reviewToCreate = {
       createdBy: this.author,
       comment: this.comment,
       criteriaName: this.selectedCriteriaName,
       waterObjectId: this.waterObjectId,
-      references: this.references,
+      reference: this.reference,
       influence: this.influence,
       globalInfluence: this.globalInfluence
     };

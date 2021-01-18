@@ -4,7 +4,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Criteria } from 'src/app/models/criteria';
 import { CriteriaService } from 'src/app/services/criteria.service';
-import { UtilsService } from 'src/app/services/utils.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,7 +22,6 @@ export class CriteriaModalComponent implements OnInit {
 
   constructor(
     private criteriaService: CriteriaService,
-    private utilsService: UtilsService,
     public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
@@ -32,10 +30,6 @@ export class CriteriaModalComponent implements OnInit {
       this.name = this.criteria.name;
       this.description = this.criteria.description;
     }
-  }
-
-  validateCriteria() {
-    return !this.utilsService.isStringEmptyOrWhitespaces(this.name);
   }
 
   saveCriteria() {
