@@ -23,13 +23,27 @@
         <mat-cell *matCellDef="let row"> {{row.waterObject.name}} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="criteria">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Проблема </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.criteria.name}} </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="comment">
         <mat-header-cell *matHeaderCellDef> Коментар </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.comment}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Статус </mat-header-cell>
+        <mat-cell *matCellDef="let row"> 
+          <i *ngIf="row.status === 0" class="fa fa-clock-o fa-2x"></i>
+          <i *ngIf="row.status === 1" class="fa fa-check-circle fa-2x" style="color: green;"></i>
+          <i *ngIf="row.status === 2" class="fa fa-times-circle fa-2x" style="color: red;"></i>  
+        </mat-cell>
+      </ng-container>
       
-      <mat-header-row *matHeaderRowDef="['createdBy', 'waterObject', 'comment']; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['createdBy', 'waterObject', 'comment'];" (dblclick)="openReviewModal(row)"></mat-row>
+      <mat-header-row *matHeaderRowDef="['createdBy', 'waterObject', 'criteria', 'comment', 'status']; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['createdBy', 'waterObject', 'criteria', 'comment', 'status'];" (dblclick)="openReviewModal(row)"></mat-row>
     </mat-table>
   
     <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>

@@ -18,7 +18,7 @@
             [(ngModel)]="waterObject.description" [ngModelOptions]="{standalone: true}"
             readonly />
 
-        <div class="label required-field">Автор:</div>
+        <div class="label">Автор:</div>
         <input class="form-control" type="text"
             [(ngModel)]="author" name="authorControl" #authorControl="ngModel"
             [ngClass]="{ 'is-invalid': authorControl.invalid && authorControl.touched}"
@@ -27,18 +27,24 @@
             <div *ngIf="authorControl.errors.required">Будь ласка, вкажіть Ваш Email для зворотнього зв'язку</div>
             <div *ngIf="authorControl.errors.email">Email має невалідний формат</div>
         </div>
-        
+
+        <div style="display:inline-flex;" *ngIf="isEditMode">
+            <div class="label">Зробити оцінку анонімною:</div>
+            <input class="form-control" name="isAnonymousControl" type="checkbox" style="margin-left: 15px; margin-top: 2px; width: 22px;"
+                [(ngModel)]="isAnonymous">
+        </div>
+
         <div class="label required-field">Проблема:</div>
         <span *ngIf="!isEditMode">
             <input class="form-control" type="text"
-                [(ngModel)]="selectedCriteriaName" [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="selectedCriteriaName" name="criteriaNameROControl"
                 disabled />
         </span>
         <span *ngIf="isEditMode">
             <input class="form-control" type="text"
-                [(ngModel)]="selectedCriteriaName" name="criteriaInput" matInput [formControl]="criteriaAutocompleteControl"
+                [(ngModel)]="selectedCriteriaName" name="criteriaAutocompleteControl" #criteriaAutocompleteControl="ngModel"
                 [ngClass]="{ 'is-invalid': criteriaAutocompleteControl.invalid && criteriaAutocompleteControl.touched}"
-                [matAutocomplete]="auto" required />
+                [matAutocomplete]="auto" matInput required />
             <div *ngIf="criteriaAutocompleteControl.invalid && criteriaAutocompleteControl.touched" class="invalid-feedback">
                 <div *ngIf="criteriaAutocompleteControl.errors.required">Будь ласка, оберіть проблему</div>
             </div>
@@ -49,34 +55,51 @@
             </mat-autocomplete>
         </span>
 
-        <div class="label required-field">Посилання:</div>
-        <input class="form-control" type="url"
-            [(ngModel)]="reference" name="referenceControl" #referenceControl="ngModel"
-            [ngClass]="{ 'is-invalid': referenceControl.invalid && referenceControl.touched}"
-            [disabled]="!isEditMode" required pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)" />
-        <div *ngIf="referenceControl.invalid && referenceControl.touched" class="invalid-feedback">
-            <div *ngIf="referenceControl.errors.required">Будь ласка, введіть посилання (URL), де описана проблема</div>
-            <div *ngIf="referenceControl.errors.pattern">Посилання (URL) має невалідний формат</div>
+        <div class="label required-field">Ступінь вливу проблеми:</div>
+        <select class="form-control"
+            [(ngModel)]="influence" name="influenceControl" #influenceControl="ngModel"
+            [ngClass]="{ 'is-invalid': influenceControl.invalid && influenceControl.touched}"
+            [disabled]="!isEditMode" required>
+                <option value="0">Надзвичайно малий</option>
+                <option value="1">Дуже малий</option>
+                <option value="2">Малий</option>
+                <option value="3">Менший середнього</option>
+                <option value="4">Середній</option>
+                <option value="5">Вищий середнього</option>
+                <option value="6">Високий</option>
+                <option value="7">Дуже високий</option>
+                <option value="8">Надзвичайно високий</option>
+        </select>
+        <div *ngIf="influenceControl.invalid && influenceControl.touched" class="invalid-feedback">
+            <div *ngIf="influenceControl.errors.required">Будь ласка, вкажіть ступінь вливу проблеми</div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="label">Вплив:</div>
-                <input class="form-control" type="number" min="0" max="100"
-                    [(ngModel)]="influence" [ngModelOptions]="{standalone: true}"
-                    [disabled]="!isEditMode" />
-            </div>
-            <div class="col-md-6">
-                <div class="label">Вплив глобальний:</div>
-                <input class="form-control" type="number" min="0" max="100"
-                    [(ngModel)]="globalInfluence" [ngModelOptions]="{standalone: true}"
-                    [disabled]="!isEditMode" />
-            </div>
+        <div class="label required-field">Варіант джерела інформації:</div>
+        <select class="form-control"
+            [(ngModel)]="referenceType" name="referenceTypeControl" #referenceTypeControl="ngModel"
+            [ngClass]="{ 'is-invalid': referenceTypeControl.invalid && referenceTypeControl.touched}"
+            [disabled]="!isEditMode" required>
+                <option value="0">Власний досвід</option>
+                <option value="1">З достовірних джерел</option>
+                <option value="2">Із соцмереж</option>
+                <option value="3">Інше</option>
+        </select>
+        <div *ngIf="referenceTypeControl.invalid && referenceTypeControl.touched" class="invalid-feedback">
+            <div *ngIf="referenceTypeControl.errors.required">Будь ласка, вкажіть варіант джерела інформації</div>
+        </div>
+
+        <div class="label required-field">Посилання:</div>
+        <textarea class="form-control" style="resize: none;" rows="2"
+            [(ngModel)]="reference" name="referenceControl" #referenceControl="ngModel"
+            [ngClass]="{ 'is-invalid': referenceControl.invalid && referenceControl.touched}"
+            [disabled]="!isEditMode" required></textarea>
+        <div *ngIf="referenceControl.invalid && referenceControl.touched" class="invalid-feedback">
+            <div *ngIf="referenceControl.errors.required">Будь ласка, вкажіть посилання</div>
         </div>
 
         <div class="label">Коментар:</div>
-        <textarea class="form-control" style="resize: none;" rows="4"
-            [(ngModel)]="comment" [ngModelOptions]="{standalone: true}"
+        <textarea class="form-control" name="commentControl" style="resize: none;" rows="4"
+            [(ngModel)]="comment"
             [disabled]="!isEditMode"></textarea>
     </div>
     <div class="modal-footer">

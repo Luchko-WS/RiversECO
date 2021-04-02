@@ -32,11 +32,12 @@ export class ReviewModalComponent implements OnInit {
 
   waterObject: WaterObject;
   author: string;
+  isAnonymous: boolean;
   comment: string;
   selectedCriteriaName: string;
+  referenceType: number;
   reference: string;
-  influence?: number;
-  globalInfluence?: number;
+  influence: number;
 
   constructor(
     private waterObjectService: WaterObjectService,
@@ -55,7 +56,6 @@ export class ReviewModalComponent implements OnInit {
       this.selectedCriteriaName = this.review.criteria.name;
       this.reference = this.review.reference;
       this.influence = this.review.influence;
-      this.globalInfluence = this.review.globalInfluence;
 
       // currently the modal does not support update review functionality.
       if (this.isEditMode) {
@@ -94,12 +94,13 @@ export class ReviewModalComponent implements OnInit {
   submitReview() {
     const reviewToCreate = {
       createdBy: this.author,
-      comment: this.comment,
-      criteriaName: this.selectedCriteriaName,
+      isAnonymous: this.isAnonymous,
       waterObjectId: this.waterObjectId,
-      reference: this.reference,
+      criteriaName: this.selectedCriteriaName,
       influence: this.influence,
-      globalInfluence: this.globalInfluence
+      referenceType: this.referenceType,
+      reference: this.reference,
+      comment: this.comment,
     };
 
     this.reviewService.createReview(reviewToCreate)

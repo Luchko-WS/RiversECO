@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using RiversECO.Dtos.Common;
+using RiversECO.Models;
 
 namespace RiversECO.Dtos.Responses
 {
@@ -18,5 +18,6 @@ namespace RiversECO.Dtos.Responses
         public int? Influence { get; set; }
         public int? GlobalInfluence { get; set; }
         public string Reference { get; set; }
+        public ReviewStatus Status { get; set; }
     }
 }
