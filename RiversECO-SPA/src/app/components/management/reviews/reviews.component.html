@@ -36,9 +36,9 @@
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef> Статус </mat-header-cell>
         <mat-cell *matCellDef="let row"> 
-          <i *ngIf="row.status === 0" class="fa fa-clock-o fa-2x"></i>
-          <i *ngIf="row.status === 1" class="fa fa-check-circle fa-2x" style="color: green;"></i>
-          <i *ngIf="row.status === 2" class="fa fa-times-circle fa-2x" style="color: red;"></i>  
+          <i *ngIf="row.status === 'PendingApproval'" class="fa fa-clock-o fa-2x"></i>
+          <i *ngIf="row.status === 'Approved'" class="fa fa-check-circle fa-2x" style="color: green;"></i>
+          <i *ngIf="row.status === 'NotApproved'" class="fa fa-times-circle fa-2x" style="color: red;"></i>  
         </mat-cell>
       </ng-container>
       

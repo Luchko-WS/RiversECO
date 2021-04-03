@@ -60,15 +60,15 @@
             [(ngModel)]="influence" name="influenceControl" #influenceControl="ngModel"
             [ngClass]="{ 'is-invalid': influenceControl.invalid && influenceControl.touched}"
             [disabled]="!isEditMode" required>
-                <option value="0">Надзвичайно малий</option>
-                <option value="1">Дуже малий</option>
-                <option value="2">Малий</option>
-                <option value="3">Менший середнього</option>
-                <option value="4">Середній</option>
-                <option value="5">Вищий середнього</option>
-                <option value="6">Високий</option>
-                <option value="7">Дуже високий</option>
-                <option value="8">Надзвичайно високий</option>
+                <option value="ExtremelyLow">Надзвичайно малий</option>
+                <option value="VeryLow">Дуже малий</option>
+                <option value="Low">Малий</option>
+                <option value="LessThanMedium">Менший середнього</option>
+                <option value="Medium">Середній</option>
+                <option value="GreaterThanMedium">Вищий середнього</option>
+                <option value="High">Високий</option>
+                <option value="VeryHigh">Дуже високий</option>
+                <option value="ExtremelyHigh">Надзвичайно високий</option>
         </select>
         <div *ngIf="influenceControl.invalid && influenceControl.touched" class="invalid-feedback">
             <div *ngIf="influenceControl.errors.required">Будь ласка, вкажіть ступінь вливу проблеми</div>
@@ -79,10 +79,10 @@
             [(ngModel)]="referenceType" name="referenceTypeControl" #referenceTypeControl="ngModel"
             [ngClass]="{ 'is-invalid': referenceTypeControl.invalid && referenceTypeControl.touched}"
             [disabled]="!isEditMode" required>
-                <option value="0">Власний досвід</option>
-                <option value="1">З достовірних джерел</option>
-                <option value="2">Із соцмереж</option>
-                <option value="3">Інше</option>
+                <option value="OwnExperience">Власний досвід</option>
+                <option value="FromReliableSources">З достовірних джерел</option>
+                <option value="FromSocialNetworks">Із соцмереж</option>
+                <option value="Other">Інше</option>
         </select>
         <div *ngIf="referenceTypeControl.invalid && referenceTypeControl.touched" class="invalid-feedback">
             <div *ngIf="referenceTypeControl.errors.required">Будь ласка, вкажіть варіант джерела інформації</div>

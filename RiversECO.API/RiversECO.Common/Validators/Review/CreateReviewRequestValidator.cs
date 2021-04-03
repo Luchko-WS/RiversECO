@@ -7,16 +7,25 @@ namespace RiversECO.Common.Validators.Review
     {
         public CreateReviewRequestValidator()
         {
-            RuleFor(x => x.Name)
-                .NotEmpty();
-
-            RuleFor(x => x.Comment)
-                .NotEmpty();
-
             RuleFor(x => x.CreatedBy)
                 .NotEmpty();
 
             RuleFor(x => x.WaterObjectId)
+                .NotEmpty();
+
+            RuleFor(x => x.CriteriaName)
+                .NotEmpty();
+
+            RuleFor(x => x.Influence)
+                .NotEmpty();
+
+            RuleFor(x => x.ReferenceType)
+                .NotEmpty();
+
+            RuleFor(x => x.Reference)
+                .NotEmpty();
+
+            RuleFor(x => x.Comment)
                 .NotEmpty();
         }
     }

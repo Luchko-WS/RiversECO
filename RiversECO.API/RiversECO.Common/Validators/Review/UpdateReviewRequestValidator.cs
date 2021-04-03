@@ -10,10 +10,22 @@ namespace RiversECO.Common.Validators.Review
             RuleFor(x => x.Id)
                 .NotEmpty();
 
-            RuleFor(x => x.Comment)
+            RuleFor(x => x.ModifiedBy)
                 .NotEmpty();
 
-            RuleFor(x => x.ModifiedBy)
+            RuleFor(x => x.CriteriaName)
+                .NotEmpty();
+
+            RuleFor(x => x.Influence)
+                .NotEmpty();
+
+            RuleFor(x => x.ReferenceType)
+                .NotEmpty();
+
+            RuleFor(x => x.Reference)
+                .NotEmpty();
+
+            RuleFor(x => x.Comment)
                 .NotEmpty();
         }
     }

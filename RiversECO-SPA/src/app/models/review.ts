@@ -2,17 +2,16 @@ import { Criteria } from './criteria';
 import { WaterObject } from './water-object';
 
 export interface Review {
-    waterObjectId: string;
-    waterObject?: WaterObject;
+    waterObject: WaterObject;
     createdBy: string;
     isAnonymous: boolean;
     criteria: Criteria;
-    influence: number;
-    referenceType: number;
+    influence: string;
+    referenceType: string;
     reference: string;
     comment: string;
     modifiedBy?: string;
-    status: number;
+    status: string;
     certainty?: number;
 }
 
@@ -21,8 +20,8 @@ export interface ReviewCreateModel {
     createdBy: string;
     isAnonymous: boolean;
     criteriaName: string;
-    influence: number;
-    referenceType: number;
+    influence: string;
+    referenceType: string;
     reference: string;
     comment: string;
 }

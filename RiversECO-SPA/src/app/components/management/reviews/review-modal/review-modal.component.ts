@@ -35,9 +35,9 @@ export class ReviewModalComponent implements OnInit {
   isAnonymous: boolean;
   comment: string;
   selectedCriteriaName: string;
-  referenceType: number;
+  referenceType: string;
   reference: string;
-  influence: number;
+  influence: string;
 
   constructor(
     private waterObjectService: WaterObjectService,

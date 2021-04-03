@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Newtonsoft.Json;
 using RiversECO.Contracts.Repositories;
 using RiversECO.Dtos.Requests;
 using RiversECO.Dtos.Responses;
 using RiversECO.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace RiversECO.API.Controllers
 {
@@ -72,8 +69,9 @@ namespace RiversECO.API.Controllers
 
             if (await _reviewsRepository.SaveAllChangesAsync())
             {
-                var reviewToReturn = _mapper.Map<ReviewDto>(reviewToCreate);
-                return CreatedAtRoute(nameof(GetReview), new { id = reviewToCreate.Id }, reviewToReturn);
+                var reviewFromDb = await _reviewsRepository.GetByIdAsync(reviewToCreate.Id);
+                var droToReturn = _mapper.Map<ReviewDto>(reviewFromDb);
+                return CreatedAtRoute(nameof(GetReview), new { id = reviewToCreate.Id }, droToReturn);
             }
 
             return BadRequest("Could not create a review.");
