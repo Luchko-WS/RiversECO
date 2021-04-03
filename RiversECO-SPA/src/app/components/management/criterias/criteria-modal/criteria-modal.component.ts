@@ -4,7 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Criteria } from 'src/app/models/criteria';
 import { CriteriaService } from 'src/app/services/criteria.service';
-import { Observable } from 'rxjs';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-criteria-modal',
@@ -22,6 +22,7 @@ export class CriteriaModalComponent implements OnInit {
 
   constructor(
     private criteriaService: CriteriaService,
+    private alertifyService: AlertifyService,
     public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
@@ -39,18 +40,24 @@ export class CriteriaModalComponent implements OnInit {
       description: this.description
     };
 
-    let observableOperation: Observable<Criteria>;
     if (this.isCreateMode) {
-      observableOperation = this.criteriaService.createCriteria(criteriaToSave);
+      this.criteriaService.createCriteria(criteriaToSave).subscribe(data => {
+          this.resultCriteria.emit(data);
+          this.alertifyService.success('Критерій "' + criteriaToSave.name + '" створено!');
+          this.bsModalRef.hide();
+        }, error => {
+          this.alertifyService.error('Під час створення критерію виникла помилка.');
+          console.error(error);
+        });
     } else {
-      observableOperation = this.criteriaService.updateCriteria(criteriaToSave);
+      this.criteriaService.updateCriteria(criteriaToSave).subscribe(data => {
+          this.resultCriteria.emit(data);
+          this.alertifyService.success('Критерій "' + criteriaToSave.name + '" оновлено!');
+          this.bsModalRef.hide();
+        }, error => {
+          this.alertifyService.error('Під час оновлення критерію виникла помилка.');
+          console.error(error);
+        });
     }
-
-    observableOperation.subscribe(data => {
-      this.resultCriteria.emit(data);
-      this.bsModalRef.hide();
-    }, error => {
-      console.error(error);
-    });
   }
 }

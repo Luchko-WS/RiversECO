@@ -9,6 +9,7 @@ import { CriteriaModalComponent } from './criteria-modal/criteria-modal.componen
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Criteria, CheckedCriteria } from 'src/app/models/criteria';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-criterias',
@@ -28,6 +29,7 @@ export class CriteriasComponent implements OnInit {
 
   constructor(
     private criteriaService: CriteriaService,
+    private alertifyService: AlertifyService,
     private utilsService: UtilsService,
     private modalService: BsModalService) {}
 
@@ -58,6 +60,7 @@ export class CriteriasComponent implements OnInit {
 
       this.isLoaded = true;
     }, error => {
+      this.alertifyService.error('Не вдалося отримати критерії.');
       console.error(error);
     });
   }
@@ -97,10 +100,14 @@ export class CriteriasComponent implements OnInit {
       return;
     }
 
-    this.criteriaService.deleteCriterias(ids).subscribe(data => {
-      this.ngOnInit();
-    }, error => {
-      console.error(error);
+    this.alertifyService.confirm('Видалення критеріїв', 'Ви впевнені, що бажаєте видалити обрані критерії?', () => {
+      this.criteriaService.deleteCriterias(ids).subscribe(data => {
+        this.alertifyService.success('Критерії видалено!');
+        this.ngOnInit();
+      }, error => {
+        this.alertifyService.error('Під час видалення критеріїв виникла помилка.');
+        console.error(error);
+      });
     });
   }
 

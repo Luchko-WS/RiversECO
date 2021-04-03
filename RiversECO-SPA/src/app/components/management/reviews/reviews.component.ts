@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ReviewModalComponent } from './review-modal/review-modal.component';
 import { ReviewService } from 'src/app/services/review.service';
 import { Review } from 'src/app/models/review';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-reviews',
@@ -31,7 +32,8 @@ export class ReviewsComponent implements OnInit {
   constructor(
     private reviewService: ReviewService,
     private route: ActivatedRoute,
-    private modalService: BsModalService) {}
+    private modalService: BsModalService,
+    private alertifyService: AlertifyService) {}
 
   ngOnInit() {
     this.isLoaded = false;
@@ -71,6 +73,7 @@ export class ReviewsComponent implements OnInit {
 
       this.isLoaded = true;
     }, error => {
+      this.alertifyService.error('Не вдалося отримати оцінки.');
       console.error(error);
     });
   }

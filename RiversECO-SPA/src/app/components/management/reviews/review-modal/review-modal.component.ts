@@ -12,6 +12,7 @@ import { Criteria } from 'src/app/models/criteria';
 import { WaterObjectService } from 'src/app/services/water-object.service';
 import { CriteriaService } from 'src/app/services/criteria.service';
 import { ReviewService } from 'src/app/services/review.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -43,6 +44,7 @@ export class ReviewModalComponent implements OnInit {
     private waterObjectService: WaterObjectService,
     private criteriaService: CriteriaService,
     private reviewService: ReviewService,
+    private alertifyService: AlertifyService,
     public bsModalRef: BsModalRef) {}
 
   ngOnInit() {
@@ -64,21 +66,21 @@ export class ReviewModalComponent implements OnInit {
       }
     }
 
-    this.waterObjectService.getWaterObject(this.waterObjectId)
-      .subscribe((res: WaterObject) => {
+    this.waterObjectService.getWaterObject(this.waterObjectId).subscribe((res: WaterObject) => {
         this.waterObject = res;
         this.isWaterObjectLoaded = true;
       }, error => {
+        this.alertifyService.error('Не вдалося отримати інформацію про даний об\'єкт.');
         console.error(error);
       });
 
-    this.criteriaService.getCriterias()
-      .subscribe((res: Criteria[]) => {
+    this.criteriaService.getCriterias().subscribe((res: Criteria[]) => {
         this.criterias = res;
         this.areCriteriasLoaded = true;
       }, error => {
+        this.alertifyService.error('Не вдалося отримати список відомих проблем.');
         console.error(error);
-      })
+      });
   }
 
   private _filterCriterias(value: string): Criteria[] {
@@ -103,11 +105,12 @@ export class ReviewModalComponent implements OnInit {
       comment: this.comment,
     };
 
-    this.reviewService.createReview(reviewToCreate)
-      .subscribe(review => {
-          console.log('Review created.', review);
-          this.bsModalRef.hide();
+    this.reviewService.createReview(reviewToCreate).subscribe(review => {
+        console.log('Review created.', review);
+        this.alertifyService.success('Оцінку створено!');
+        this.bsModalRef.hide();
       }, error => {
+          this.alertifyService.error('Під час створення оцінки виникла помилка.');
           console.error(error);
       });
   }
