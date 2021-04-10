@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using RiversECO.Contracts.Repositories;
@@ -8,6 +9,7 @@ using RiversECO.Dtos.Responses;
 namespace RiversECO.API.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class WaterObjectController : ControllerBase
     {

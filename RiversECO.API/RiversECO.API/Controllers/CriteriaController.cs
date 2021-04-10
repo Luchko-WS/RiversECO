@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using RiversECO.Contracts.Repositories;
@@ -11,6 +12,7 @@ using RiversECO.Models;
 namespace RiversECO.API.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class CriteriaController : ControllerBase
     {

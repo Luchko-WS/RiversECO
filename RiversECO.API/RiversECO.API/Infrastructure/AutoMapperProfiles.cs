@@ -18,6 +18,7 @@ namespace RiversECO.API.Infrastructure
             CreateMap<Review, ReviewDto>();
             CreateMap<CreateReviewRequestDto, Review>();
             CreateMap<UpdateReviewRequestDto, Review>();
+            CreateMap<User, UserDto>();
         }
     }
 }

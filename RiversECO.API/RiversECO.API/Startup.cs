@@ -1,8 +1,11 @@
+using System;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,8 +15,6 @@ using RiversECO.API.Infrastructure.Middlewares;
 using RiversECO.Cache.Configuration;
 using RiversECO.DataContext.Configuration;
 using RiversECO.Repositories.Configuration;
-using System.IO;
-using System;
 
 namespace RiversECO.API
 {
@@ -30,18 +31,21 @@ namespace RiversECO.API
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSpaStaticFiles(config =>
-                {
-                    config.RootPath = "wwwroot";
-                });
-
-            services
+                .ConfigureIdentitySystem()
+                .ConfigureAuth(Configuration.GetSection("AppSettings:Token").Value)
+                .ConfigureStaticFiles()
                 .ConfigureDataContextForSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 .RegisterCache()
                 .RegisterRepositories()
                 .AddAutoMapper(typeof(Startup).Assembly)
                 .RegisterValidators()
-                .AddControllers();
+                .AddControllers(options =>
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                    options.Filters.Add(new AuthorizeFilter(policy));
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
