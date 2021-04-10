@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using RiversECO.API.ActionFilters;
 using RiversECO.Contracts.Repositories;
 using RiversECO.Dtos.Requests;
 using RiversECO.Dtos.Responses;
@@ -29,6 +30,7 @@ namespace RiversECO.API.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetReview))]
+        [HideSensitiveDataIfReviewAnonimized]
         public async Task<IActionResult> GetReview(Guid id)
         {
             var review = await _reviewsRepository.GetByIdAsync(id);
@@ -37,6 +39,7 @@ namespace RiversECO.API.Controllers
         }
 
         [HttpGet]
+        [HideSensitiveDataIfReviewAnonimized]
         public async Task<IActionResult> GetAll()
         {
             var reviews = await _reviewsRepository.GetAllAsync();
@@ -45,6 +48,7 @@ namespace RiversECO.API.Controllers
         }
 
         [HttpGet("for/{waterObjectId}")]
+        [HideSensitiveDataIfReviewAnonimized]
         public async Task<IActionResult> GetAllForWaterObject(Guid waterObjectId)
         {
             var reviews = await _reviewsRepository.GetAllForWaterObjectAsync(waterObjectId);
